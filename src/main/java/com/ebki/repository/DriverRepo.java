@@ -1,4 +1,4 @@
-package com.ebki.interfaces;
+package com.ebki.repository;
 
 import com.ebki.model.Driver;
 import org.springframework.data.jpa.repository.Query;
@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface DriverRepository extends CrudRepository<Driver, Long> {
+public interface DriverRepo extends CrudRepository<Driver, Long> {
 
     @Query(value = "SELECT * FROM driver WHERE email = :email", nativeQuery = true)
     Optional<Driver> selectDriverByEmail(

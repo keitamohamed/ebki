@@ -1,4 +1,4 @@
-package com.ebki.interfaces;
+package com.ebki.repository;
 
 import com.ebki.model.Car;
 import com.ebki.request.CarRegistrationRequest;
@@ -8,15 +8,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @DataJpaTest (
         properties = {
@@ -27,7 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class CarRepositoryTest {
 
     @Autowired
-    private CarRepository carRepository;
+    private CarRepo carRepository;
 
     @Test
     void itShouldNotSelectCarWhenVinNumDoesNotExists() {

@@ -1,7 +1,7 @@
 package com.ebki.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +35,14 @@ public class Car {
     @NotBlank
     private int modelYear;
 
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonManagedReference
+    private CarCheckIn checkIn;
+
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonManagedReference
+    private CarCheckout checkout;
+
     public Car(Long carVinNumber, String brand, String model, String bodyStyle, int modelYear) {
         this.carVinNumber = carVinNumber;
         this.brand = brand;
@@ -42,4 +50,5 @@ public class Car {
         this.bodyStyle = bodyStyle;
         this.modelYear = modelYear;
     }
+
 }

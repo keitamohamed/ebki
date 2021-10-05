@@ -22,4 +22,9 @@ public class CarCheckIn implements Serializable {
     @JoinColumn(name = "driverID")
     @JsonBackReference
     private Driver driverCheckIn;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "carVinNumber")
+    @JsonBackReference
+    private Car car;
 }

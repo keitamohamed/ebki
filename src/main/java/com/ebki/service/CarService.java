@@ -1,6 +1,6 @@
 package com.ebki.service;
 
-import com.ebki.interfaces.CarRepository;
+import com.ebki.repository.CarRepo;
 import com.ebki.model.Car;
 import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class CarService {
 
-    private final CarRepository carRepository;
+    private final CarRepo carRepository;
 
     @Autowired
-    public CarService(CarRepository carRepository) {
+    public CarService(CarRepo carRepository) {
         this.carRepository = carRepository;
     }
 

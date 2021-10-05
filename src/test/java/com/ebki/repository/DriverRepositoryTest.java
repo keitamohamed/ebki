@@ -1,7 +1,6 @@
-package com.ebki.interfaces;
+package com.ebki.repository;
 
 import com.ebki.model.Driver;
-import com.ebki.request.CarRegistrationRequest;
 import com.ebki.request.DriverRegistration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class DriverRepositoryTest {
 
     @Autowired
-    private DriverRepository underTest;
+    private DriverRepo underTest;
 
     @Test
     void itShouldFindDriverByID() {

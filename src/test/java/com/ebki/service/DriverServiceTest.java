@@ -1,6 +1,6 @@
 package com.ebki.service;
 
-import com.ebki.interfaces.DriverRepository;
+import com.ebki.repository.DriverRepo;
 import com.ebki.model.Driver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.never;
 class DriverServiceTest {
 
     @Mock
-    private DriverRepository driverRepositoryUnderTest;
+    private DriverRepo driverRepositoryUnderTest;
 
     @Captor
     private ArgumentCaptor<Driver> driverArgumentCaptor;

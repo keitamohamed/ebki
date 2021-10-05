@@ -1,6 +1,6 @@
 package com.ebki.service;
 
-import com.ebki.interfaces.DriverRepository;
+import com.ebki.repository.DriverRepo;
 import com.ebki.model.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import java.util.Random;
 @Service
 public class DriverService {
 
-    private final DriverRepository driverRepository;
+    private final DriverRepo driverRepository;
 
     @Autowired
-    public DriverService(DriverRepository driverRepository) {
+    public DriverService(DriverRepo driverRepository) {
         this.driverRepository = driverRepository;
     }
 

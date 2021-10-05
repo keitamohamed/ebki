@@ -1,6 +1,6 @@
 package com.ebki.service;
 
-import com.ebki.interfaces.CarRepository;
+import com.ebki.repository.CarRepo;
 import com.ebki.model.Car;
 import com.ebki.request.CarRegistrationRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.never;
 class CarServiceTest {
 
     @Mock
-    private CarRepository carRepository;
+    private CarRepo carRepository;
 
     @Captor
     private ArgumentCaptor<Car> carArgumentCaptor;

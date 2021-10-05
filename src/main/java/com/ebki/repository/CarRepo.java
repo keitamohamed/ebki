@@ -1,4 +1,4 @@
-package com.ebki.interfaces;
+package com.ebki.repository;
 
 import com.ebki.model.Car;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface CarRepository extends CrudRepository<Car, Long> {
+public interface CarRepo extends CrudRepository<Car, Long> {
 
    @Query(value = "SELECT * FROM car WHERE brand = :brand AND model_year = :year", nativeQuery = true)
     Optional<Car> findCarByBrandAndModelYear(@Param("brand") String brand, @Param("year") int year);
