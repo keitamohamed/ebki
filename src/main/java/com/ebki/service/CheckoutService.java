@@ -3,7 +3,7 @@ package com.ebki.service;
 import com.ebki.model.Car;
 import com.ebki.model.CarCheckout;
 import com.ebki.repository.CheckOutRepo;
-import com.ebki.request.CarCheckOutRequest;
+import com.ebki.request.CheckOut;
 import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +11,18 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class CarCheckoutService {
+public class CheckoutService {
 
     private final CheckOutRepo repository;
 
     @Autowired
-    public CarCheckoutService(CheckOutRepo repository) {
+    public CheckoutService(CheckOutRepo repository) {
         this.repository = repository;
     }
 
     public void checkOutCar(CarCheckout checkout) {
 
-        CarCheckOutRequest request = new CarCheckOutRequest(checkout);
+        CheckOut request = new CheckOut(checkout);
         Car requestCar = request.getCheckout().getCar();
 
         Optional<CarCheckout> optional = repository.findById(request.getCheckout().getCheckoutID());

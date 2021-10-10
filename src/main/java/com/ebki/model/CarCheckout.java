@@ -18,6 +18,7 @@ import java.io.Serializable;
 public class CarCheckout implements Serializable {
 
     @Id
+    @NotNull
     private Long checkoutID;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

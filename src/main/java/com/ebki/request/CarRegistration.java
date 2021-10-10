@@ -3,11 +3,11 @@ package com.ebki.request;
 import com.ebki.model.Car;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CarRegistrationRequest {
+public class CarRegistration {
 
     private final Car car;
 
-    public CarRegistrationRequest (@JsonProperty("car") Car car) {
+    public CarRegistration(@JsonProperty("car") Car car) {
         this.car = car;
     }
 

@@ -33,7 +33,7 @@ public class Car {
     private String bodyStyle;
     @Column(nullable = false)
     @NotBlank
-    private int modelYear;
+    private int year;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JsonManagedReference
@@ -48,7 +48,7 @@ public class Car {
         this.brand = brand;
         this.model = model;
         this.bodyStyle = bodyStyle;
-        this.modelYear = modelYear;
+        this.year = modelYear;
     }
 
 }

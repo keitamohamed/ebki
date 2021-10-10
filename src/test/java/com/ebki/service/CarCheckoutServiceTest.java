@@ -14,9 +14,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
@@ -25,14 +23,14 @@ class CarCheckoutServiceTest {
 
     @Mock
     private CheckOutRepo repo;
-    private CarCheckoutService carCheckoutService;
+    private CheckoutService carCheckoutService;
     @Captor
     private ArgumentCaptor<CarCheckout> argumentCaptor;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        carCheckoutService = new CarCheckoutService(repo);
+        carCheckoutService = new CheckoutService(repo);
     }
 
     @Test
@@ -70,12 +68,11 @@ class CarCheckoutServiceTest {
         // When
         carCheckoutService.checkOutCar(checkout);
         // Then
-
         then(repo).should(never()).save(any());
     }
 
     @Test
-    void itShouldThrowExceptionWhenCarAlreadyCheckout() {
+    void itShouldThrowExceptionWhenCheckIDExists() {
         // Given
         long id = 672635511L;
         Car car = new Car(6271718L, "Nissan", "Maxima", "Open Top", 2004);

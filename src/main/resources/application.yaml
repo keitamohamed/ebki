@@ -2,9 +2,21 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/ebik?serverTimezone=UTC
     username: postgres
     password: '!2Mohamed'
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace

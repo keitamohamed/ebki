@@ -1,7 +1,7 @@
 package com.ebki.repository;
 
 import com.ebki.model.Car;
-import com.ebki.request.CarRegistrationRequest;
+import com.ebki.request.CarRegistration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -39,7 +39,7 @@ class CarRepositoryTest {
     void itShouldSaveCar() {
         // Given
         Car car = new Car(672635511L, "Nissan", "Maxima", "Open Top", 2004);
-        CarRegistrationRequest request = new CarRegistrationRequest(car);
+        CarRegistration request = new CarRegistration(car);
         // When
         carRepository.save(request.getCar());
         // Then
@@ -58,11 +58,11 @@ class CarRepositoryTest {
         // Given
         long id = 672635511L;
         Car car = new Car(id, "Nissan", "Maxima", "Open Top", 2004);
-        CarRegistrationRequest request = new CarRegistrationRequest(car);
+        CarRegistration request = new CarRegistration(car);
         // When
         carRepository.save(request.getCar());
         // Then
-        Optional<Car> optionalCar = carRepository.findCarByBrandAndModelYear(car.getBrand(), car.getModelYear());
+        Optional<Car> optionalCar = carRepository.findCarByBrandAndModelYear(car.getBrand(), car.getYear());
         assertThat(optionalCar)
                 .isPresent()
                 .hasValueSatisfying(c -> {
@@ -78,11 +78,11 @@ class CarRepositoryTest {
     void itShouldSelectCarByBrandAndModelAndModelYear() {
         // Given
         Car car = new Car(67231631L, "Nissan", "Maxima", "Open Top", 2004);
-        CarRegistrationRequest request = new CarRegistrationRequest(car);
+        CarRegistration request = new CarRegistration(car);
         // When
         carRepository.save(request.getCar());
         // Then
-        List<Car> optionalCar = carRepository.findCarByBrandAndModelAndModelYear(car.getBrand(), car.getModel(), car.getModelYear());
+        List<Car> optionalCar = carRepository.findCarByBrandAndModelAndModelYear(car.getBrand(), car.getModel(), car.getYear());
         assertThat(optionalCar)
                 .isNotNull()
                 .asList()
@@ -93,7 +93,7 @@ class CarRepositoryTest {
     void itShouldNotSaveCarWhenBrandIsNull() {
         // Given
         Car car = new Car(672635511L, null, "Maxima", "Open top", 2004);
-        CarRegistrationRequest request = new CarRegistrationRequest(car);
+        CarRegistration request = new CarRegistration(car);
         // When
         // Then
         assertThatThrownBy(() -> carRepository.save(request.getCar()))

@@ -13,8 +13,9 @@ public interface CheckOutRepo extends CrudRepository<CarCheckout, Long> {
     @Query(value = "SELECT * FROM car_checkout WHERE car_vin_number = :vin_num", nativeQuery = true)
     Optional<CarCheckout> findCarCheckoutByCar_CarVinNumber(@Param("vin_num") Long aLong);
 
-//    @Query(value = "SELECT * FROM car_checkout WHERE car_checkout.brand = :brand AND car_checkout.model = :model", nativeQuery = true)
-//    List<CarCheckout> findCarCheckoutByCar_BrandAndCar_Model(
-//            @Param("brand") String brand,
-//            @Param("model") String model);
+    @Query(value = "SELECT * FROM car_checkout WHERE brand = :brand AND model = :model", nativeQuery = true)
+    List<CarCheckout> findCarCheckoutByCar_BrandAndCar_Model(
+            @Param("brand") String brand,
+            @Param("model") String model);
+
 }

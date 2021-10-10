@@ -2,7 +2,7 @@ package com.ebki.service;
 
 import com.ebki.repository.CarRepo;
 import com.ebki.model.Car;
-import com.ebki.request.CarRegistrationRequest;
+import com.ebki.request.CarRegistration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -61,7 +61,7 @@ class CarServiceTest {
         Car car = new Car(null, "Nissan", "Maxima", "Open Top", 2004);
 
         // ... a request
-        CarRegistrationRequest request = new CarRegistrationRequest(car);
+        CarRegistration request = new CarRegistration(car);
 
         // ... No car with vin number
         given(carRepository.selectCarByVinNumber(id))
@@ -104,7 +104,7 @@ class CarServiceTest {
         Car car1 = new Car(vinNum, "Nissan", "Maxima", "Open Top", 2004);
         Car car2 = new Car(vinNum, "Nissan", "370Z", "Close Top", 2012);
 
-        CarRegistrationRequest carRegistrationRequest = new CarRegistrationRequest(car1);
+        CarRegistration carRegistrationRequest = new CarRegistration(car1);
         given(carRepository.selectCarByVinNumber(car1.getCarVinNumber()))
                 .willReturn(Optional.of(car2));
         // When
