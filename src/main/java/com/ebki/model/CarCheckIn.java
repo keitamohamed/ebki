@@ -28,4 +28,13 @@ public class CarCheckIn implements Serializable {
     @JoinColumn(name = "carVinNumber")
     @JsonBackReference
     private Car car;
+
+    public CarCheckIn(Long checkInID) {
+        this.checkInID = checkInID;
+    }
+
+    public int compareToYear(int modelYear) {
+        return this.getCar().getYear() - modelYear;
+    }
+
 }

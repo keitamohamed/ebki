@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(value = {"carVinNumber"}, allowGetters = true)
 @Table(name = "car")
 @Getter @Setter @NoArgsConstructor
-public class Car {
+public class Car implements Comparable<Integer> {
 
     @Id
     @NotNull
@@ -51,4 +51,8 @@ public class Car {
         this.year = modelYear;
     }
 
+    @Override
+    public int compareTo(Integer o) {
+        return o.compareTo(this.year);
+    }
 }
