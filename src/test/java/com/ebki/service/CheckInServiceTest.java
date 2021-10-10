@@ -64,50 +64,57 @@ class CheckInServiceTest {
     @Test
     void itShouldFindCarCheckInByCarBrandAndModel() {
         // Given
-        CarCheckIn check = new CarCheckIn();
-        CarCheckIn checkTwo = new CarCheckIn();
+        CarCheckIn firstCheckIn = new CarCheckIn();
+        CarCheckIn secondCheckIn = new CarCheckIn();
 
-        check.setCheckInID(53778288L);
-        check.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 2004));
+        firstCheckIn.setCheckInID(53778288L);
+        firstCheckIn.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 2004));
 
-        checkTwo.setCheckInID(35611821L);
-        checkTwo.setCar(new Car(89973632L, "Nissan", "Maxima", "Close Top", 2020));
+        secondCheckIn.setCheckInID(35611821L);
+        secondCheckIn.setCar(new Car(89973632L, "Nissan", "Maxima", "Close Top", 2020));
 
         // When ... It should save the two new CHECK_IN CAR
-        service.save(check);
-        service.save(checkTwo);
+        service.save(firstCheckIn);
+        service.save(secondCheckIn);
 
         // Then
-        //...Verify that two CHECK_IN CAR are being CHECK_IN, Capture it
+        //...It should Verify there are two CHECK_IN CAR being CHECK_IN, And it should Capture the CHECK_IN
         verify(repo, times(2)).save(argumentCaptor.capture());
         //...GET all the CHECK_IN CAR
         List<CarCheckIn> capture = argumentCaptor.getAllValues();
-        assertThat(service.getRepo(capture, check.getCar().getBrand(), check.getCar().getModel()))
-                .asList().doesNotContain(checkTwo);
+        //...It should return list of CHECK_IN Cars, CHECK the list contain firstCheckIn
+        // and DOES NOT CONTAIN secondCheckIn
+        assertThat(service.getRepo(capture, firstCheckIn.getCar().getBrand(), firstCheckIn.getCar().getModel()))
+                .asList()
+                .contains(firstCheckIn)
+                .doesNotContain(secondCheckIn);
     }
 
     @Test
     void itShouldThrowExceptionWhenCarExist() {
         // Given
-        CarCheckIn check = new CarCheckIn();
-        CarCheckIn checkTwo = new CarCheckIn();
+        CarCheckIn firstCheckIN = new CarCheckIn();
+        CarCheckIn secondCheckIN = new CarCheckIn();
 
-        check.setCheckInID(35611821L);
-        check.setCar(new Car(836622L, "Nissan", "Maxima", "Open Top", 2004));
+        firstCheckIN.setCheckInID(35611821L);
+        firstCheckIN.setCar(new Car(836622L, "Nissan", "Maxima", "Open Top", 2004));
 
-        checkTwo.setCheckInID(35611821L);
-        checkTwo.setCar(new Car(89973632L, "Nissan", "37Z", "Open Top", 2004));
+        secondCheckIN.setCheckInID(35611821L);
+        secondCheckIN.setCar(new Car(89973632L, "Nissan", "37Z", "Open Top", 2004));
 
-        given(repo.findById(check.getCheckInID()))
-                .willReturn(Optional.of(checkTwo));
+        //... Will return CHECK_IN CAR With SAME ID as secondCheckIn
+        given(repo.findById(firstCheckIN.getCheckInID()))
+                .willReturn(Optional.of(secondCheckIN));
 
         // When
-        // Then
-        assertThatThrownBy(() -> service.save(check))
+        // Then ...it Should throw IllegalStateException, Since there is CHECK_IN CAR
+        // with same CHECK_IN ID number
+        assertThatThrownBy(() -> service.save(firstCheckIN))
                 .hasMessageContaining(String.format(
                         "CheckIn with ID [%s] already exists",
-                        check.getCheckInID()))
+                        firstCheckIN.getCheckInID()))
                 .isInstanceOf(IllegalStateException.class);
+        //... It should not save CHECK_IN Car
         then(repo).should(never()).save(any(CarCheckIn.class));
     }
 
