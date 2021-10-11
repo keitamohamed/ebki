@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 //@DiscriminatorColumn(name = "CAR_TYPE")
 @Entity
 @JsonIgnoreProperties(value = {"carVinNumber"}, allowGetters = true)
-@Table(name = "car")
 @Getter @Setter @NoArgsConstructor
 public class Car implements Comparable<Integer> {
 
