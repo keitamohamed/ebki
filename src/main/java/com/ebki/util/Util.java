@@ -12,4 +12,8 @@ public class Util {
         Random random = new Random();
         return (long) random.nextInt(bound);
     }
+
+    public static boolean isIntegerValueZero(Integer integer) {
+        return integer.equals(0);
+    }
 }

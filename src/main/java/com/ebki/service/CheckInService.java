@@ -77,7 +77,7 @@ public class CheckInService {
         if (carCheckInList.isEmpty()) {
             Util.throwIllegalStateException("No car in the checkin database");
         }
-        if (year == 0) {
+        if (Util.isIntegerValueZero(year)) {
             throw new IllegalArgumentException(
                     String.format("Value for car year is [%s] ", year));
         }

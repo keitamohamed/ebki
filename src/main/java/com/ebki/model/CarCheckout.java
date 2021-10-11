@@ -23,8 +23,8 @@ public class CarCheckout implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "driverID")
-    @JsonBackReference
-    private Driver driverCheckOut;
+    @JsonBackReference(value = "checkOutDriver")
+    private Driver checkOutDriver;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "carVinNumber")

@@ -37,7 +37,8 @@ class DriverServiceTest {
     @Test
     void itShouldSaveNewDriver() {
         // Given
-        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+//        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver();
 
         given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
                 .willReturn(Optional.empty());
@@ -54,7 +55,9 @@ class DriverServiceTest {
     @Test
     void itShouldSaveNewDriverWhenIdIsNull() {
         // Given
-        Driver driver = new Driver(null, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+//        Driver driver = new Driver(null, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver();
+
 
         given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
                 .willReturn(Optional.empty());
@@ -77,6 +80,8 @@ class DriverServiceTest {
         // Given
         long id = 7823516L;
         Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+//        Driver driver = new Driver();
+
         // ... an existing driver is return
         given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
                 .willReturn(Optional.of(driver));
@@ -91,8 +96,11 @@ class DriverServiceTest {
     void itShouldThrowWhenEmailIsTaken() {
         // Given a driver information
         long id = 7823516L;
-        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
-        Driver driverTwo = new Driver(id, "Fayanga", "Fayanga", "keitamohamed12@gmail.com", "5405666378");
+//        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+//        Driver driverTwo = new Driver(id, "Fayanga", "Fayanga", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver();
+        Driver driverTwo = new Driver();
+
 
         // ... No customer with am email address
         given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))

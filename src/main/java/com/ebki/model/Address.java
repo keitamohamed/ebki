@@ -23,6 +23,6 @@ public class Address {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "driverID")
-    @JsonBackReference
-    private Driver driver;
+    @JsonBackReference(value = "addressDriver")
+    private Driver addressDriver;
 }

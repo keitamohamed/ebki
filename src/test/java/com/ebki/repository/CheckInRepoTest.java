@@ -80,10 +80,11 @@ class CheckInRepoTest {
         // Given
         CarCheckIn checkIn = new CarCheckIn();
         Car car = new Car(6351619L, "Toyota", "RAV4", "SUV", 2021);
-        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver();
+//        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
 
         checkIn.setCheckInID(6838319L);
-        checkIn.setDriverCheckIn(driver);
+        checkIn.setCheckInDriver(driver);
         checkIn.setCar(car);
         // When....save car check in...
         repo.save(checkIn);

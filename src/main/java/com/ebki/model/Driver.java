@@ -44,15 +44,15 @@ public class Driver {
         this.phoneNum = phoneNum;
     }
 
-    @OneToMany(mappedBy = "driver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "addressDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "addressDriver")
     private Set<Address> address;
 
-    @OneToMany(mappedBy = "driverCheckOut", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "checkOutDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "checkOutDriver")
     private Set<CarCheckout> checkout;
 
-    @OneToMany(mappedBy = "driverCheckIn", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "checkInDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "checkInDriver")
     private Set<CarCheckIn> carCheckIns;
 }

@@ -19,8 +19,8 @@ public class DriverService {
     }
 
     public void registerNewDriver(Driver driver) {
-        String driverEmail = driver.getEmail();
 
+        String driverEmail = driver.getEmail();
         Optional<Driver> dbDriver = driverRepository.selectDriverByEmail(driverEmail);
 
         if (dbDriver.isPresent()) {

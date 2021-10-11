@@ -1,0 +1,11 @@
+POST http://localhost:8080/ebik/driver/add_new_driver
+Content-Type: application/json;charset=UTF-8
+
+{
+  "driverID": 5462781,
+  "firstName": "Ashely",
+  "lastName": "More",
+  "email": "ashelymore56@gmail.com",
+  "phoneNum": "6735147890"
+}
+
