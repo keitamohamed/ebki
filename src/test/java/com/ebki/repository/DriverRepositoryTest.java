@@ -28,12 +28,9 @@ class DriverRepositoryTest {
     void itShouldFindDriverByID() {
         // Given
         long id = 7823516L;
-        Driver driver = new Driver();
-        driver.setDriverID(id);
-        driver.setFirstName("Mohamed");
-        driver.setLastName("Keita");
-        driver.setEmail("keitamohamed12@gmail.com");
-        driver.setPhoneNum("5405666378");
+//        Driver driver = new Driver();
+        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+
         // When
         underTest.save(driver);
         // Then
@@ -51,12 +48,7 @@ class DriverRepositoryTest {
     void itShouldSelectDriverByEmail() {
         // Given
         String email = "keitamohamed12@gmail.com";
-        Driver driver = new Driver();
-        driver.setDriverID(53672881L);
-        driver.setFirstName("Mohamed");
-        driver.setLastName("Keita");
-        driver.setEmail("keitamohamed12@gmail.com");
-        driver.setPhoneNum("5405666378");
+        Driver driver = new Driver(64726181L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
         // When
         underTest.save(driver);
         // Then
@@ -85,12 +77,8 @@ class DriverRepositoryTest {
     void itShouldSaveDriver() {
         // Given
         long id = 7823516L;
-        Driver driver = new Driver();
-        driver.setDriverID(id);
-        driver.setFirstName("Mohamed");
-        driver.setLastName("Keita");
-        driver.setEmail("keitamohamed12@gmail.com");
-        driver.setPhoneNum("5405666378");
+        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+
         // When
         underTest.save(driver);
         // Then
@@ -107,12 +95,7 @@ class DriverRepositoryTest {
     @Test
     void itShouldNotSaveDriverWhenNameIsNull() {
         // Given
-        Driver driver = new Driver();
-        driver.setDriverID(737267181L);
-        driver.setFirstName("Mohamed");
-        driver.setLastName("Keita");
-        driver.setEmail("keitamohamed12@gmail.com");
-        driver.setPhoneNum("5405666378");
+        Driver driver = new Driver(737267181L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
         DriverRegistration registration = new DriverRegistration(driver);
         // When
         // Then
