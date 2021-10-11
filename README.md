@@ -1,13 +1,13 @@
-##Spring boot Web Application
-###Ebik
+## Spring boot Web Application
+### Ebik
 
-###Requirement
+### Requirement
 * JDK 11+
 * Lombox configured on IDE
 * Maven
 * Postgres 13+
 * pgAdmin 4+
-###IDEA Use For Project
+### IDEA Use For Project
 * Intellij IDEA
-####How to Run 
+#### How to Run 
 * Create postgres database in pgAdmin name ebik 
