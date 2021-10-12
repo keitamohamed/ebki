@@ -32,13 +32,17 @@ public class DriverService {
             driver.setDriverID(Util.generateID(999999999));
         }
 
+        setAddressIDIfNull(driver);
+        driverRepository.save(driver);
+    }
+
+    private void setAddressIDIfNull(Driver driver) {
         Set<Address> address = driver.getAddress();
-        address.forEach(address1 -> {
-            if (address1.getAddressID() == null) {
-                address1.setAddressID(Util.generateID(99999999));
+        address.forEach(a -> {
+            if (a.getAddressID() == null) {
+                a.setAddressID(Util.generateID(99999999));
             }
         });
-        driverRepository.save(driver);
     }
 
     // Just wrote this code. Need to add test
