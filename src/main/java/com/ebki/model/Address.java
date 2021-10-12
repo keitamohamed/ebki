@@ -6,16 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @JsonIgnoreProperties(value = {"addressID"}, allowGetters = true)
 @Getter @Setter @NoArgsConstructor
-@AllArgsConstructor
 public class Address {
 
     @Id
@@ -29,6 +28,15 @@ public class Address {
     @NotNull
     @Digits(integer = 5,  message = "zipcode cannot be greater than 5 digit number", fraction = 0)
     private int zipcode;
+
+    public Address(Long addressID, String street, String city, String state, int zipcode, Driver addressDriver) {
+        this.addressID = addressID;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.addressDriver = addressDriver;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "driverID")

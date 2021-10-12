@@ -52,7 +52,7 @@ class DriverRepositoryTest {
         // When
         underTest.save(driver);
         // Then
-        Optional<Driver> optionalDriver = underTest.selectDriverByEmail(email);
+        Optional<Driver> optionalDriver = underTest.findDriverByEmailAddress(email);
         assertThat(optionalDriver)
                 .isPresent()
                 .hasValueSatisfying( d -> {
@@ -68,7 +68,7 @@ class DriverRepositoryTest {
         // Given
         String email = "keitamohamed12@gmail.com";
         // When
-        Optional<Driver> optionalDriver = underTest.selectDriverByEmail(email);
+        Optional<Driver> optionalDriver = underTest.findDriverByEmailAddress(email);
         // Then
         assertThat(optionalDriver).isNotPresent();
     }

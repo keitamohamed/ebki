@@ -30,7 +30,7 @@ public class CarService {
         }
 
         if (car.getCarVinNumber() == null) {
-            car.setCarVinNumber(Util.id(999999999));
+            car.setCarVinNumber(Util.generateID(999999999));
         }
         carRepository.save(car);
     }

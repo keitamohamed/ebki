@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface DriverRepo extends CrudRepository<Driver, Long> {
 
     @Query(value = "SELECT * FROM driver WHERE email = :email", nativeQuery = true)
-    Optional<Driver> selectDriverByEmail(
+    Optional<Driver> findDriverByEmailAddress(
             @Param("email") String email);
 }

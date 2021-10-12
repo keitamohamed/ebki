@@ -37,7 +37,7 @@ public class CheckoutService {
         }
 
         if (request.getCheckout().getCheckoutID() == null) {
-            request.getCheckout().setCheckoutID(Util.id(672415261));
+            request.getCheckout().setCheckoutID(Util.generateID(672415261));
         }
         repository.save(request.getCheckout());
     }

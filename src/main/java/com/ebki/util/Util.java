@@ -8,7 +8,7 @@ public class Util {
         throw new IllegalStateException(message);
     }
 
-    public static Long id(int bound) {
+    public static Long generateID(int bound) {
         Random random = new Random();
         return (long) random.nextInt(bound);
     }

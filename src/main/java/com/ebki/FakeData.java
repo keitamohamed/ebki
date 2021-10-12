@@ -35,11 +35,11 @@ public class FakeData {
     }
 
     public List<CarCheckIn> carCheckInList() {
-        carCheckInList.add(new CarCheckIn(Util.id(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.id(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.id(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.id(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.id(797367281)));
+        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
+        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
+        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
+        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
+        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
         return this.carCheckInList;
     }
 }

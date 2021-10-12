@@ -1,5 +1,6 @@
 package com.ebki.service;
 
+import com.ebki.model.Address;
 import com.ebki.repository.DriverRepo;
 import com.ebki.model.Driver;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,10 +10,11 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
@@ -37,10 +39,12 @@ class DriverServiceTest {
     @Test
     void itShouldSaveNewDriver() {
         // Given
-//        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
-        Driver driver = new Driver();
+        Set<Address> addressList = new HashSet<>();
+        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        addressList.add(new Address(6252622L, "5627 City Street", "Phoenix", "AZ", 26152, driver));
+        driver.setAddress(addressList);
 
-        given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
+        given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
                 .willReturn(Optional.empty());
 
         // When
@@ -55,11 +59,11 @@ class DriverServiceTest {
     @Test
     void itShouldSaveNewDriverWhenIdIsNull() {
         // Given
-//        Driver driver = new Driver(null, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
-        Driver driver = new Driver();
-
-
-        given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
+        Set<Address> addressList = new HashSet<>();
+        Driver driver = new Driver(null, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        addressList.add(new Address(6252622L, "5627 City Street", "Phoenix", "AZ", 26152, driver));
+        driver.setAddress(addressList);
+        given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
                 .willReturn(Optional.empty());
         // When
         underTest.registerNewDriver(driver);
@@ -70,7 +74,7 @@ class DriverServiceTest {
         // assertThat(driverCaptorValue).isEqualToIgnoringGivenFields(driver, "driverID");
         assertThat(driverCaptorValue)
                 .usingRecursiveComparison()
-                .ignoringFields("driverID")
+                .ignoringFields("name", "driverID")
                 .isEqualTo(driver);
         assertThat(driverCaptorValue.getDriverID()).isNotNull();
     }
@@ -80,10 +84,9 @@ class DriverServiceTest {
         // Given
         long id = 7823516L;
         Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
-//        Driver driver = new Driver();
 
         // ... an existing driver is return
-        given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
+        given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
                 .willReturn(Optional.of(driver));
         // When
         underTest.registerNewDriver(driver);
@@ -96,14 +99,11 @@ class DriverServiceTest {
     void itShouldThrowWhenEmailIsTaken() {
         // Given a driver information
         long id = 7823516L;
-//        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
-//        Driver driverTwo = new Driver(id, "Fayanga", "Fayanga", "keitamohamed12@gmail.com", "5405666378");
-        Driver driver = new Driver();
-        Driver driverTwo = new Driver();
-
+        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driverTwo = new Driver(id, "Fayanga", "Fayanga", "keitamohamed12@gmail.com", "5405666378");
 
         // ... No customer with am email address
-        given(driverRepositoryUnderTest.selectDriverByEmail(driver.getEmail()))
+        given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
                 .willReturn(Optional.of(driverTwo));
         // When
         // Then
