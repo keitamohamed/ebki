@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public interface CheckInRepo extends CrudRepository<CarCheckIn, Long> {
 
-    @Query(value = "SELECT * FROM car_ WHERE car_vin_number = :vin_num", nativeQuery = true)
+    @Query(value = "SELECT * FROM car_check_in WHERE car_vin_number = :vin_num", nativeQuery = true)
     Optional<CarCheckIn> findCarCheckInByCar_CarVinNumber(@Param("vin_num") Long aLong);
 
-    @Query(value = "SELECT * FROM car_CHECK_OUT", nativeQuery = true)
+    @Query(value = "SELECT * FROM car_check_in", nativeQuery = true)
     List<CarCheckIn> findAll();
 
 }
