@@ -49,14 +49,14 @@ class CheckInServiceTest {
         checkIn.setCheckInID(532188367L);
         checkIn.setCar(car);
 
-        // Given that Checkin ID, It should return empty optional
+        // GIVEN THAT CHECKIN ID, IT SHOULD RETURN EMPTY OPTIONAL
         given(repo.findById(checkIn.getCheckInID()))
                 .willReturn(Optional.empty());
 
-        // When ... It should save the checkin car
+        // WHEN ... IT SHOULD SAVE THE CHECKIN CAR
         service.save(checkIn);
 
-        // Then ... it should capture the CHECK_OUT_CAR And RETURN the CHECK_OUT_CAR
+        // THEN ... IT SHOULD CAPTURE THE CHECK_IN AND RETURN THE CHECK_IN_CAR
         then(repo).should().save(argumentCaptor.capture());
         CarCheckIn capture = argumentCaptor.getValue();
         assertThat(capture).isSameAs(checkIn);
@@ -64,7 +64,7 @@ class CheckInServiceTest {
 
     @Test
     void itShouldFindCarCheckInByCarBrandAndModel() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         CarCheckIn secondCheckIn = new CarCheckIn();
 
@@ -74,17 +74,17 @@ class CheckInServiceTest {
         secondCheckIn.setCheckInID(35611821L);
         secondCheckIn.setCar(new Car(89973632L, "Nissan", "Maxima", "Close Top", 2020));
 
-        // When ... It should save the two new CHECK_OUT CAR
+        // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
         service.save(firstCheckIn);
         service.save(secondCheckIn);
 
-        // Then
-        //...It should Verify there are two CHECK_OUT CAR being CHECK_OUT, And it should Capture the CHECK_OUT
+        // THEN
+        //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
         verify(repo, times(2)).save(argumentCaptor.capture());
-        //...GET all the CHECK_OUT CAR
+        //...GET ALL THE CHECK_IN CAR
         List<CarCheckIn> capture = argumentCaptor.getAllValues();
-        //...It should return list of CHECK_OUT Cars, CHECK the list contain firstCheckIn
-        // and DOES NOT CONTAIN secondCheckIn
+        //...IT SHOULD RETURN LIST OF CHECK_IN CARS, CHECK THE LIST CONTAIN FIRST_CHECKIN
+        // AND DOES NOT CONTAIN SECOND_CHECKIN
         assertThat(service.findCheckInByCarBrandAndModel(capture, firstCheckIn.getCar().getBrand(), firstCheckIn.getCar().getModel()))
                 .asList()
                 .contains(firstCheckIn)
@@ -93,16 +93,16 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenListIsEmpty() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         List<CarCheckIn> list = new ArrayList<>();
 
         firstCheckIn.setCheckInID(53778288L);
         firstCheckIn.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 2004));
-        // When
 
-        // Then
-        //...it should throw exception, List is empty
+        // WHEN
+        // THEN
+        //...IT SHOULD THROW EXCEPTION, LIST IS EMPTY
         assertThatThrownBy(() -> service.findCheckInByCarBrandAndModel(list, firstCheckIn.getCar().getBrand(), firstCheckIn.getCar().getModel()))
                 .hasMessageContaining("No car in the checkin database")
                 .isInstanceOf(IllegalStateException.class);
@@ -110,23 +110,23 @@ class CheckInServiceTest {
 
     @Test
     void itShouldFindCheckInByCarBrand() {
-        // Given
+        // GIVEN
         List<Car> carList = fakeData.carList();
         List<CarCheckIn> carCheckInList = fakeData.carCheckInList();
 
         int[] index = {0};
         carCheckInList.forEach(checkIn -> checkIn.setCar(carList.get(index[0]++)));
 
-        // When ... It should save the two new CHECK_OUT CAR
+        // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
         carCheckInList.forEach(carCheckIn -> service.save(carCheckIn));
 
-        // Then
-        //...It should Verify there are two CHECK_OUT CAR being CHECK_OUT, And it should Capture the CHECK_OUT
+        // THEN
+        //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
         verify(repo, times(carList.size())).save(argumentCaptor.capture());
-        //...GET all the CHECK_OUT CAR
+        //...GET ALL THE CHECK_IN CAR
         List<CarCheckIn> capture = argumentCaptor.getAllValues();
-        //...It should return list of CHECK_OUT Cars, CHECK the list contain lastCheckIn
-        // and DOES NOT CONTAIN firstCheckIn
+        //...IT SHOULD RETURN LIST OF CHECK_IN CARS, CHECK THE LIST CONTAIN LAST_CHECKIN
+        // AND DOES NOT CONTAIN FIRST_CHECKIN
         assertThat(service.findCheckInByCarBrand(capture, "Toyota"))
                 .asList()
                 .contains(carCheckInList.get(carList.size() - 1))
@@ -136,16 +136,16 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenListIsEmptyForFindCarByCarBrand() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         List<CarCheckIn> list = new ArrayList<>();
 
         firstCheckIn.setCheckInID(53778288L);
         firstCheckIn.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 2004));
-        // When
 
-        // Then
-        //...it should throw exception, List is empty
+        // WHEN
+        // THEN
+        //...IT SHOULD THROW EXCEPTION, LIST IS EMPTY
         assertThatThrownBy(() -> service.findCheckInByCarBrand(list, firstCheckIn.getCar().getBrand()))
                 .hasMessageContaining("No car in the checkin database")
                 .isInstanceOf(IllegalStateException.class);
@@ -153,18 +153,18 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenCarBrandIsEmpty() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         List<CarCheckIn> list = new ArrayList<>();
 
         firstCheckIn.setCheckInID(53778288L);
         firstCheckIn.setCar(new Car(836622L, "", "37Z", "Open Top", 2004));
 
-        // When
+        // WHEN
         list.add(firstCheckIn);
 
-        // Then
-        //...it should throw exception, List is empty
+        // THEN
+        //...IT SHOULD THROW EXCEPTION, LIST IS EMPTY
         assertThatThrownBy(() -> service.findCheckInByCarBrand(list, firstCheckIn.getCar().getBrand()))
                 .hasMessageContaining(String.format("Value for car brand is [%s] ", firstCheckIn.getCar().getBrand()))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -172,23 +172,23 @@ class CheckInServiceTest {
 
     @Test
     void itShouldFindCheckInByCarYear() {
-        // Given
+        // GIVEN
         List<Car> carList = fakeData.carList();
         List<CarCheckIn> carCheckInList = fakeData.carCheckInList();
 
         int[] index = {0};
         carCheckInList.forEach(checkIn -> checkIn.setCar(carList.get(index[0]++)));
 
-        // When ... It should save the two new CHECK_OUT CAR
+        // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
         carCheckInList.forEach(carCheckIn -> service.save(carCheckIn));
 
-        // Then
-        //...It should Verify there are two CHECK_OUT CAR being CHECK_OUT, And it should Capture the CHECK_OUT
+        // THEN
+        //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
         verify(repo, times(carList.size())).save(argumentCaptor.capture());
-        //...GET all the CHECK_OUT CAR
+        //...GET ALL THE CHECK_IN CAR
         List<CarCheckIn> capture = argumentCaptor.getAllValues();
-        //...It should return list of CHECK_OUT Cars, CHECK the list contain lastCheckIn
-        // and DOES NOT CONTAIN secondCheckIn
+        //...IT SHOULD RETURN LIST OF CHECK_IN CARS, CHECK THE LIST CONTAIN LAST_CHECKIN
+        // AND DOES NOT CONTAIN SECOND_CHECKIN
         assertThat(service.findCheckInByCarYear(capture, 2007))
                 .asList()
                 .contains(carCheckInList.get(carList.size() - 1))
@@ -198,16 +198,16 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionForFindCheckInByCarYearWhenListIsEmpty() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         List<CarCheckIn> list = new ArrayList<>();
 
         firstCheckIn.setCheckInID(53778288L);
         firstCheckIn.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 2004));
-        // When
 
-        // Then
-        //...it should throw exception, List is empty
+        // WHEN
+        // THEN
+        //...IT SHOULD THROW EXCEPTION, LIST IS EMPTY
         assertThatThrownBy(() -> service.findCheckInByCarYear(list, firstCheckIn.getCar().getYear()))
                 .hasMessageContaining("No car in the checkin database")
                 .isInstanceOf(IllegalStateException.class);
@@ -215,18 +215,18 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionForFindCheckInByCarBrandWhenYearIsEmpty() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         List<CarCheckIn> list = new ArrayList<>();
 
         firstCheckIn.setCheckInID(53778288L);
         firstCheckIn.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 0));
 
-        // When
+        // WHEN
         list.add(firstCheckIn);
 
-        // Then
-        //...it should throw exception, List is empty
+        // THEN
+        //...IT SHOULD THROW EXCEPTION, LIST IS EMPTY
         assertThatThrownBy(() -> service.findCheckInByCarYear(list, firstCheckIn.getCar().getYear()))
                 .hasMessageContaining(String.format("Value for car year is [%s] ", firstCheckIn.getCar().getYear()))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -234,7 +234,7 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenCarBrandOrModelIsNull() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIn = new CarCheckIn();
         CarCheckIn secondCheckIn = new CarCheckIn();
 
@@ -244,16 +244,16 @@ class CheckInServiceTest {
         secondCheckIn.setCheckInID(35611821L);
         secondCheckIn.setCar(new Car(89973632L, "Nissan", "Maxima", "Close Top", 2020));
 
-        // When ... It should save the two new CHECK_OUT CAR
+        // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
         service.save(firstCheckIn);
         service.save(secondCheckIn);
 
-        // Then
-        //...It should Verify there are two CHECK_OUT CAR being CHECK_OUT, And it should Capture the CHECK_OUT
+        // THEN
+        //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
         verify(repo, times(2)).save(argumentCaptor.capture());
-        //...GET all the CHECK_OUT CAR
+        //...GET ALL THE CHECK_OUT CAR
         List<CarCheckIn> capture = argumentCaptor.getAllValues();
-        //...it should throw IllegalArgumentException, Car model is empty
+        //...IT SHOULD THROW ILLEGAL ARGUMENT EXCEPTION, CAR MODEL IS EMPTY
         assertThatThrownBy(() -> service.findCheckInByCarBrandAndModel(capture, firstCheckIn.getCar().getBrand(), firstCheckIn.getCar().getModel()))
                 .hasMessageContaining(String.format("Value for car brand is [%s] and model is [%s]",
                         firstCheckIn.getCar().getBrand(), firstCheckIn.getCar().getModel()))
@@ -262,7 +262,7 @@ class CheckInServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenCarExist() {
-        // Given
+        // GIVEN
         CarCheckIn firstCheckIN = new CarCheckIn();
         CarCheckIn secondCheckIN = new CarCheckIn();
 
@@ -272,21 +272,19 @@ class CheckInServiceTest {
         secondCheckIN.setCheckInID(35611821L);
         secondCheckIN.setCar(new Car(89973632L, "Nissan", "37Z", "Open Top", 2004));
 
-        //... Will return CHECK_OUT CAR With SAME ID as secondCheckIn
+        //... WILL RETURN CHECK_IN CAR WITH SAME ID AS SECOND_CHECKIN
         given(repo.findById(firstCheckIN.getCheckInID()))
                 .willReturn(Optional.of(secondCheckIN));
 
-        // When
-        // Then ...it Should throw IllegalStateException, Since there is CHECK_OUT CAR
-        // with same CHECK_OUT ID number
+        // WHEN
+        // THEN ...IT SHOULD THROW ILLEGAL STATE EXCEPTION, SINCE THERE IS CHECK_IN CAR
+        // WITH SAME CHECK_IN ID NUMBER
         assertThatThrownBy(() -> service.save(firstCheckIN))
                 .hasMessageContaining(String.format(
                         "CheckIn with ID [%s] already exists",
                         firstCheckIN.getCheckInID()))
                 .isInstanceOf(IllegalStateException.class);
-        //... It should not save CHECK_OUT Car
+        //... IT SHOULD NOT SAVE CHECK_IN CAR
         then(repo).should(never()).save(any(CarCheckIn.class));
     }
-
-
 }
