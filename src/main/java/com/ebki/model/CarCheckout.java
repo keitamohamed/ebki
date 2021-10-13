@@ -31,4 +31,8 @@ public class CarCheckout implements Serializable {
     @JsonBackReference
     @NotBlank
     private Car car;
+
+    public CarCheckout(Long checkoutID) {
+        this.checkoutID = checkoutID;
+    }
 }

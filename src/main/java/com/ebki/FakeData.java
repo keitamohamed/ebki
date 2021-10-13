@@ -2,6 +2,7 @@ package com.ebki;
 
 import com.ebki.model.Car;
 import com.ebki.model.CarCheckIn;
+import com.ebki.model.CarCheckout;
 import com.ebki.util.Util;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,10 +15,13 @@ public class FakeData {
 
     private List<Car> carList;
     private List<CarCheckIn> carCheckInList;
+    private List<CarCheckout> carCheckoutList;
 
     public FakeData() {
         carList = new ArrayList<>();
         carCheckInList = new ArrayList<>();
+        carCheckoutList = new ArrayList<>();
+
     }
 
     public FakeData(List<Car> car, List<CarCheckIn> checkIn) {
@@ -41,5 +45,14 @@ public class FakeData {
         carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
         carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
         return this.carCheckInList;
+    }
+
+    public List<CarCheckout> carCheckoutList() {
+        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
+        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
+        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
+        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
+        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
+        return this.carCheckoutList;
     }
 }

@@ -16,8 +16,11 @@ public class DriverController {
         this.driverService = driverService;
     }
 
-    @RequestMapping(value = {"/add_new_driver"},
-            method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(
+            value = {"/add_new_driver"},
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     public void registerNewDriver(@RequestBody Driver driver) {
         driverService.registerNewDriver(driver);
     }
