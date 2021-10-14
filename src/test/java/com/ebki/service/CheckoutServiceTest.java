@@ -194,6 +194,35 @@ class CheckoutServiceTest {
     }
 
     @Test
+    void itShouldFindCheckOutByCarBrandAndModel() {
+        // Given...GIVEN CHECK_OUT INFORMATION
+        List<Car> carList = fakeData.carList();
+        List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
+
+        int[] index = {0};
+        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+
+        // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+
+        // Then
+        //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT
+        verify(repo, times(carList.size())).save(argumentCaptor.capture());
+        //...GET ALL THE CHECK_OUT CAR
+        List<CarCheckout> capture = argumentCaptor.getAllValues();
+        //...IT SHOULD RETURN A LIST OF CHECK_OUT CARS, AND THE LIST SHOULD CONTAIN
+        // CAR WITH GIVEN BRAND AND MODEL BEING PASS
+        assertThat(service.findCheckOutByCarBrandAndModel(capture, "Ford", "Crown Victoria"))
+                .asList()
+                .containsOnly(capture.get(0))
+                .isNotEmpty()
+                .hasSize(1);
+
+    }
+
+
+
+    @Test
     void itShouldThrowExceptionWhenTheListIsEmptyForFindCarByCarBrand() {
         // Given
         CarCheckIn firstCheckOut = new CarCheckIn();
@@ -273,5 +302,46 @@ class CheckoutServiceTest {
         assertThatThrownBy(() -> service.findCheckOutByCarYear(carCheckoutList, 0))
                 .hasMessageContaining(String.format("Value for car year is [%s] ", 0))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void itShouldThrowExceptionWhenTheBrandOrModelIsEmptyForFindCarByCarBrandAndModel() {
+        // Given...GIVEN CHECK_OUT INFORMATION
+        List<Car> carList = fakeData.carList();
+        List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
+
+        int[] index = {0};
+        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+
+        // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+
+        // Then
+        //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT
+        verify(repo, times(carList.size())).save(argumentCaptor.capture());
+        //...GET ALL THE CHECK_OUT CAR
+        List<CarCheckout> capture = argumentCaptor.getAllValues();
+        // Then
+        //...IT SHOULD THROW EXCEPTION, NO VALUE IS BEING PASS FOR MODEL
+        assertThatThrownBy(() -> service.findCheckOutByCarBrandAndModel(carCheckoutList, carList.get(1).getBrand(), ""))
+                .hasMessageContaining(String.format("Value for car brand is [%s] and model is [%s]", carList.get(1).getBrand(), ""))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void itShouldThrowExceptionWhenTheListIsEmptyForFindCarByCarBrandAndModel() {
+        // Given
+        CarCheckIn firstCheckOut = new CarCheckIn();
+        List<CarCheckout> list = new ArrayList<>();
+
+        firstCheckOut.setCheckInID(53778288L);
+        firstCheckOut.setCar(new Car(836622L, "Nissan", "37Z", "Open Top", 2004));
+        // When
+
+        // Then
+        //...IT SHOULD THROW EXCEPTION, LIST IS EMPTY
+        assertThatThrownBy(() -> service.findCheckOutByCarBrandAndModel(list, "Nissan", "37Z"))
+                .hasMessageContaining("No car in the checkin database")
+                .isInstanceOf(IllegalStateException.class);
     }
 }

@@ -16,6 +16,7 @@ public class FakeData {
     private List<Car> carList;
     private List<CarCheckIn> carCheckInList;
     private List<CarCheckout> carCheckoutList;
+    private final int BOUND_VALUE = 999999999;
 
     public FakeData() {
         carList = new ArrayList<>();
@@ -39,20 +40,20 @@ public class FakeData {
     }
 
     public List<CarCheckIn> carCheckInList() {
-        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
-        carCheckInList.add(new CarCheckIn(Util.generateID(797367281)));
+        carCheckInList.add(new CarCheckIn(Util.generateID(getBOUND_VALUE())));
+        carCheckInList.add(new CarCheckIn(Util.generateID(getBOUND_VALUE())));
+        carCheckInList.add(new CarCheckIn(Util.generateID(getBOUND_VALUE())));
+        carCheckInList.add(new CarCheckIn(Util.generateID(getBOUND_VALUE())));
+        carCheckInList.add(new CarCheckIn(Util.generateID(getBOUND_VALUE())));
         return this.carCheckInList;
     }
 
     public List<CarCheckout> carCheckoutList() {
-        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
-        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
-        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
-        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
-        carCheckoutList.add(new CarCheckout(Util.generateID(797367281)));
+        carCheckoutList.add(new CarCheckout(Util.generateID(getBOUND_VALUE())));
+        carCheckoutList.add(new CarCheckout(Util.generateID(getBOUND_VALUE())));
+        carCheckoutList.add(new CarCheckout(Util.generateID(getBOUND_VALUE())));
+        carCheckoutList.add(new CarCheckout(Util.generateID(getBOUND_VALUE())));
+        carCheckoutList.add(new CarCheckout(Util.generateID(getBOUND_VALUE())));
         return this.carCheckoutList;
     }
 }
