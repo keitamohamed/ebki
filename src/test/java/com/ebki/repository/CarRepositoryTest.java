@@ -22,10 +22,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 )
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CarRepositoryTest {
-
     @Autowired
     private CarRepo carRepository;
-    private TestData fakeData = new TestData();
+    private final TestData data = new TestData();
 
     @Test
     void itShouldNotSelectCarWhenVinNumDoesNotExists() {
@@ -105,7 +104,7 @@ class CarRepositoryTest {
     @Test
     void itShouldFindCarByBrand() {
         // Given...GIVEN CAR INFORMATION
-        List<Car> carList = fakeData.carList();
+        List<Car> carList = data.carList();
         // When...IT SHOULD SAVE LIST OF CAR
         carList.forEach(car -> {
             CarRegistration registration = new CarRegistration(car);
@@ -122,7 +121,7 @@ class CarRepositoryTest {
     @Test
     void itShouldFindCarByYear() {
         // Given...GIVEN CAR INFORMATION
-        List<Car> carList = fakeData.carList();
+        List<Car> carList = data.carList();
         // When...IT SHOULD SAVE LIST OF CAR
         carList.forEach(car -> {
             CarRegistration registration = new CarRegistration(car);
@@ -147,7 +146,7 @@ class CarRepositoryTest {
     @Test
     void itShouldFindCarByBrandModelAndYear() {
         // Given...GIVEN CAR INFORMATION
-        List<Car> carList = fakeData.carList();
+        List<Car> carList = data.carList();
         // When...IT SHOULD SAVE LIST OF CAR
         carList.forEach(car -> {
             CarRegistration registration = new CarRegistration(car);

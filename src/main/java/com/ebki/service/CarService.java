@@ -55,7 +55,7 @@ public class CarService {
             Util.throwIllegalStateException(String.format("Car year [ %s ] cannot be 0 or empty", year));
         }
         if (carList.size() == 0) {
-            Util.throwIllegalStateException(String.format("Car list is [ %s ]. No cars in database", year));
+            Util.throwIllegalStateException(String.format("Car list is [ %s ]. No cars in database", 0));
         }
         return carList
                 .stream()
@@ -63,7 +63,7 @@ public class CarService {
                 .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByBrandModelAndYear(String brand, String model, int year) {
+    public List<Car> findCarByBrandModelAndYear(List<Car> carList, String brand, String model, int year) {
 
         if (brand.isEmpty() || model.isEmpty() ||
                 Util.isIntegerValueZero(year)) {
@@ -71,7 +71,14 @@ public class CarService {
                     "value for model is [ %s ] and value enter for year is [ %s ]. " +
                     "Enter a valid for all field", brand, model, year));
         }
-        return repository.findCarByBrandAndModelAndModelYear(brand, model, year);
+        if(carList.size() == 0) {
+            Util.throwIllegalStateException(String.format("Car list is [ %s ]. No cars in database", 0));
+        }
+        return carList
+                .stream()
+                .filter(car -> car.getBrand().equals(brand)
+                        && car.getModel().equals(model) && car.compareTo(year) == 0)
+                .collect(Collectors.toList());
     }
 
 

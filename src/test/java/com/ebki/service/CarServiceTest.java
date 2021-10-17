@@ -1,10 +1,8 @@
 package com.ebki.service;
 
 import com.ebki.TestData;
-import com.ebki.model.CarCheckIn;
-import com.ebki.model.CarCheckout;
-import com.ebki.repository.CarRepo;
 import com.ebki.model.Car;
+import com.ebki.repository.CarRepo;
 import com.ebki.request.CarRegistration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,8 +43,6 @@ class CarServiceTest {
         // Given
         long id = 672635511L;
         Car car = new Car(id, "Nissan", "Maxima", "Open Top", 2004);
-        Optional<Car> optionalCar = repository.findById(id);
-
         // When
         given(repository.selectCarByVinNumber(car.getVin()))
                 .willReturn(Optional.empty());
@@ -244,7 +240,66 @@ class CarServiceTest {
         // Then
         //...IT SHOULD THROW EXCEPTION, SINCE YEAR IS EMPTY
         assertThatThrownBy(() -> service.findCarByYear(list, car.getYear()))
-                .hasMessageContaining(String.format("Car list is [ %s ]. No cars in database", car.getYear()))
+                .hasMessageContaining(String.format("Car list is [ %s ]. No cars in database", 0))
                 .isInstanceOf(IllegalStateException.class);
     }
+
+    @Test
+    void itShouldFindCarByBrandModelAndYear() {
+        // Given...GIVEN CARS LIST
+        List<Car> carList = data.carList();
+        // When...IT SHOULD SAVE LIST OF CAR
+        carList.forEach(car -> {
+            service.save(car);
+        });
+        Car car = carList.get(carList.size() - 1);
+        // Then...IT SHOULD CHECK NUMBER OF CARS SAVE IS THE SAME AS CAR_LIST_SIZE
+        //...AND IT SHOULD CAPTURE THE CARS SAVE
+        verify(repository, times(carList.size())).save(argumentCaptor.capture());
+        //...IT SHOULD RETURN THE CARS LIST
+        List<Car> listCar = argumentCaptor.getAllValues();
+        //...IT SHOULD FIND CARS BY GIVEN BRAND, MODEL AND YEAR, THE LIST OF CARS RETURN SHOULD
+        //...NOT BE NULL AND CONTAINS ONLY CARS WITH YEAR OF 2016
+        assertThat(service.findCarByBrandModelAndYear(listCar, car.getBrand(), car.getModel(), car.getYear()))
+                .isNotNull()
+                .asList()
+                .hasSize(1)
+                .satisfies(cars -> {
+                    assertThat(cars.get(0))
+                            .usingRecursiveComparison()
+                            .isEqualTo(carList.get(carList.size() - 1));
+                });
+    }
+
+    @Test
+    void itShouldShouldThrowExceptionWhenBrandModelOrYearIsEmpty() {
+        // Given...CAR INFORMATION
+        Car car = new Car();
+        car.setBrand("");
+        car.setModel("");
+        List<Car> list = data.carList();
+        // When
+
+        // Then
+        //...IT SHOULD THROW EXCEPTION, SINCE AN EMPTY BRAND, MODE, AND YEAR IS PASS
+        assertThatThrownBy(() -> service.findCarByBrandModelAndYear(list, car.getBrand(), car.getModel(), car.getYear()))
+                .hasMessageContaining(String.format("Value enter for brand is [ %s ], " +
+                        "value for model is [ %s ] and value enter for year is [ %s ]. " +
+                        "Enter a valid for all field", car.getBrand(), car.getModel(), car.getYear()))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void itShouldShouldThrowExceptionForFindCarByBrandModelAndYearWhenListIsEmpty() {
+        // Given...CAR INFORMATION
+        Car car = data.carList().get(2);
+        List<Car> list = new ArrayList<>();
+        // When
+        // Then
+        //...IT SHOULD THROW EXCEPTION, SINCE AN EMPTY LIST IS PASS
+        assertThatThrownBy(() -> service.findCarByBrandModelAndYear(list, car.getBrand(), car.getModel(), car.getYear()))
+                .hasMessageContaining(String.format("Car list is [ %s ]. No cars in database", 0))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
 }
