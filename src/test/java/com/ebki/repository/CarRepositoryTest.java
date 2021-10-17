@@ -1,6 +1,6 @@
 package com.ebki.repository;
 
-import com.ebki.FakeData;
+import com.ebki.TestData;
 import com.ebki.model.Car;
 import com.ebki.request.CarRegistration;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class CarRepositoryTest {
 
     @Autowired
     private CarRepo carRepository;
-    private FakeData fakeData = new FakeData();
+    private TestData fakeData = new TestData();
 
     @Test
     void itShouldNotSelectCarWhenVinNumDoesNotExists() {

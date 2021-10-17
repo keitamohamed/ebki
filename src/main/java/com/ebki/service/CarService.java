@@ -20,7 +20,7 @@ public class CarService {
         this.repository = carRepository;
     }
 
-    public void registerNewCar(Car car) {
+    public void save(Car car) {
 
         if (car.getVin() == null) {
             car.setVin(Util.generateID(999999999));
@@ -37,30 +37,30 @@ public class CarService {
         repository.save(car);
     }
 
-    public List<Car> findCarByBand(String brand) {
+    public List<Car> findCarByBand(List<Car> carList, String brand) {
         if (brand.isEmpty()) {
             Util.throwIllegalStateException(String.format("Car brand [ %s ] cannot be null or empty", brand));
         }
-        List<Car> carBrand = repository.findCarByBrand(brand);
-
-        if (carBrand.size() == 0) {
-            Util.throwIllegalStateException(String.format("Car brand [ %s ] does not exists", brand));
+        if (carList.size() == 0) {
+            Util.throwIllegalStateException(String.format("Car list [ %s ] is empty", 0));
         }
-        return carBrand
+        return carList
                 .stream()
                 .filter(car -> car.getBrand().equals(brand))
                 .collect(Collectors.toList());
     }
 
-    public List<Car> findCarByYear(int year) {
+    public List<Car> findCarByYear(List<Car> carList, int year) {
         if (Util.isIntegerValueZero(year)) {
             Util.throwIllegalStateException(String.format("Car year [ %s ] cannot be 0 or empty", year));
         }
-        List<Car> carList = repository.findCarByYear(year);
         if (carList.size() == 0) {
-            Util.throwIllegalStateException(String.format("Cannot find cars with year of [ %s ]", year));
+            Util.throwIllegalStateException(String.format("Car list is [ %s ]. No cars in database", year));
         }
-        return carList;
+        return carList
+                .stream()
+                .filter(car -> car.compareTo(year) == 0)
+                .collect(Collectors.toList());
     }
 
     public List<Car> findCarByBrandModelAndYear(String brand, String model, int year) {

@@ -11,21 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter
-public class FakeData {
+public class TestData {
 
     private List<Car> carList;
     private List<CarCheckIn> carCheckInList;
     private List<CarCheckout> carCheckoutList;
     private final int BOUND_VALUE = 999999999;
 
-    public FakeData() {
+    public TestData() {
         carList = new ArrayList<>();
         carCheckInList = new ArrayList<>();
         carCheckoutList = new ArrayList<>();
 
     }
 
-    public FakeData(List<Car> car, List<CarCheckIn> checkIn) {
+    public TestData(List<Car> car, List<CarCheckIn> checkIn) {
         this.carList = car;
         this.carCheckInList = checkIn;
     }

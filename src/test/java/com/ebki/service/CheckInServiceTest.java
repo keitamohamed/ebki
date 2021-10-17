@@ -1,6 +1,6 @@
 package com.ebki.service;
 
-import com.ebki.FakeData;
+import com.ebki.TestData;
 import com.ebki.model.Car;
 import com.ebki.model.CarCheckIn;
 import com.ebki.repository.CheckInRepo;
@@ -32,7 +32,7 @@ class CheckInServiceTest {
     private ArgumentCaptor<CarCheckIn> argumentCaptor;
 
 
-    private final FakeData fakeData = new FakeData();
+    private final TestData fakeData = new TestData();
 
     @BeforeEach
     void setUp() {

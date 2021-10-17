@@ -22,6 +22,6 @@ public class CarController {
     public void registerCar(@RequestBody Car car) {
         CarRegistration registration = new CarRegistration(car);
         System.out.println("Brand is " + registration.getCar().getBrand());
-        service.registerNewCar(registration.getCar());
+        service.save(registration.getCar());
     }
 }
