@@ -16,9 +16,9 @@ public interface CarRepo extends CrudRepository<Car, Long> {
     @Query(value = "SELECT * FROM car WHERE vin = :id", nativeQuery = true)
     Optional<Car> selectCarByVinNumber(@Param("id") Long aLong);
 
-    Optional<Car> findCarByVin(@Param("vin") Long carVinNumber);
-
     List<Car> findCarByBrand(@Param("brand") String brand);
+
+    List<Car> findCarByYear(@Param("year") int year);
 
     @Query(value = "SELECT * FROM car WHERE brand = :brand " +
             "AND model = :model AND year = :year", nativeQuery = true)

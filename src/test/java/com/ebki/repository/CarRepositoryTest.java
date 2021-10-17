@@ -103,7 +103,7 @@ class CarRepositoryTest {
     }
 
     @Test
-    void itShouldFindCarByCarBrand() {
+    void itShouldFindCarByBrand() {
         // Given...GIVEN CAR INFORMATION
         List<Car> carList = fakeData.carList();
         // When...IT SHOULD SAVE LIST OF CAR
@@ -117,5 +117,54 @@ class CarRepositoryTest {
                 .isNotNull()
                 .asList()
                 .hasSize(1);
+    }
+
+    @Test
+    void itShouldFindCarByYear() {
+        // Given...GIVEN CAR INFORMATION
+        List<Car> carList = fakeData.carList();
+        // When...IT SHOULD SAVE LIST OF CAR
+        carList.forEach(car -> {
+            CarRegistration registration = new CarRegistration(car);
+            carRepository.save(registration.getCar());
+        });
+        // Then...IT SHOULD FIND CAR BY Year AND CHECK THE LIST TWO IS JUST ONE
+        List<Car> findCarByBrand = carRepository.findCarByYear(2016);
+        assertThat(findCarByBrand)
+                .asList()
+                .isNotNull()
+                .hasSize(2);
+        assertThat(findCarByBrand).satisfies(cars -> {
+            assertThat(cars.get(1))
+                    .usingRecursiveComparison()
+                    .isEqualTo(carList.get(carList.size() - 1));
+            assertThat(cars.get(0))
+                    .usingRecursiveComparison()
+                    .isEqualTo(carList.get(2));
+        });
+    }
+
+    @Test
+    void itShouldFindCarByBrandModelAndYear() {
+        // Given...GIVEN CAR INFORMATION
+        List<Car> carList = fakeData.carList();
+        // When...IT SHOULD SAVE LIST OF CAR
+        carList.forEach(car -> {
+            CarRegistration registration = new CarRegistration(car);
+            carRepository.save(registration.getCar());
+        });
+        // Then...IT SHOULD FIND CAR BY Brand, Model, and Year AND CHECK THE LIST SIZE IS JUST ONE
+        Car car = carList.get(1);
+        List<Car> findCarByBrandModelAndYear = carRepository.findCarByBrandAndModelAndModelYear(car.getBrand(), car.getModel(), car.getYear());
+        assertThat(findCarByBrandModelAndYear)
+                .isNotNull()
+                .asList()
+                .hasSizeGreaterThan(0)
+                .satisfies(cars -> {
+                    assertThat(cars.get(0))
+                            .usingRecursiveComparison()
+                            .isEqualTo(car);
+                });
+
     }
 }
