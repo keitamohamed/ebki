@@ -1,0 +1,9 @@
+POST http://localhost:8080/ebik/car/register_new_car
+Content-Type: application/json
+
+{
+  "brand": "Toyota",
+  "model": "Corolla LE",
+  "bodyStyle": "Sedan",
+  "year": 2021
+}

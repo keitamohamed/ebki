@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,18 +21,19 @@ public class Car implements Comparable<Integer> {
 
     @Id
     @NotNull
-    private Long carVinNumber;
+    private Long vin;
     @Column(nullable = false)
-    @NotBlank
+    @NotBlank(message = "Brand name cannot be null or empty")
     private String brand;
     @Column(nullable = false)
-    @NotBlank
+    @NotBlank(message = "Model cannot be null or empty")
     private String model;
     @Column(nullable = false)
-    @NotBlank
+    @NotBlank(message = "Body style cannot be null or empty")
     private String bodyStyle;
     @Column(nullable = false)
-    @NotBlank
+    @NotNull
+    @Min(2005)
     private int year;
 
     @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -43,7 +45,7 @@ public class Car implements Comparable<Integer> {
     private CarCheckout checkout;
 
     public Car(Long carVinNumber, String brand, String model, String bodyStyle, int modelYear) {
-        this.carVinNumber = carVinNumber;
+        this.vin = carVinNumber;
         this.brand = brand;
         this.model = model;
         this.bodyStyle = bodyStyle;

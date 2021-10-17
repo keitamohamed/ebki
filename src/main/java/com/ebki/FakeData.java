@@ -31,11 +31,11 @@ public class FakeData {
     }
 
     public List<Car> carList() {
-        this.carList.add(new Car(635521L, "Ford", "Crown Victoria", "Sedan", 2007));
+        this.carList.add(new Car(635521L, "Ford", "Crown Victoria", "Sedan", 2012));
         carList.add(new Car(537261L, "Lexus", "GX", "Convertible", 2021));
-        carList.add(new Car(737291L, "Nissan", "Altima", "Sedan", 2009));
+        carList.add(new Car(737291L, "Nissan", "Altima", "Sedan", 2016));
         carList.add(new Car(462821L, "Toyota", "Tacoma", "SUV", 2017));
-        carList.add(new Car(5478291L, "Toyota", "Matrix", "SUV", 2007));
+        carList.add(new Car(5478291L, "Toyota", "Matrix", "SUV", 2016));
         return this.carList;
     }
 

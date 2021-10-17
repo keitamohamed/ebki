@@ -44,7 +44,7 @@ class CarServiceTest {
         Optional<Car> optionalCar = carRepository.findById(id);
 
         // When
-        given(carRepository.selectCarByVinNumber(car.getCarVinNumber()))
+        given(carRepository.selectCarByVinNumber(car.getVin()))
                 .willReturn(Optional.empty());
 
         // Then
@@ -78,7 +78,7 @@ class CarServiceTest {
                 .isEqualTo(car);
 //                .isEqualToIgnoringGivenFields(car, "carVinNumber");
 
-        assertThat(capture.getCarVinNumber()).isNotNull();
+        assertThat(capture.getVin()).isNotNull();
     }
 
     @Test
@@ -88,7 +88,7 @@ class CarServiceTest {
         Car car = new Car(id, "Nissan", "Maxima", "Open Top", 2004);
 
         // ...an existing car returned
-        given(carRepository.selectCarByVinNumber(car.getCarVinNumber()))
+        given(carRepository.selectCarByVinNumber(car.getVin()))
                 .willReturn(Optional.of(car));
         // When
         carServiceTest.registerNewCar(car);
@@ -105,13 +105,13 @@ class CarServiceTest {
         Car car2 = new Car(vinNum, "Nissan", "370Z", "Close Top", 2012);
 
         CarRegistration carRegistrationRequest = new CarRegistration(car1);
-        given(carRepository.selectCarByVinNumber(car1.getCarVinNumber()))
+        given(carRepository.selectCarByVinNumber(car1.getVin()))
                 .willReturn(Optional.of(car2));
         // When
         // Then
         assertThatThrownBy(() -> carServiceTest.registerNewCar(carRegistrationRequest.getCar()))
                 .isInstanceOf(IllegalStateException.class)
-                .hasMessageContaining(String.format("Vin number [%s] is taken", car1.getCarVinNumber()));
+                .hasMessageContaining(String.format("Vin number [%s] is taken", car1.getVin()));
         // finally
         then(carRepository).should(never()).save(any(Car.class));
     }

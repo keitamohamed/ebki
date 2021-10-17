@@ -1,5 +1,6 @@
 package com.ebki.repository;
 
+import com.ebki.FakeData;
 import com.ebki.model.Car;
 import com.ebki.request.CarRegistration;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-@DataJpaTest (
+@DataJpaTest(
         properties = {
                 "spring.jpa.properties.javax.persistence.validation.mode=none"
         }
@@ -24,6 +25,7 @@ class CarRepositoryTest {
 
     @Autowired
     private CarRepo carRepository;
+    private FakeData fakeData = new FakeData();
 
     @Test
     void itShouldNotSelectCarWhenVinNumDoesNotExists() {
@@ -38,12 +40,12 @@ class CarRepositoryTest {
     @Test
     void itShouldSaveCar() {
         // Given
-        Car car = new Car(672635511L, "Nissan", "Maxima", "Open Top", 2004);
+        Car car = new Car(672635511L, "Nissan", "Maxima", "Open Top", 2018);
         CarRegistration request = new CarRegistration(car);
         // When
         carRepository.save(request.getCar());
         // Then
-        Optional<Car> optionalCar = carRepository.selectCarByVinNumber(car.getCarVinNumber());
+        Optional<Car> optionalCar = carRepository.selectCarByVinNumber(car.getVin());
         assertThat(optionalCar)
                 .isPresent()
                 .hasValueSatisfying(c -> {
@@ -57,7 +59,7 @@ class CarRepositoryTest {
     void itShouldFindCarByBrandAndModelYear() {
         // Given
         long id = 672635511L;
-        Car car = new Car(id, "Nissan", "Maxima", "Open Top", 2004);
+        Car car = new Car(id, "Nissan", "Maxima", "Open Top", 2012);
         CarRegistration request = new CarRegistration(car);
         // When
         carRepository.save(request.getCar());
@@ -69,7 +71,6 @@ class CarRepositoryTest {
                     assertThat(c)
                             .usingRecursiveComparison()
                             .isEqualTo(car);
-
                 });
 
     }
@@ -77,7 +78,7 @@ class CarRepositoryTest {
     @Test
     void itShouldSelectCarByBrandAndModelAndModelYear() {
         // Given
-        Car car = new Car(67231631L, "Nissan", "Maxima", "Open Top", 2004);
+        Car car = new Car(67231631L, "Nissan", "Maxima", "Open Top", 2016);
         CarRegistration request = new CarRegistration(car);
         // When
         carRepository.save(request.getCar());
@@ -92,13 +93,29 @@ class CarRepositoryTest {
     @Test
     void itShouldNotSaveCarWhenBrandIsNull() {
         // Given
-        Car car = new Car(672635511L, null, "Maxima", "Open top", 2004);
+        Car car = new Car(672635511L, null, "Maxima", "Open top", 2019);
         CarRegistration request = new CarRegistration(car);
         // When
         // Then
         assertThatThrownBy(() -> carRepository.save(request.getCar()))
                 .hasMessageContaining("not-null property references a null or transient value :")
                 .isInstanceOf(DataIntegrityViolationException.class);
+    }
 
+    @Test
+    void itShouldFindCarByCarBrand() {
+        // Given...GIVEN CAR INFORMATION
+        List<Car> carList = fakeData.carList();
+        // When...IT SHOULD SAVE LIST OF CAR
+        carList.forEach(car -> {
+            CarRegistration registration = new CarRegistration(car);
+            carRepository.save(registration.getCar());
+        });
+        // Then...IT SHOULD FIND CAR BY BRAND AND CHECK THE LIST SIZE IS JUST ONE
+        List<Car> findCarByBrand = carRepository.findCarByBrand("Nissan");
+        assertThat(findCarByBrand)
+                .isNotNull()
+                .asList()
+                .hasSize(1);
     }
 }

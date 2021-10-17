@@ -35,7 +35,7 @@ public class CheckoutService {
                 return;
             }
             Util.throwIllegalStateException(String.format("Car [%s] with Vin number [%s] is already checkout ",
-                    car.getBrand(), car.getCarVinNumber()));
+                    car.getBrand(), car.getVin()));
         }
 
         if (request.getCheckout().getCheckoutID() == null) {

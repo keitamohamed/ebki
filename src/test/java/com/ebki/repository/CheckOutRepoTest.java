@@ -85,7 +85,7 @@ class CheckOutRepoTest {
         repository.save(checkout);
 
         // Then
-        Optional<CarCheckout> optional = repository.findCarCheckoutByCar_CarVinNumber(checkout.getCar().getCarVinNumber());
+        Optional<CarCheckout> optional = repository.findCarCheckoutByCar_CarVinNumber(checkout.getCar().getVin());
         assertThat(optional)
                 .isPresent()
                 .hasValueSatisfying(checkout1 -> {

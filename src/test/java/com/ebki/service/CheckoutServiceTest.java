@@ -108,7 +108,7 @@ class CheckoutServiceTest {
                 .isInstanceOf(IllegalStateException.class)
                         .hasMessageContaining(String.format(
                                 "Car [%s] with Vin number [%s] is already checkout ",
-                                car.getBrand(), car.getCarVinNumber()));
+                                car.getBrand(), car.getVin()));
         //...IT SHOULD CHECK THAT THE REQUEST WAS NOT SAVE
         then(repo).should(never()).save(any(CarCheckout.class));
     }
@@ -124,7 +124,7 @@ class CheckoutServiceTest {
         checkout.setCheckoutID(null);
 
         //...GIVEN THE CAR VIN NUMBER, IT SHOULD RETURN AN EMPTY OPTIONAL OF CHECKOUT
-        given(repo.findCarCheckoutByCar_CarVinNumber(car.getCarVinNumber()))
+        given(repo.findCarCheckoutByCar_CarVinNumber(car.getVin()))
                 .willReturn(Optional.empty());
         // When...IT SHOULD SAVE THE CHECKOUT REQUEST
         service.save(checkout);

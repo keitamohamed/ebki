@@ -90,7 +90,7 @@ class CheckInRepoTest {
         repo.save(checkIn);
 
         // Then...will find car check in by car vin num
-        Optional<CarCheckIn> optional = repo.findCarCheckInByCar_CarVinNumber(car.getCarVinNumber());
+        Optional<CarCheckIn> optional = repo.findCarCheckInByCar_CarVinNumber(car.getVin());
         assertThat(optional)
                 .isPresent()
                 .hasValueSatisfying(checkIn1 -> {
