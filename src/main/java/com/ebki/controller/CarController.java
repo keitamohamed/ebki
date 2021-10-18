@@ -6,7 +6,6 @@ import com.ebki.service.CarService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,12 +27,22 @@ public class CarController {
         service.save(registration.getCar());
     }
 
-    @PostMapping(value = {"/brand/{brand}"},
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = {"/brand/{brand}"})
     public List<Car> findCarByBrand(@PathVariable("brand") String brand) {
-        System.out.println("Value being pass is " + brand);
-        List<Car> carList = new ArrayList<>();
-        carList.add(new Car(783211L, "Toyota", "4X4", "Truck", 2012));
-        return carList;
+        return service.findCarByBand(service.findAll(), brand);
+    }
+
+    @GetMapping(path = {"/year/{year}"})
+    public List<Car> findCarByYear(@PathVariable("year") int year) {
+        return service.findCarByYear(service.findAll(), year);
+    }
+
+    @GetMapping(path = {"/find_by_brand_mode_year/{brand}/{model}/{year}"})
+    public List<Car> findCarByBrandModelYear(
+            @PathVariable("brand") String brand,
+            @PathVariable("model") String model,
+            @PathVariable("year") int year) {
+        System.out.println("Brand " + brand + " model " + model + " year " + year);
+        return service.findCarByBrandModelAndYear(service.findAll(), brand, model, year);
     }
 }

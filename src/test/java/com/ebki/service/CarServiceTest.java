@@ -123,9 +123,7 @@ class CarServiceTest {
         // Given...GIVEN CARS LIST
         List<Car> carList = data.carList();
         // When...IT SHOULD SAVE LIST OF CAR
-        carList.forEach(car -> {
-            service.save(car);
-        });
+        carList.forEach(car -> service.save(car));
         Car car = carList.get(carList.size() - 1);
         // Then...IT SHOULD CHECK NUMBER OF CARS SAVE IS THE SAME AS CAR_LIST_SIZE
         //...AND IT SHOULD CAPTURE THE CARS SAVE
@@ -138,11 +136,9 @@ class CarServiceTest {
                 .isNotNull()
                 .asList()
                 .hasSizeGreaterThan(1)
-                .satisfies(cars -> {
-                    assertThat(cars.get(0))
-                            .usingRecursiveComparison()
-                            .isEqualTo(carList.get(carList.size() - 2));
-                });
+                .satisfies(cars -> assertThat(cars.get(0))
+                        .usingRecursiveComparison()
+                        .isEqualTo(carList.get(carList.size() - 2)));
 
     }
 
@@ -151,9 +147,7 @@ class CarServiceTest {
         // Given...GIVEN CARS LIST
         List<Car> carList = data.carList();
         // When...IT SHOULD SAVE LIST OF CAR
-        carList.forEach(car -> {
-            service.save(car);
-        });
+        carList.forEach(car -> service.save(car));
         Car car = carList.get(carList.size() - 1);
         // Then...IT SHOULD CHECK NUMBER OF CARS SAVE IS THE SAME AS CAR_LIST_SIZE
         //...AND IT SHOULD CAPTURE THE CARS SAVE
@@ -166,11 +160,9 @@ class CarServiceTest {
                 .isNotNull()
                 .asList()
                 .hasSize(2)
-                .satisfies(cars -> {
-                    assertThat(cars.get(0))
-                            .usingRecursiveComparison()
-                            .isEqualTo(carList.get(carList.size() - 3));
-                });
+                .satisfies(cars -> assertThat(cars.get(0))
+                        .usingRecursiveComparison()
+                        .isEqualTo(carList.get(carList.size() - 3)));
     }
 
     @Test
@@ -249,9 +241,7 @@ class CarServiceTest {
         // Given...GIVEN CARS LIST
         List<Car> carList = data.carList();
         // When...IT SHOULD SAVE LIST OF CAR
-        carList.forEach(car -> {
-            service.save(car);
-        });
+        carList.forEach(car -> service.save(car));
         Car car = carList.get(carList.size() - 1);
         // Then...IT SHOULD CHECK NUMBER OF CARS SAVE IS THE SAME AS CAR_LIST_SIZE
         //...AND IT SHOULD CAPTURE THE CARS SAVE
@@ -264,11 +254,9 @@ class CarServiceTest {
                 .isNotNull()
                 .asList()
                 .hasSize(1)
-                .satisfies(cars -> {
-                    assertThat(cars.get(0))
-                            .usingRecursiveComparison()
-                            .isEqualTo(carList.get(carList.size() - 1));
-                });
+                .satisfies(cars -> assertThat(cars.get(0))
+                        .usingRecursiveComparison()
+                        .isEqualTo(carList.get(carList.size() - 1)));
     }
 
     @Test
@@ -295,6 +283,7 @@ class CarServiceTest {
         Car car = data.carList().get(2);
         List<Car> list = new ArrayList<>();
         // When
+
         // Then
         //...IT SHOULD THROW EXCEPTION, SINCE AN EMPTY LIST IS PASS
         assertThatThrownBy(() -> service.findCarByBrandModelAndYear(list, car.getBrand(), car.getModel(), car.getYear()))

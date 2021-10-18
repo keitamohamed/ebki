@@ -6,6 +6,7 @@ import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,12 +42,13 @@ public class CarService {
         if (brand.isEmpty()) {
             Util.throwIllegalStateException(String.format("Car brand [ %s ] cannot be null or empty", brand));
         }
+
         if (carList.size() == 0) {
             Util.throwIllegalStateException(String.format("Car list [ %s ] is empty", 0));
         }
         return carList
                 .stream()
-                .filter(car -> car.getBrand().equals(brand))
+                .filter(car -> car.getBrand().equalsIgnoreCase(brand))
                 .collect(Collectors.toList());
     }
 
@@ -54,6 +56,7 @@ public class CarService {
         if (Util.isIntegerValueZero(year)) {
             Util.throwIllegalStateException(String.format("Car year [ %s ] cannot be 0 or empty", year));
         }
+
         if (carList.size() == 0) {
             Util.throwIllegalStateException(String.format("Car list is [ %s ]. No cars in database", 0));
         }
@@ -71,15 +74,21 @@ public class CarService {
                     "value for model is [ %s ] and value enter for year is [ %s ]. " +
                     "Enter a valid for all field", brand, model, year));
         }
+
         if(carList.size() == 0) {
             Util.throwIllegalStateException(String.format("Car list is [ %s ]. No cars in database", 0));
         }
         return carList
                 .stream()
-                .filter(car -> car.getBrand().equals(brand)
-                        && car.getModel().equals(model) && car.compareTo(year) == 0)
+                .filter(car -> car.getBrand().equalsIgnoreCase(brand)
+                        && car.getModel().equalsIgnoreCase(model)
+                        && car.compareTo(year) == 0)
                 .collect(Collectors.toList());
     }
 
-
+    public List<Car> findAll() {
+        List<Car> carList = new ArrayList<>();
+        repository.findAll().iterator().forEachRemaining(carList::add);
+        return carList;
+    }
 }

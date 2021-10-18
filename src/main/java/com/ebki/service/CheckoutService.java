@@ -34,7 +34,7 @@ public class CheckoutService {
             if (car.getBrand().equals(requestCar.getBrand()) && car.getModel().equals(requestCar.getModel())) {
                 return;
             }
-            Util.throwIllegalStateException(String.format("Car [%s] with Vin number [%s] is already checkout ",
+            Util.throwIllegalStateException(String.format("Car [ %s ] with vin number [ %s ] is already checkout ",
                     car.getBrand(), car.getVin()));
         }
 
