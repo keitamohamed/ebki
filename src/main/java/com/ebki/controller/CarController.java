@@ -23,7 +23,6 @@ public class CarController {
             method = RequestMethod.POST)
     public void registerCar(@RequestBody Car car) {
         CarRegistration registration = new CarRegistration(car);
-        System.out.println("Brand is " + registration.getCar().getBrand());
         service.save(registration.getCar());
     }
 
@@ -42,7 +41,6 @@ public class CarController {
             @PathVariable("brand") String brand,
             @PathVariable("model") String model,
             @PathVariable("year") int year) {
-        System.out.println("Brand " + brand + " model " + model + " year " + year);
         return service.findCarByBrandModelAndYear(service.findAll(), brand, model, year);
     }
 }

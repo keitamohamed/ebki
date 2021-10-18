@@ -1,0 +1,12 @@
+POST http://localhost:8080/ebik/car-checkout/checkout
+Content-Type: application/json
+
+{
+  "carCheckOut": {
+    "vin": 835629738,
+    "brand": "Nissa",
+    "model": "Altima",
+    "bodyStyle": "SV",
+    "year": 2020
+  }
+}

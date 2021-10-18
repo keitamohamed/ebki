@@ -2,13 +2,13 @@ package com.ebki.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -27,10 +27,9 @@ public class CarCheckout implements Serializable {
     private Driver checkOutDriver;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "carVinNumber")
-    @JsonBackReference
-    @NotBlank
-    private Car car;
+    @JoinColumn(name = "vin")
+    @JsonBackReference(value = "carCheckOut")
+    private Car carCheckOut;
 
     public CarCheckout(Long checkoutID) {
         this.checkoutID = checkoutID;

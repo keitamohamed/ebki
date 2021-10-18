@@ -42,7 +42,7 @@ class CheckOutRepoTest {
 
         car.setYear(2004);
         checkout.setCheckoutID(67251426L);
-        checkout.setCar(car);
+        checkout.setCarCheckOut(car);
 
         // When
         repository.save(checkout);
@@ -65,7 +65,7 @@ class CheckOutRepoTest {
         CarCheckout checkout = new CarCheckout();
 
         checkout.setCheckoutID(56729182L);
-        checkout.setCar(car);
+        checkout.setCarCheckOut(car);
         // When
         // Then
         assertThatThrownBy(() -> repository.save(checkout))
@@ -79,13 +79,13 @@ class CheckOutRepoTest {
         CarCheckout checkout = new CarCheckout();
 
         checkout.setCheckoutID(67251426L);
-        checkout.setCar(new Car(672635511L, "Nissan", "Maxima", "Open Top", 2004));
+        checkout.setCarCheckOut(new Car(672635511L, "Nissan", "Maxima", "Open Top", 2004));
 
         // When
         repository.save(checkout);
 
         // Then
-        Optional<CarCheckout> optional = repository.findCarCheckoutByCar_CarVinNumber(checkout.getCar().getVin());
+        Optional<CarCheckout> optional = repository.findCarCheckoutByCar_CarVinNumber(checkout.getCarCheckOut().getVin());
         assertThat(optional)
                 .isPresent()
                 .hasValueSatisfying(checkout1 -> {

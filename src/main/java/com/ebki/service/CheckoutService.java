@@ -8,14 +8,16 @@ import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CheckoutService {
-
     private final CheckOutRepo repository;
+    @Autowired
+    private CarService service;
 
     @Autowired
     public CheckoutService(CheckOutRepo repository) {
@@ -25,21 +27,21 @@ public class CheckoutService {
     public void save(CarCheckout checkout) {
 
         CheckOut request = new CheckOut(checkout);
-        Car requestCar = request.getCheckout().getCar();
+        Car requestCar = request.getCheckout().getCarCheckOut();
+
+        if (request.getCheckout().getCheckoutID() == null) {
+            request.getCheckout().setCheckoutID(Util.generateID(672415261));
+        }
 
         Optional<CarCheckout> optional = repository.findById(request.getCheckout().getCheckoutID());
 
         if (optional.isPresent()) {
-            Car car = optional.get().getCar();
+            Car car = optional.get().getCarCheckOut();
             if (car.getBrand().equals(requestCar.getBrand()) && car.getModel().equals(requestCar.getModel())) {
                 return;
             }
             Util.throwIllegalStateException(String.format("Car [ %s ] with vin number [ %s ] is already checkout ",
                     car.getBrand(), car.getVin()));
-        }
-
-        if (request.getCheckout().getCheckoutID() == null) {
-            request.getCheckout().setCheckoutID(Util.generateID(672415261));
         }
         repository.save(request.getCheckout());
     }
@@ -53,7 +55,7 @@ public class CheckoutService {
         }
         return carCheckoutList
                 .stream()
-                .filter(checkout -> checkout.getCar().getBrand().equals(brand))
+                .filter(checkout -> checkout.getCarCheckOut().getBrand().equals(brand))
                 .collect(Collectors.toList());
     }
 
@@ -66,7 +68,7 @@ public class CheckoutService {
         }
         return carCheckoutList
                 .stream()
-                .filter(checkout -> checkout.getCar().compareTo(year) == 0)
+                .filter(checkout -> checkout.getCarCheckOut().compareTo(year) == 0)
                 .collect(Collectors.toList());
     }
 
@@ -80,8 +82,25 @@ public class CheckoutService {
         }
         return carCheckoutList
                 .stream()
-                .filter(checkout -> checkout.getCar().getBrand().equals(brand)
-                        && checkout.getCar().getModel().equals(model))
+                .filter(checkout -> checkout.getCarCheckOut().getBrand().equals(brand)
+                        && checkout.getCarCheckOut().getModel().equals(model))
                 .collect(Collectors.toList());
+    }
+
+    public Car findCheckOutByID(Long checkOutID) {
+        Optional<CarCheckout> optional = repository.findById(checkOutID);
+        if (optional.isEmpty())
+        {
+            return new Car();
+        }
+        return optional.get().getCarCheckOut();
+    }
+
+    public List<CarCheckout> checkoutList() {
+        List<CarCheckout> checkoutList = new ArrayList<>();
+        repository.findAll()
+                .iterator()
+                .forEachRemaining(checkoutList::add);
+        return checkoutList;
     }
 }

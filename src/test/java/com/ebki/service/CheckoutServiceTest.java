@@ -47,7 +47,7 @@ class CheckoutServiceTest {
         CarCheckout checkout = new CarCheckout();
 
         checkout.setCheckoutID(6738161L);
-        checkout.setCar(car);
+        checkout.setCarCheckOut(car);
 
         // When...CHECKOUT ID, IT SHOULD RETURN EMPTY OPTIONAL
         given(repo.findById(checkout.getCheckoutID()))
@@ -71,7 +71,7 @@ class CheckoutServiceTest {
         CarCheckout checkout = new CarCheckout();
 
         checkout.setCheckoutID(6728121L);
-        checkout.setCar(car);
+        checkout.setCarCheckOut(car);
 
         //...Given CHECKOUT ID, IT SHOULD RETURN EMPTY OPTIONAL
         given(repo.findById(checkout.getCheckoutID()))
@@ -95,8 +95,8 @@ class CheckoutServiceTest {
 
         checkout.setCheckoutID(id);
         checkoutTwo.setCheckoutID(id);
-        checkout.setCar(car);
-        checkoutTwo.setCar(carTwo);
+        checkout.setCarCheckOut(car);
+        checkoutTwo.setCarCheckOut(carTwo);
 
         //...IT SHOULD RETURN CHECKOUT WITH GIVEN ID THAT IS SAME AS CHECKOUT TWO
         given(repo.findById(checkout.getCheckoutID()))
@@ -107,7 +107,7 @@ class CheckoutServiceTest {
         assertThatThrownBy(() -> service.save(checkout))
                 .isInstanceOf(IllegalStateException.class)
                         .hasMessageContaining(String.format(
-                                "Car [%s] with Vin number [%s] is already checkout ",
+                                "Car [ %s ] with vin number [ %s ] is already checkout ",
                                 car.getBrand(), car.getVin()));
         //...IT SHOULD CHECK THAT THE REQUEST WAS NOT SAVE
         then(repo).should(never()).save(any(CarCheckout.class));
@@ -120,7 +120,7 @@ class CheckoutServiceTest {
         Car car = new Car(id, "Nissan", "Maxima", "Open Top", 2004);
 
         CarCheckout checkout = new CarCheckout();
-        checkout.setCar(car);
+        checkout.setCarCheckOut(car);
         checkout.setCheckoutID(null);
 
         //...GIVEN THE CAR VIN NUMBER, IT SHOULD RETURN AN EMPTY OPTIONAL OF CHECKOUT
@@ -148,7 +148,7 @@ class CheckoutServiceTest {
         List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
 
         int[] index = {0};
-        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+        carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
         carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
@@ -174,7 +174,7 @@ class CheckoutServiceTest {
         List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
 
         int[] index = {0};
-        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+        carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         //When...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
         carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
@@ -186,11 +186,12 @@ class CheckoutServiceTest {
         List<CarCheckout> capture = argumentCaptor.getAllValues();
         //...IT SHOULD RETURN A LIST OF CHECK_OUT CARS, AND THE LIST CONTAIN
         // THE THIRD_CHECKOUT AND DOES NOT CONTAIN SECOND_CHECKOUT AND THE LAST_CHECKOUT
-        assertThat(service.findCheckOutByCarYear(capture, 2009))
+        assertThat(service.findCheckOutByCarYear(capture, 2021))
                 .asList()
-                .contains(carCheckoutList.get(2))
-                .doesNotContain(carCheckoutList.get(1), carCheckoutList.get(carCheckoutList.size() - 1))
-                .hasSize(1);
+                .hasSizeGreaterThan(0)
+                .satisfies(checks -> assertThat(checks.get(0))
+                        .usingRecursiveComparison()
+                        .isEqualTo(carCheckoutList.get(1)));
     }
 
     @Test
@@ -200,7 +201,7 @@ class CheckoutServiceTest {
         List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
 
         int[] index = {0};
-        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+        carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
         carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
@@ -244,7 +245,7 @@ class CheckoutServiceTest {
         List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
 
         int[] index = {0};
-        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+        carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
         carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
@@ -285,7 +286,7 @@ class CheckoutServiceTest {
         List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
 
         int[] index = {0};
-        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+        carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
         carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
@@ -309,7 +310,7 @@ class CheckoutServiceTest {
         List<CarCheckout> carCheckoutList = fakeData.carCheckoutList();
 
         int[] index = {0};
-        carCheckoutList.forEach(checkout -> checkout.setCar(carList.get(index[0]++)));
+        carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
         carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
