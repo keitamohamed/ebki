@@ -47,6 +47,10 @@ public class CheckInService {
         if (checkInList.isEmpty()) {
             Util.throwIllegalStateException("No car in the checkin database");
         }
+        if (brand.isEmpty() || model.isEmpty()) {
+            throw new IllegalArgumentException(
+                    String.format("Value for car brand is [%s] and model is [%s]", brand, model));
+        }
         return checkInList
                 .stream()
                 .filter(checkIn ->
