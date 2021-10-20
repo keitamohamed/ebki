@@ -1,0 +1,2 @@
+GET localhost:8080/ebik/checkout/find_all_cars_checkout
+Content-Type: application/json

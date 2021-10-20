@@ -8,10 +8,9 @@ import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class CheckoutService {
@@ -96,11 +95,10 @@ public class CheckoutService {
         return optional.get().getCarCheckOut();
     }
 
-    public List<CarCheckout> checkoutList() {
-        List<CarCheckout> checkoutList = new ArrayList<>();
-        repository.findAll()
-                .iterator()
-                .forEachRemaining(checkoutList::add);
-        return checkoutList;
+    public List<Car> checkoutList() {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(repository.findAll().iterator(), Spliterator.ORDERED), false)
+                .map(CarCheckout::getCarCheckOut)
+                .collect(Collectors.toList());
     }
 }

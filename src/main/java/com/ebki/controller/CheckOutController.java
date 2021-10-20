@@ -7,10 +7,10 @@ import com.ebki.service.CheckoutService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
-@RequestMapping("/ebik/car-checkout/**")
+@RequestMapping("/ebik/checkout/**")
 @CrossOrigin("*")
 public class CheckOutController {
 
@@ -31,5 +31,10 @@ public class CheckOutController {
     @GetMapping(path = {"/find-by-id/{id}"})
     public Car findCheckOutByID(@PathVariable("id") Long id) {
         return service.findCheckOutByID(id);
+    }
+
+    @GetMapping(value = "/find_all_cars_checkout")
+    public List<Car> getAllCheckOutCar() {
+        return service.checkoutList();
     }
 }

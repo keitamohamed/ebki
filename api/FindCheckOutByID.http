@@ -1,2 +1,2 @@
-GET localhost:8080/ebik/car-checkout/find-by-id/432135723
+GET localhost:8080/ebik/checkout/find-by-id/432135723
 Content-Type: application/json

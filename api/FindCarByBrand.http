@@ -1,2 +1,2 @@
-GET localhost:8080/ebik/car/brand/nissa
+GET localhost:8080/ebik/car/brand/toyota
 Content-Type: application/json

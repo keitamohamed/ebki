@@ -1,12 +1,12 @@
-POST http://localhost:8080/ebik/car-checkout/checkout
+POST http://localhost:8080/ebik/checkout/checkout
 Content-Type: application/json
 
 {
   "carCheckOut": {
-    "vin": 835629738,
-    "brand": "Nissa",
-    "model": "Altima",
-    "bodyStyle": "SV",
-    "year": 2020
+    "vin": 155296945,
+    "brand": "Toyota",
+    "model": "Camry XSE",
+    "bodyStyle": "Sedan",
+    "year": 2016
   }
 }
