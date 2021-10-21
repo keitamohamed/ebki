@@ -35,6 +35,23 @@ public class CheckOutController {
 
     @GetMapping(value = "/find_all_cars_checkout")
     public List<Car> getAllCheckOutCar() {
-        return service.checkoutList();
+        return service.carCheckOut();
+    }
+
+    @GetMapping(path = {"/find_checkout_by_brand/{brand}"})
+    public List<Car> findCheckOutByBrand(@PathVariable("brand") String brand) {
+        return service.findCheckOutByCarBrand(service.checkoutList(), brand);
+    }
+
+    @GetMapping(value = {"/find_checkout_by_year/{year}"})
+    public List<Car> findCheckOutByCarYear(@PathVariable("year") int year) {
+        return service.findCheckOutByCarYear(service.checkoutList(), year);
+    }
+
+    @GetMapping(value = {"/checkout_by_brand_model/{brand}/?{model}"})
+    public List<Car> findCheckOutByBrandAndModel(@PathVariable("brand") String brand,
+                                                 @PathVariable("model") String model) {
+        return service.findCheckOutByCarBrandAndModel(service.checkoutList(), brand, model);
+
     }
 }

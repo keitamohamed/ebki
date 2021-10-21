@@ -45,7 +45,7 @@ public class CheckoutService {
         repository.save(request.getCheckout());
     }
 
-    public List<CarCheckout> findCheckOutByCarBrand(List<CarCheckout> carCheckoutList, String brand) {
+    public List<Car> findCheckOutByCarBrand(List<CarCheckout> carCheckoutList, String brand) {
         if (carCheckoutList.isEmpty()) {
             throw new IllegalStateException("No car in the checkin database");
         }
@@ -54,11 +54,13 @@ public class CheckoutService {
         }
         return carCheckoutList
                 .stream()
-                .filter(checkout -> checkout.getCarCheckOut().getBrand().equals(brand))
+                .map(CarCheckout::getCarCheckOut)
+                .filter(car -> car.getBrand().equalsIgnoreCase(brand))
                 .collect(Collectors.toList());
     }
 
-    public List<CarCheckout> findCheckOutByCarYear(List<CarCheckout> carCheckoutList, int year) {
+
+    public List<Car> findCheckOutByCarYear(List<CarCheckout> carCheckoutList, int year) {
         if (carCheckoutList.isEmpty()) {
             throw new IllegalStateException("No car in the checkin database");
         }
@@ -67,11 +69,12 @@ public class CheckoutService {
         }
         return carCheckoutList
                 .stream()
-                .filter(checkout -> checkout.getCarCheckOut().compareTo(year) == 0)
+                .map(CarCheckout::getCarCheckOut)
+                .filter(car -> car.compareTo(year) == 0)
                 .collect(Collectors.toList());
     }
 
-    public List<CarCheckout> findCheckOutByCarBrandAndModel(List<CarCheckout> carCheckoutList, String brand, String model) {
+    public List<Car> findCheckOutByCarBrandAndModel(List<CarCheckout> carCheckoutList, String brand, String model) {
         if (carCheckoutList.isEmpty()) {
             Util.throwIllegalStateException("No car in the checkin database");
         }
@@ -81,8 +84,9 @@ public class CheckoutService {
         }
         return carCheckoutList
                 .stream()
-                .filter(checkout -> checkout.getCarCheckOut().getBrand().equals(brand)
-                        && checkout.getCarCheckOut().getModel().equals(model))
+                .map(CarCheckout::getCarCheckOut)
+                .filter(car -> car.getBrand().equalsIgnoreCase(brand)
+                        && car.getModel().equalsIgnoreCase(model))
                 .collect(Collectors.toList());
     }
 
@@ -95,10 +99,20 @@ public class CheckoutService {
         return optional.get().getCarCheckOut();
     }
 
-    public List<Car> checkoutList() {
-        return StreamSupport.stream(
-                Spliterators.spliteratorUnknownSize(repository.findAll().iterator(), Spliterator.ORDERED), false)
+    public List<Car> carCheckOut() {
+        return checkoutList()
+                .stream()
                 .map(CarCheckout::getCarCheckOut)
+                .collect(Collectors.toList());
+    }
+
+    public List<CarCheckout> checkoutList() {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(
+                        repository.findAll()
+                                .iterator(),
+                        Spliterator.ORDERED),
+                        false)
                 .collect(Collectors.toList());
     }
 }
