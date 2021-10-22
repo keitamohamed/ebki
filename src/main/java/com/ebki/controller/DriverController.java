@@ -5,23 +5,34 @@ import com.ebki.service.DriverService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ebik/driver/**")
 @CrossOrigin("*")
 public class DriverController {
 
-    private final DriverService driverService;
+    private final DriverService service;
 
     public DriverController(DriverService driverService) {
-        this.driverService = driverService;
+        this.service = driverService;
     }
 
-    @RequestMapping(
+    @PostMapping(
             value = {"/add_new_driver"},
-            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void registerNewDriver(@RequestBody Driver driver) {
-        driverService.registerNewDriver(driver);
+        service.save(driver);
+    }
+
+    @DeleteMapping(value = {"/delete_driver/{id}"})
+    public void deleteDriver(@PathVariable("id") Long id) {
+        service.deleteDriver(id);
+    }
+
+    @GetMapping(value = {"/get_drivers"})
+    public List<Driver> getDrivers() {
+        return service.drivers();
     }
 }

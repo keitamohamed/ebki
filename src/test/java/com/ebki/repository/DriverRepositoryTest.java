@@ -26,7 +26,7 @@ class DriverRepositoryTest {
 
     @Test
     void itShouldFindDriverByID() {
-        // Given
+        // Given...Driver information
         long id = 7823516L;
 //        Driver driver = new Driver();
         Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
@@ -46,7 +46,7 @@ class DriverRepositoryTest {
 
     @Test
     void itShouldSelectDriverByEmail() {
-        // Given
+        // Given...Driver information
         String email = "keitamohamed12@gmail.com";
         Driver driver = new Driver(64726181L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
         // When
@@ -65,7 +65,7 @@ class DriverRepositoryTest {
 
     @Test
     void itShouldNotSelectDriverWhenEmailDoesNotExists() {
-        // Given
+        // Given...Driver information
         String email = "keitamohamed12@gmail.com";
         // When
         Optional<Driver> optionalDriver = underTest.findDriverByEmailAddress(email);
@@ -75,7 +75,7 @@ class DriverRepositoryTest {
 
     @Test
     void itShouldSaveDriver() {
-        // Given
+        // Given...Driver information
         long id = 7823516L;
         Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
 
@@ -94,7 +94,7 @@ class DriverRepositoryTest {
 
     @Test
     void itShouldNotSaveDriverWhenNameIsNull() {
-        // Given
+        // Given...Driver information
         Driver driver = new Driver(737267181L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
         DriverRegistration registration = new DriverRegistration(driver);
         // When

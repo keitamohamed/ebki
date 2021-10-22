@@ -16,4 +16,8 @@ public class Util {
     public static boolean isIntegerValueZero(Integer integer) {
         return integer.equals(0);
     }
+
+    public static boolean isLongValueZero(Long value) {
+        return value.compareTo(0L) == 0;
+    }
 }

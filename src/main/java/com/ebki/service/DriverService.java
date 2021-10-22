@@ -7,20 +7,21 @@ import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class DriverService {
 
-    private final DriverRepo driverRepository;
+    private final DriverRepo repository;
 
     @Autowired
     public DriverService(DriverRepo driverRepository) {
-        this.driverRepository = driverRepository;
+        this.repository = driverRepository;
     }
 
-    public void registerNewDriver(Driver driver) {
+    public void save(Driver driver) {
         if (findDriverByEmail(driver.getEmail()).isPresent()) {
             Driver searchResult = findDriverByEmail(driver.getEmail()).get();
             if (searchResult.getFirstName().equals(driver.getFirstName())) {
@@ -33,7 +34,7 @@ public class DriverService {
         }
 
         setAddressIDIfNull(driver);
-        driverRepository.save(driver);
+        repository.save(driver);
     }
 
     private void setAddressIDIfNull(Driver driver) {
@@ -45,9 +46,24 @@ public class DriverService {
         });
     }
 
+    public List<Driver> drivers() {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(
+                        repository.findAll().iterator(),
+                        Spliterator.ORDERED), false)
+                .collect(Collectors.toList());
+    }
+
+    public void deleteDriver(Long id) {
+        if (Util.isLongValueZero(id)) {
+            Util.throwIllegalStateException(String.format("[ %s ] is an invalid driver id.", id));
+        }
+        repository.deleteById(id);
+    }
+
     // Just wrote this code. Need to add test
     public Optional<Driver> findDriverByEmail(String email) {
-        return driverRepository.findDriverByEmailAddress(email);
+        return repository.findDriverByEmailAddress(email);
     }
 
 }
