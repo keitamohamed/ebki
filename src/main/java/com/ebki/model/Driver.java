@@ -44,8 +44,8 @@ public class Driver {
         this.phoneNum = phoneNum;
     }
 
-    @OneToMany(mappedBy = "addressDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "addressDriver")
+    @OneToMany(mappedBy = "driverAddress", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "driverAddress")
     private Set<Address> address;
 
     @OneToMany(mappedBy = "checkOutDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

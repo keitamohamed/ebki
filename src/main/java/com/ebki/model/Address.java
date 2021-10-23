@@ -2,7 +2,6 @@ package com.ebki.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,17 +28,18 @@ public class Address {
     @Digits(integer = 5,  message = "zipcode cannot be greater than 5 digit number", fraction = 0)
     private int zipcode;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "driverID")
+    @JsonBackReference(value = "driverAddress")
+    private Driver driverAddress;
+
     public Address(Long addressID, String street, String city, String state, int zipcode, Driver addressDriver) {
         this.addressID = addressID;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zipcode = zipcode;
-        this.addressDriver = addressDriver;
+        this.driverAddress = addressDriver;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "driverID")
-    @JsonBackReference(value = "addressDriver")
-    private Driver addressDriver;
 }

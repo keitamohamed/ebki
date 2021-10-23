@@ -38,6 +38,13 @@ public class CarService {
         repository.save(car);
     }
 
+    public Optional<Car> findCarById (Long id) {
+        if (repository.findById(id).isEmpty()) {
+            return Optional.empty();
+        }
+        return repository.findById(id);
+    }
+
     public List<Car> findCarByBand(List<Car> carList, String brand) {
         if (brand.isEmpty()) {
             Util.throwIllegalStateException(String.format("Car brand [ %s ] cannot be null or empty", brand));

@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ebik/car/**")
@@ -42,5 +43,10 @@ public class CarController {
             @PathVariable("model") String model,
             @PathVariable("year") int year) {
         return service.findCarByBrandModelAndYear(service.findAll(), brand, model, year);
+    }
+
+    @GetMapping(value = {"/find_car_vin/{vin}"})
+    public Optional<Car> getCar(@PathVariable("vin") Long id) {
+        return service.findCarById(id);
     }
 }

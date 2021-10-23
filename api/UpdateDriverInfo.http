@@ -1,0 +1,10 @@
+PUT http://localhost:8080/ebik/driver/update_Driver_information/267522526
+Content-Type: application/json;charset=UTF-8
+
+{
+  "driverID": 267522526,
+  "firstName": "Ashely",
+  "lastName": "Smith More",
+  "email": "smithash6@gmail.com",
+  "phoneNum": "6735614523"
+}

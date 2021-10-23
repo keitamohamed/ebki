@@ -46,6 +46,22 @@ public class DriverService {
         });
     }
 
+    public Optional<Driver> updateDriver(Long driverID, Driver driver) {
+        if (repository.findById(driverID).isEmpty()) {
+            Util.throwIllegalStateException(String.format("No Driver found with an ID = [ %s ]", driverID));
+        }
+        driver.setDriverID(driverID);
+        repository.save(driver);
+        return repository.findById(driverID);
+    }
+
+    public Optional<Driver> findDriverByID(Long id) {
+        if (repository.findById(id).isEmpty()) {
+            return Optional.empty();
+        }
+        return repository.findById(id);
+    }
+
     public List<Driver> drivers() {
         return StreamSupport.stream(
                 Spliterators.spliteratorUnknownSize(

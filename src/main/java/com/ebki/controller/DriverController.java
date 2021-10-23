@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ebik/driver/**")
@@ -26,13 +27,23 @@ public class DriverController {
         service.save(driver);
     }
 
-    @DeleteMapping(value = {"/delete_driver/{id}"})
-    public void deleteDriver(@PathVariable("id") Long id) {
-        service.deleteDriver(id);
+    @GetMapping(value = {"/find_driver_by_di/{id}"})
+    public Optional<Driver> findByID(@PathVariable("id") Long id) {
+        return service.findDriverByID(id);
     }
 
     @GetMapping(value = {"/get_drivers"})
     public List<Driver> getDrivers() {
         return service.drivers();
+    }
+
+    @PutMapping(value = {"/update_Driver_information/{id}"})
+    public Optional<Driver> updateDriver(@RequestBody Driver driver, @PathVariable("id") Long id) {
+        return service.updateDriver(id, driver);
+    }
+
+    @DeleteMapping(value = {"/delete_driver/{id}"})
+    public void deleteDriver(@PathVariable("id") Long id) {
+        service.deleteDriver(id);
     }
 }
