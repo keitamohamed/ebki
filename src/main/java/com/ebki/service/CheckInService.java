@@ -2,6 +2,8 @@ package com.ebki.service;
 
 import com.ebki.model.Car;
 import com.ebki.model.CarCheckIn;
+import com.ebki.model.CarCheckout;
+import com.ebki.model.Driver;
 import com.ebki.repository.CheckInRepo;
 import com.ebki.request.CheckIn;
 import com.ebki.util.Util;
@@ -18,17 +20,24 @@ import static java.util.stream.Collectors.toList;
 public class CheckInService {
 
     private final CheckInRepo repo;
+    private final DriverService driverService;
+    @Autowired
+    private CheckoutService checkoutService;
 
     @Autowired
-    public CheckInService(CheckInRepo repo) {
+    public CheckInService(CheckInRepo repo, DriverService driverService) {
         this.repo = repo;
+        this.driverService = driverService;
     }
 
-    public void save(CarCheckIn checkIn) {
+    public void save(CarCheckIn checkIn, Long driverID, Long checkoutID) {
 
-        CheckIn checkInRegistration = new CheckIn(checkIn);
+        CheckIn checkInReq = new CheckIn(checkIn);
+        setCheckInID(checkIn);
 
         Optional<CarCheckIn> optional = repo.findById(checkIn.getCheckInID());
+        Optional<Driver> optionalDriver = driverService.findDriverByID(driverID);
+        Optional<CarCheckout> optionalCarCheckout = checkoutService.findCarCheckoutByID(checkoutID);
 
         if (optional.isPresent()) {
             Car car = optional.get().getCar();
@@ -38,7 +47,22 @@ public class CheckInService {
             throw new IllegalStateException(String.format("CheckIn with ID [%s] already exists",
                     checkIn.getCheckInID()));
         }
-        repo.save(checkInRegistration.getCheckIn());
+
+        throwExceptionIfDriverOrCheckoutCarIsEmpty(driverID, checkoutID, checkInReq, optionalDriver, optionalCarCheckout);
+        repo.save(checkInReq.getCheckIn());
+    }
+
+    private void throwExceptionIfDriverOrCheckoutCarIsEmpty(
+            Long driverID, Long checkoutID, CheckIn checkInReq,
+            Optional<Driver> optionalDriver, Optional<CarCheckout> optionalCarCheckout) {
+        if (optionalDriver.isEmpty()) {
+            Util.throwIllegalStateException(String.format("No driver found with an ID [ %s ]", driverID));
+        }
+        if (optionalCarCheckout.isEmpty()) {
+            Util.throwIllegalStateException(String.format("Checkout ID does not exists [ %s ]", checkoutID));
+        }
+        checkInReq.getCheckIn().setCarCheckIn(optionalDriver.get());
+        checkInReq.getCheckIn().setCar(optionalCarCheckout.get().getCarCheckOut());
     }
 
     // Return car with matching brand and model
@@ -90,5 +114,11 @@ public class CheckInService {
                 .stream()
                 .filter(checkIn -> checkIn.getCar().compareTo(year) == 0)
                 .collect(toList());
+    }
+
+    private void setCheckInID(CarCheckIn checkIn) {
+        if (checkIn.getCheckInID() == null) {
+            checkIn.setCheckInID(Util.generateID(672415261));
+        }
     }
 }

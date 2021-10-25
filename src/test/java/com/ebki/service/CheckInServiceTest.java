@@ -10,6 +10,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ class CheckInServiceTest {
     @Mock
     private CheckInRepo repo;
     private CheckInService service;
+    @MockitoSettings
+    private DriverService driverService;
     @Captor
     private ArgumentCaptor<CarCheckIn> argumentCaptor;
 
@@ -37,7 +40,7 @@ class CheckInServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        service = new CheckInService(repo);
+        service = new CheckInService(repo, driverService);
     }
 
     @Test
@@ -54,7 +57,7 @@ class CheckInServiceTest {
                 .willReturn(Optional.empty());
 
         // WHEN ... IT SHOULD SAVE THE CHECKIN CAR
-        service.save(checkIn);
+        service.save(checkIn, 0L, 0L);
 
         // THEN ... IT SHOULD CAPTURE THE CHECK_IN AND RETURN THE CHECK_IN_CAR
         then(repo).should().save(argumentCaptor.capture());
@@ -75,8 +78,8 @@ class CheckInServiceTest {
         secondCheckIn.setCar(new Car(89973632L, "Nissan", "Maxima", "Close Top", 2020));
 
         // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
-        service.save(firstCheckIn);
-        service.save(secondCheckIn);
+        service.save(firstCheckIn, 0L, 0L);
+        service.save(secondCheckIn, 0L, 0L);
 
         // THEN
         //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
@@ -118,7 +121,7 @@ class CheckInServiceTest {
         carCheckInList.forEach(checkIn -> checkIn.setCar(carList.get(index[0]++)));
 
         // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
-        carCheckInList.forEach(carCheckIn -> service.save(carCheckIn));
+        carCheckInList.forEach(carCheckIn -> service.save(carCheckIn, 0L, 0L));
 
         // THEN
         //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
@@ -180,7 +183,7 @@ class CheckInServiceTest {
         carCheckInList.forEach(checkIn -> checkIn.setCar(carList.get(index[0]++)));
 
         // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
-        carCheckInList.forEach(carCheckIn -> service.save(carCheckIn));
+        carCheckInList.forEach(carCheckIn -> service.save(carCheckIn, 0L, 0L));
 
         // THEN
         //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
@@ -189,10 +192,10 @@ class CheckInServiceTest {
         List<CarCheckIn> capture = argumentCaptor.getAllValues();
         //...IT SHOULD RETURN LIST OF CHECK_IN CARS, CHECK THE LIST CONTAIN LAST_CHECKIN
         // AND DOES NOT CONTAIN SECOND_CHECKIN
-        assertThat(service.findCheckInByCarYear(capture, 2007))
+        assertThat(service.findCheckInByCarYear(capture, 2016))
                 .asList()
                 .contains(carCheckInList.get(carList.size() - 1))
-                .doesNotContain(carCheckInList.get(2))
+                .doesNotContain(carCheckInList.get(1))
                 .hasSize(2);
     }
 
@@ -245,8 +248,8 @@ class CheckInServiceTest {
         secondCheckIn.setCar(new Car(89973632L, "Nissan", "Maxima", "Close Top", 2020));
 
         // WHEN ... IT SHOULD SAVE THE TWO NEW CHECK_IN CAR
-        service.save(firstCheckIn);
-        service.save(secondCheckIn);
+        service.save(firstCheckIn, 0L, 0L);
+        service.save(secondCheckIn, 0L, 0L);
 
         // THEN
         //...IT SHOULD VERIFY THERE ARE TWO CHECK_IN CAR BEING CHECK_IN, AND IT SHOULD CAPTURE THE CHECK_IN
@@ -279,7 +282,7 @@ class CheckInServiceTest {
         // WHEN
         // THEN ...IT SHOULD THROW ILLEGAL STATE EXCEPTION, SINCE THERE IS CHECK_IN CAR
         // WITH SAME CHECK_IN ID NUMBER
-        assertThatThrownBy(() -> service.save(firstCheckIN))
+        assertThatThrownBy(() -> service.save(firstCheckIN, 0L, 0L))
                 .hasMessageContaining(String.format(
                         "CheckIn with ID [%s] already exists",
                         firstCheckIN.getCheckInID()))

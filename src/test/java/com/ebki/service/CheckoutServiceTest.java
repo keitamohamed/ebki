@@ -117,13 +117,13 @@ class CheckoutServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenDriverDoesNotExists() {
-        // Given
+        // Given...CHECKOUT INFORMATION
         CheckOut request = new CheckOut(new CarCheckout());
         Optional<Driver> driver = Optional.empty();
         Optional<Car> carOptional = Optional.empty();
 
         // When
-        // Then
+        // Then...IT SHOULD THROW ILLEGAL STATE EXCEPTION
         assertThatThrownBy(() ->
                 service.throwExceptionWhenDriverOrCarDoesNotExists(0L, 0L, driver, carOptional, request))
                 .hasMessageContaining(String.format("No driver found with an ID [ %s ]", 0L))
@@ -132,13 +132,13 @@ class CheckoutServiceTest {
 
     @Test
     void itShouldThrowExceptionWhenOptionalCarDoesNotExist() {
-        // Given
+        // Given...CHECKOUT INFORMATION
         CheckOut request = new CheckOut(new CarCheckout());
         Optional<Driver> driver = Optional.of(new Driver(7466210L, "John", "Robert", "roberts@gmail.com", "5405666378"));
         Optional<Car> carOptional = Optional.empty();
 
         // When
-        // Then
+        // Then...IT SHOULD THROW ILLEGAL STATE EXCEPTION FOR NOT FINDING A CAR
         assertThatThrownBy(() ->
                 service.throwExceptionWhenDriverOrCarDoesNotExists(0L, 0L, driver, carOptional, request))
                 .hasMessageContaining(String.format("No Car found with vin number [ %s ]", 0L))
@@ -376,5 +376,28 @@ class CheckoutServiceTest {
         assertThatThrownBy(() -> service.findCheckOutByCarBrandAndModel(list, "Nissan", "37Z"))
                 .hasMessageContaining("No car in the checkin database")
                 .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void itShouldThrowIllegalStateExceptionForDeletingCheckout() {
+        // Given...GIVING CHECKOUT ID
+        long checkOutID = 0L;
+        // When
+        // Then...IT SHOULD THROW ILLEGAL STATE EXCEPTION FOR NOT FINDING CHECKOUT
+        assertThatThrownBy(() -> service.deleteCheckOut(checkOutID))
+                .hasMessageContaining(String.format("There is no check out with an ID [ %s ]", checkOutID))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void itShouldReturnEmptyCarForFindingCheckoutByID() {
+        // Given...GIVING CHECKOUT ID
+        long checkOutID = 0L;
+        // When
+        // Then...IT SHOULD THROW ILLEGAL STATE EXCEPTION FOR NOT FINDING CHECKOUT
+        assertThat(service.findCheckOutByID(checkOutID))
+                .usingRecursiveComparison()
+                .isEqualTo(new Car())
+                .isInstanceOf(Car.class);
     }
 }

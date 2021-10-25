@@ -18,11 +18,10 @@ public class CarCheckIn implements Serializable {
 
     @Id
     private Long checkInID;
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "driverID")
-    @JsonBackReference(value = "checkInDriver")
-    private Driver checkInDriver;
+    @JsonBackReference(value = "carCheckIn")
+    private Driver carCheckIn;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "carVinNumber")

@@ -33,7 +33,7 @@ public class Car implements Comparable<Integer> {
     private String bodyStyle;
     @Column(nullable = false)
     @NotNull
-    @Min(2005)
+    @Min(1985)
     private int year;
 
     @OneToOne(mappedBy = "carCheckOut", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

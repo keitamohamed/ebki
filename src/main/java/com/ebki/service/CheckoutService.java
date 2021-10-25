@@ -35,8 +35,8 @@ public class CheckoutService {
         setCheckOutID(request.getCheckout());
 
         Optional<CarCheckout> optional = repository.findById(request.getCheckout().getCheckoutID());
-//        Optional<Driver> optionalDriver = driverService.findDriverByID(driverID);
-//        Optional<Car> carOptional = carService.findCarById(carID);
+        Optional<Driver> optionalDriver = driverService.findDriverByID(driverID);
+        Optional<Car> carOptional = carService.findCarById(carID);
 
         if (optional.isPresent()) {
             Car car = optional.get().getCarCheckOut();
@@ -48,7 +48,7 @@ public class CheckoutService {
             Util.throwIllegalStateException(String.format("Car [ %s ] with vin number [ %s ] is already checkout ",
                     car.getBrand(), car.getVin()));
         }
-//        throwExceptionWhenDriverOrCarDoesNotExists(driverID, carID, optionalDriver, carOptional, request);
+        throwExceptionWhenDriverOrCarDoesNotExists(driverID, carID, optionalDriver, carOptional, request);
         repository.save(request.getCheckout());
     }
 
@@ -116,13 +116,21 @@ public class CheckoutService {
                 .collect(Collectors.toList());
     }
 
-    public Car findCheckOutByID(Long checkOutID) {
-        Optional<CarCheckout> optional = repository.findById(checkOutID);
-        if (optional.isEmpty())
-        {
-            return new Car();
+    public void deleteCheckOut(Long checkoutID) {
+        Optional<CarCheckout> checkout = findCarCheckoutByID(checkoutID);
+        if (checkout.isEmpty()) {
+            Util.throwIllegalStateException(String.format("There is no check out with an ID [ %s ]", checkoutID));
         }
-        return optional.get().getCarCheckOut();
+        repository.deleteByCheckoutID(checkoutID);
+    }
+
+    public Car findCheckOutByID(Long checkOutID) {
+        Optional<CarCheckout> optional = findCarCheckoutByID(checkOutID);
+        return optional.isPresent() ? optional.get().getCarCheckOut() : new Car();
+    }
+
+    public Optional<CarCheckout> findCarCheckoutByID(Long checkOutID) {
+        return repository.findById(checkOutID);
     }
 
     public List<Car> carCheckOut() {

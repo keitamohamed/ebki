@@ -52,7 +52,7 @@ public class Driver {
     @JsonManagedReference(value = "checkoutCar")
     private Set<CarCheckout> checkout;
 
-    @OneToMany(mappedBy = "checkInDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "checkInDriver")
+    @OneToMany(mappedBy = "carCheckIn", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "carCheckIn")
     private Set<CarCheckIn> carCheckIns;
 }

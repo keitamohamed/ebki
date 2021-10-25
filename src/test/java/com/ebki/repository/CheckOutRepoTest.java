@@ -46,7 +46,6 @@ class CheckOutRepoTest {
 
         // When
         repository.save(checkout);
-
         // Then
         Optional<CarCheckout> optional = repository.findById(checkout.getCheckoutID());
         assertThat(optional)
@@ -56,6 +55,23 @@ class CheckOutRepoTest {
                             .usingRecursiveComparison()
                             .isEqualTo(checkout);
                 });
+    }
+
+    @Test
+    void itShouldShouldDeleteData() {
+        // Given
+        Car car = new Car(672635511L, "Nissan", "Maxima", "Open Top", 2019);
+        CarCheckout checkout = new CarCheckout();
+
+        checkout.setCheckoutID(67251426L);
+        checkout.setCarCheckOut(car);
+
+        // When
+        repository.save(checkout);
+        // Then
+        assertThat(repository.deleteByCheckoutID(checkout.getCheckoutID()))
+                .isEqualTo(1);
+
     }
 
     @Test
@@ -79,7 +95,7 @@ class CheckOutRepoTest {
         CarCheckout checkout = new CarCheckout();
 
         checkout.setCheckoutID(67251426L);
-        checkout.setCarCheckOut(new Car(672635511L, "Nissan", "Maxima", "Open Top", 2004));
+        checkout.setCarCheckOut(new Car(672635511L, "Nissan", "Maxima", "Open Top", 2016));
 
         // When
         repository.save(checkout);

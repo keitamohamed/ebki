@@ -55,6 +55,10 @@ public class CheckOutController {
     public List<Car> findCheckOutByBrandAndModel(@PathVariable("brand") String brand,
                                                  @PathVariable("model") String model) {
         return service.findCheckOutByCarBrandAndModel(service.checkoutList(), brand, model);
+    }
 
+    @DeleteMapping(value = {"/delete/{id}"})
+    public void deleteCheckout(@PathVariable("id") Long id) {
+        service.deleteCheckOut(id);
     }
 }
