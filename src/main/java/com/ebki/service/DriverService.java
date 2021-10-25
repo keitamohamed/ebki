@@ -15,6 +15,11 @@ import java.util.stream.StreamSupport;
 public class DriverService {
 
     private final DriverRepo repository;
+    @Autowired
+    private CheckoutService checkoutService;
+    @Autowired
+    private CarService carService;
+
 
     @Autowired
     public DriverService(DriverRepo driverRepository) {

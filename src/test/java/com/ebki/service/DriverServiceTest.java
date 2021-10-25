@@ -41,7 +41,7 @@ class DriverServiceTest {
     void itShouldSaveNewDriver() {
         // Given...THE NEW DRIVER INFORMATION AND ADDRESS
         Set<Address> addressList = new HashSet<>();
-        Driver driver = new Driver(7823516L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver(7823516L, "John", "Robert", "roberts@gmail.com", "5405666378");
         addressList.add(new Address(6252622L, "5627 City Street", "Phoenix", "AZ", 26152, driver));
         driver.setAddress(addressList);
 
@@ -64,7 +64,7 @@ class DriverServiceTest {
     void itShouldSaveNewDriverWhenIdIsNull() {
         // Given...THE NEW DRIVER INFORMATION AND ADDRESS
         Set<Address> addressList = new HashSet<>();
-        Driver driver = new Driver(null, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver(null, "John", "Robert", "roberts@gmail.com", "5405666378");
         addressList.add(new Address(6252622L, "5627 City Street", "Phoenix", "AZ", 26152, driver));
         driver.setAddress(addressList);
         given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
@@ -90,7 +90,7 @@ class DriverServiceTest {
     void itShouldNotSaveDriverWhenDriverExists() {
         // Given
         long id = 7823516L;
-        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver(id, "John", "Robert", "roberts@gmail.com", "5405666378");
 
         // ... IT SHOULD RETURN AN EXISTING DRIVER
         given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
@@ -106,7 +106,7 @@ class DriverServiceTest {
     void itShouldThrownExceptionWhenEmailExists() {
         // Given...DRIVER NEW INFORMATION
         long id = 7823516L;
-        Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        Driver driver = new Driver(id, "John", "Robert", "roberts@gmail.com", "5405666378");
         Driver driverTwo = new Driver(id, "Fayanga", "Fayanga", "keitamohamed12@gmail.com", "5405666378");
 
         // ...IT SHOULD RETURN AN EXISTING DRIVER WITH GIVEN EMAIL

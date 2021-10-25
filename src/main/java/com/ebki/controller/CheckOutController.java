@@ -21,11 +21,14 @@ public class CheckOutController {
     }
 
     @PostMapping(
-            value = {"/checkout"},
+            value = {"/checkout/{driverID}/{vinNumber}"},
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void save(@RequestBody CarCheckout checkout) {
+    public void save(@RequestBody CarCheckout checkout,
+                     @PathVariable("driverID") Long driverID,
+                     @PathVariable("vinNumber") Long vinNumber) {
+        System.out.println("Driver id " + driverID);
         CheckOut requestCheckOut = new CheckOut(checkout);
-        service.save(requestCheckOut.getCheckout());
+        service.save(requestCheckOut.getCheckout(), driverID, vinNumber);
     }
 
     @GetMapping(path = {"/find-by-id/{id}"})

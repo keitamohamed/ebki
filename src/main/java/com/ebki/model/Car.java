@@ -36,12 +36,12 @@ public class Car implements Comparable<Integer> {
     @Min(2005)
     private int year;
 
-    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JsonManagedReference
-    private CarCheckIn checkIn;
     @OneToOne(mappedBy = "carCheckOut", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "carCheckOut")
     private CarCheckout checkout;
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonManagedReference
+    private CarCheckIn checkIn;
 
     public Car(Long carVinNumber, String brand, String model, String bodyStyle, int modelYear) {
         this.vin = carVinNumber;

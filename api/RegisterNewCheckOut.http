@@ -1,12 +1,6 @@
-POST http://localhost:8080/ebik/checkout/checkout
+POST http://localhost:8080/ebik/checkout/checkout/267522526/835629738
 Content-Type: application/json
 
 {
-  "carCheckOut": {
-    "vin": 155296945,
-    "brand": "Toyota",
-    "model": "Camry XSE",
-    "bodyStyle": "Sedan",
-    "year": 2016
-  }
+  "checkoutID": 635461612
 }

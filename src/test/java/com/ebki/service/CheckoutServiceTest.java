@@ -4,7 +4,9 @@ import com.ebki.TestData;
 import com.ebki.model.Car;
 import com.ebki.model.CarCheckIn;
 import com.ebki.model.CarCheckout;
+import com.ebki.model.Driver;
 import com.ebki.repository.CheckOutRepo;
+import com.ebki.request.CheckOut;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -54,7 +56,7 @@ class CheckoutServiceTest {
                 .willReturn(Optional.empty());
 
         // Then...IT SHOULD SAVE CHECKOUT REQUEST
-        service.save(checkout);
+        service.save(checkout, 0L, 0L);
         //...IT SHOULD SAVE THE REQUEST AND CAPTURE IT
         then(repo).should().save(argumentCaptor.capture());
         //...IT SHOULD RETURN THE CAPTURE VALUE
@@ -78,7 +80,7 @@ class CheckoutServiceTest {
                 .willReturn(Optional.of(checkout));
 
         // When...IT SHOULD NOT SAVE THE CHECKOUT REQUEST SINCE THE CHECKOUT ALREADY EXIST
-        service.save(checkout);
+        service.save(checkout, 0L, 0L);
         // Then...IT SHOULD CHECK THAT THE CHECKOUT REQUEST WAS NOT SAVE
         then(repo).should(never()).save(any());
     }
@@ -104,13 +106,43 @@ class CheckoutServiceTest {
 
         // When
         // Then ...IT SHOULD THROW ILLEGAL STATE EXCEPTION SINCE GIVEN ID ALREADY EXISTS
-        assertThatThrownBy(() -> service.save(checkout))
+        assertThatThrownBy(() -> service.save(checkout, 0L, 0L))
                 .isInstanceOf(IllegalStateException.class)
                         .hasMessageContaining(String.format(
                                 "Car [ %s ] with vin number [ %s ] is already checkout ",
                                 car.getBrand(), car.getVin()));
         //...IT SHOULD CHECK THAT THE REQUEST WAS NOT SAVE
         then(repo).should(never()).save(any(CarCheckout.class));
+    }
+
+    @Test
+    void itShouldThrowExceptionWhenDriverDoesNotExists() {
+        // Given
+        CheckOut request = new CheckOut(new CarCheckout());
+        Optional<Driver> driver = Optional.empty();
+        Optional<Car> carOptional = Optional.empty();
+
+        // When
+        // Then
+        assertThatThrownBy(() ->
+                service.throwExceptionWhenDriverOrCarDoesNotExists(0L, 0L, driver, carOptional, request))
+                .hasMessageContaining(String.format("No driver found with an ID [ %s ]", 0L))
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void itShouldThrowExceptionWhenOptionalCarDoesNotExist() {
+        // Given
+        CheckOut request = new CheckOut(new CarCheckout());
+        Optional<Driver> driver = Optional.of(new Driver(7466210L, "John", "Robert", "roberts@gmail.com", "5405666378"));
+        Optional<Car> carOptional = Optional.empty();
+
+        // When
+        // Then
+        assertThatThrownBy(() ->
+                service.throwExceptionWhenDriverOrCarDoesNotExists(0L, 0L, driver, carOptional, request))
+                .hasMessageContaining(String.format("No Car found with vin number [ %s ]", 0L))
+                .isInstanceOf(IllegalStateException.class);
     }
 
     @Test
@@ -127,7 +159,7 @@ class CheckoutServiceTest {
         given(repo.findCarCheckoutByCar_CarVinNumber(car.getVin()))
                 .willReturn(Optional.empty());
         // When...IT SHOULD SAVE THE CHECKOUT REQUEST
-        service.save(checkout);
+        service.save(checkout, 0L, 0L);
 
         // Then...IT SAVE THE REQUEST AND CAPTURE THE REQUEST
         then(repo).should().save(argumentCaptor.capture());
@@ -151,7 +183,7 @@ class CheckoutServiceTest {
         carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
-        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout, 0L, 0L));
 
         // Then
         //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT
@@ -179,7 +211,7 @@ class CheckoutServiceTest {
         carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         //When...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
-        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout, 0L, 0L));
 
         // Then
         //...IT SHOULD VERIFY THERE THE CHECK_OUT CARS WAS CHECK_OUT AND CAPTURE THE CHECK_OUT
@@ -206,7 +238,7 @@ class CheckoutServiceTest {
         carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
-        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout, 0L, 0L));
 
         // Then
         //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT
@@ -250,7 +282,7 @@ class CheckoutServiceTest {
         carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
-        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout, 0L, 0L));
 
         // Then
         //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT
@@ -291,7 +323,7 @@ class CheckoutServiceTest {
         carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
-        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout, 0L, 0L));
 
         // Then
         //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT
@@ -315,7 +347,7 @@ class CheckoutServiceTest {
         carCheckoutList.forEach(checkout -> checkout.setCarCheckOut(carList.get(index[0]++)));
 
         // When ...IT SHOULD SAVE THE CHECK_OUT LIST OF CARS
-        carCheckoutList.forEach(carCheckout -> service.save(carCheckout));
+        carCheckoutList.forEach(carCheckout -> service.save(carCheckout, 0L, 0L));
 
         // Then
         //...IT SHOULD VERIFY THE LIST CHECK_OUT CAR WAS SAVE, AND CAPTURE THE CHECK_OUT

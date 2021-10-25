@@ -46,4 +46,5 @@ public class DriverController {
     public void deleteDriver(@PathVariable("id") Long id) {
         service.deleteDriver(id);
     }
+
 }
