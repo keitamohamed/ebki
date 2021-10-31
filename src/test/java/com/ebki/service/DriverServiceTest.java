@@ -10,6 +10,8 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -37,11 +39,16 @@ class DriverServiceTest {
         underTest = new DriverService(driverRepositoryUnderTest);
     }
 
+    String dob = "12-17-2004";
+    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+
     @Test
-    void itShouldSaveNewDriver() {
+    void itShouldSaveNewDriver() throws ParseException {
         // Given...THE NEW DRIVER INFORMATION AND ADDRESS
         Set<Address> addressList = new HashSet<>();
         Driver driver = new Driver(7823516L, "John", "Robert", "roberts@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
         addressList.add(new Address(6252622L, "5627 City Street", "Phoenix", "AZ", 26152, driver));
         driver.setAddress(addressList);
 
@@ -61,10 +68,12 @@ class DriverServiceTest {
     }
 
     @Test
-    void itShouldSaveNewDriverWhenIdIsNull() {
+    void itShouldSaveNewDriverWhenIdIsNull() throws ParseException {
         // Given...THE NEW DRIVER INFORMATION AND ADDRESS
         Set<Address> addressList = new HashSet<>();
         Driver driver = new Driver(null, "John", "Robert", "roberts@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
         addressList.add(new Address(6252622L, "5627 City Street", "Phoenix", "AZ", 26152, driver));
         driver.setAddress(addressList);
         given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
@@ -87,10 +96,12 @@ class DriverServiceTest {
     }
 
     @Test
-    void itShouldNotSaveDriverWhenDriverExists() {
+    void itShouldNotSaveDriverWhenDriverExists() throws ParseException {
         // Given
         long id = 7823516L;
         Driver driver = new Driver(id, "John", "Robert", "roberts@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
 
         // ... IT SHOULD RETURN AN EXISTING DRIVER
         given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))
@@ -103,11 +114,17 @@ class DriverServiceTest {
     }
 
     @Test
-    void itShouldThrownExceptionWhenEmailExists() {
+    void itShouldThrownExceptionWhenEmailExists() throws ParseException {
         // Given...DRIVER NEW INFORMATION
         long id = 7823516L;
         Driver driver = new Driver(id, "John", "Robert", "roberts@gmail.com", "5405666378");
         Driver driverTwo = new Driver(id, "Fayanga", "Fayanga", "keitamohamed12@gmail.com", "5405666378");
+
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
+
+        driverTwo.setDob(format.parse(dob));
+        driverTwo.setGender("Male");
 
         // ...IT SHOULD RETURN AN EXISTING DRIVER WITH GIVEN EMAIL
         given(driverRepositoryUnderTest.findDriverByEmailAddress(driver.getEmail()))

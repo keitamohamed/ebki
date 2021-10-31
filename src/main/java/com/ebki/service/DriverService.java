@@ -38,6 +38,8 @@ public class DriverService {
             driver.setDriverID(Util.generateID(999999999));
         }
 
+        System.out.println("Date is " + driver.getDob());
+
         setAddressIDIfNull(driver);
         repository.save(driver);
     }

@@ -13,6 +13,7 @@ import java.util.Optional;
 @RequestMapping("/ebik/car/**")
 @CrossOrigin("*")
 public class CarController {
+
     private final CarService service;
 
     public CarController(CarService service) {
@@ -25,6 +26,11 @@ public class CarController {
     public void registerCar(@RequestBody Car car) {
         CarRegistration registration = new CarRegistration(car);
         service.save(registration.getCar());
+    }
+
+    @GetMapping(value = {"/carList"})
+    public List<Car> carList() {
+        return service.findAll();
     }
 
     @GetMapping(path = {"/brand/{brand}"})

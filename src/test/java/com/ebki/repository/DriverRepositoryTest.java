@@ -8,6 +8,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -24,12 +26,16 @@ class DriverRepositoryTest {
     @Autowired
     private DriverRepo underTest;
 
+    String dob = "12-17-2004";
+    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+
     @Test
-    void itShouldFindDriverByID() {
+    void itShouldFindDriverByID() throws ParseException {
         // Given...Driver information
         long id = 7823516L;
-//        Driver driver = new Driver();
         Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
 
         // When
         underTest.save(driver);
@@ -45,10 +51,12 @@ class DriverRepositoryTest {
     }
 
     @Test
-    void itShouldSelectDriverByEmail() {
+    void itShouldSelectDriverByEmail() throws ParseException {
         // Given...Driver information
         String email = "keitamohamed12@gmail.com";
         Driver driver = new Driver(64726181L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
         // When
         underTest.save(driver);
         // Then
@@ -74,10 +82,12 @@ class DriverRepositoryTest {
     }
 
     @Test
-    void itShouldSaveDriver() {
+    void itShouldSaveDriver() throws ParseException {
         // Given...Driver information
         long id = 7823516L;
         Driver driver = new Driver(id, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
 
         // When
         underTest.save(driver);
@@ -93,9 +103,11 @@ class DriverRepositoryTest {
     }
 
     @Test
-    void itShouldNotSaveDriverWhenNameIsNull() {
+    void itShouldNotSaveDriverWhenNameIsNull() throws ParseException {
         // Given...Driver information
         Driver driver = new Driver(737267181L, "Mohamed", "Keita", "keitamohamed12@gmail.com", "5405666378");
+        driver.setDob(format.parse(dob));
+        driver.setGender("Male");
         DriverRegistration registration = new DriverRegistration(driver);
         // When
         // Then

@@ -1,0 +1,22 @@
+@import "at_variable";
+@import "at_media";
+
+@include responsive_min(lg) {
+
+}
+
+
+
+// Small dives
+@include responsive_max(xs) {
+
+  .signup {
+
+    .container {
+
+      .form {
+        flex-direction: column;
+      }
+    }
+  }
+}

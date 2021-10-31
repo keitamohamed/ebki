@@ -1,5 +1,6 @@
 package com.ebki.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
@@ -7,10 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -28,6 +31,12 @@ public class Driver {
     @NotBlank
     @Column(nullable = false)
     private String lastName;
+    @NotBlank
+    @Column(nullable = false)
+    private String gender;
+    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "US/NEW YORK")
+    private Date dob;
     @NotBlank
     @Email
     @Column(nullable = false, unique = true)

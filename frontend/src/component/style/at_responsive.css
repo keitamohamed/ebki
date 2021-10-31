@@ -1,0 +1,7 @@
+@media screen and (max-width: 575px) {
+  .signup .container .form {
+    flex-direction: column;
+  }
+}
+
+/*# sourceMappingURL=at_responsive.css.map */

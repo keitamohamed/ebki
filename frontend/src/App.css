@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+table {
+  border-radius: 5px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  white-space: nowrap;
+  font-size: 1.2em;
+}
+table * {
+  padding: 15px;
+  font-size: 1em;
+}
+table tr:nth-child(even) td {
+  background: #E1E5EA;
+}
+
+.dashboard {
+  width: 100%;
+}
+
+.signup {
+  min-height: 100%;
+  margin-bottom: 0;
+}
+.signup * {
+  text-align: center;
+}
+.signup .container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.signup .container .form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  min-height: 100vh;
+}
+.signup .container .form .context_left, .signup .container .form .context_right {
+  width: 100%;
+  padding: 20px 10px;
+  border-top-right-radius: 5px;
+}
+.signup .container .form .context_left .title_title, .signup .container .form .context_right .title_title {
+  margin-bottom: 2em;
+}
+.signup .container .form .context_left .title_title h3, .signup .container .form .context_right .title_title h3 {
+  font-size: 1.7em;
+  letter-spacing: 0.07em;
+}
+.signup .container .form .context_left * {
+  color: #231E23 !important;
+}
+.signup .container .form .context_left input:-webkit-autofill {
+  -webkit-text-fill-color: #231E23;
+}
+.signup .container .form .context_right {
+  color: #E1E5EA;
+  background: #495664;
+}
+.signup .container .form .context_right * {
+  background: #495664;
+  color: #E1E5EA !important;
+}
+.signup .container .form .context_right input::placeholder {
+  color: #E1E5EA;
+}
+.signup .container .form .context_right input {
+  color: #E1E5EA;
+}
+.signup .container .form .context_right .btn-container {
+  margin-top: 5em;
+}
+.signup .container .form .form-group {
+  width: 100%;
+  margin-top: 1.5em;
+}
+.signup .container .form .form-group * {
+  font-size: 1.1em;
+}
+.signup .container .form .form-group input {
+  width: 90%;
+  padding: 10px;
+  border-bottom: 1px solid #E1E5EA;
+  background: transparent;
+  text-align: left;
+  letter-spacing: 1px;
+}
+.signup .container .form .form-group input[type=date] {
+  margin-bottom: 0.8em;
+}
+.signup .container .form .form-group-row {
+  display: flex;
+  padding: 15px 25px;
+}
+.signup .container .form .form-group-row * {
+  font-size: 1.1em;
+}
+.signup .container .form .form-group-row .form-group {
+  display: flex;
+  gap: 1em;
+}
+.signup .container .form .form-group-row .form-group input {
+  width: auto;
+}
+.signup .container .form .form-group-row .form-group label {
+  margin-top: -0.3em;
+}
+.signup .container .form .btn-container {
+  text-align: left;
+  padding: 10px 30px;
+  margin-bottom: 0;
+}
+.signup .container .form .btn-container input {
+  cursor: pointer;
+  margin-top: 2em;
+  border: 1px solid #F9F3DF;
+  text-align: center;
+  width: 60%;
+  border-radius: 20px;
+  font-size: 1.3em;
+  color: #343434 !important;
+  background: #F7F6F2 !important;
+}
+.signup .container .form .error {
+  color: #FF3D68 !important;
+  text-align: left;
+  width: 80%;
+  padding-left: 2.5em;
+}
+.signup .container .form .error::placeholder {
+  color: #FF3D68 !important;
+}
+
+/*# sourceMappingURL=App.css.map */
