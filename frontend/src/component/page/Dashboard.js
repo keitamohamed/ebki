@@ -3,21 +3,25 @@ import {useEffect, useState} from "react";
 import {Path} from "../../client/apirequest/Path";
 import {GET_REQUEST} from "../../client/apirequest/Request";
 
-const Dashboard = () => {
-    const [car, setCar] = useState({list:[]})
+import {useDashboard} from "../custom_hook/useDashboard";
 
-    useEffect(async () => {
-        async function fetchData() {
-            const {data} = await GET_REQUEST(Path.CAR_LIST, null)
-            console.log(data)
-            setCar({
-                ...car,
-                list: data
-            })
-        }
-        fetchData()
-        console.log(car.list)
-    }, [])
+const Dashboard = () => {
+    // const [car, setCar] = useState({list:[]})
+    const {car} = useDashboard()
+
+
+    // useEffect(async () => {
+    //     async function fetchData() {
+    //         const {data} = await GET_REQUEST(Path.CAR_LIST, null)
+    //         console.log(data)
+    //         setCar({
+    //             ...car,
+    //             list: data
+    //         })
+    //     }
+    //     fetchData()
+    //     console.log(car.list)
+    // }, [])
 
     return (
         <div className="dashboard">
@@ -35,7 +39,7 @@ const Dashboard = () => {
                         </tr>
                         </thead>
                         {
-                            car.list.map((car, index) => {
+                            car.cars.map((car, index) => {
                                 return (
                                     <tr key={index}>
                                         <td>{car.data}</td>

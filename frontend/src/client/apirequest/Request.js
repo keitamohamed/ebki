@@ -16,13 +16,13 @@ const POST_REQUEST = async (url, token, data) => {
         return error;
     }
 }
-const GET_REQUEST = async (url, id) => {
+const GET_REQUEST = async (url, token, id) => {
     try {
         return await axios({
             method: 'GET',
-            url: url,
+            url: `${url}${id ? id : ''}`,
             headers: {
-                Authorization: `Bearer`
+                Authorization: `Bearer ${token}`
             }
         })
     }catch (error) {

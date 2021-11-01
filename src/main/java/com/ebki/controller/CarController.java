@@ -20,7 +20,7 @@ public class CarController {
         this.service = service;
     }
 
-    @RequestMapping(value = {"/register_new_car"},
+    @RequestMapping(value = {"/add"},
             consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.POST)
     public void registerCar(@RequestBody Car car) {

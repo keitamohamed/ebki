@@ -16,6 +16,13 @@ table tr:nth-child(even) td {
   background: #E1E5EA;
 }
 
+.home .main .context_car {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+  padding: 15px;
+}
+
 .dashboard {
   width: 100%;
 }
@@ -37,8 +44,7 @@ table tr:nth-child(even) td {
   flex-direction: row;
   width: 100%;
   margin: 0 auto;
-  height: 100%;
-  min-height: 100vh;
+  min-height: 95vh;
 }
 .signup .container .form .context_left, .signup .container .form .context_right {
   width: 100%;
@@ -47,10 +53,13 @@ table tr:nth-child(even) td {
 }
 .signup .container .form .context_left .title_title, .signup .container .form .context_right .title_title {
   margin-bottom: 2em;
+  text-transform: uppercase;
 }
 .signup .container .form .context_left .title_title h3, .signup .container .form .context_right .title_title h3 {
-  font-size: 1.7em;
   letter-spacing: 0.07em;
+}
+.signup .container .form .context_left .title_title.add_margin, .signup .container .form .context_right .title_title.add_margin {
+  margin-top: 3em;
 }
 .signup .container .form .context_left * {
   color: #231E23 !important;
@@ -74,24 +83,6 @@ table tr:nth-child(even) td {
 }
 .signup .container .form .context_right .btn-container {
   margin-top: 5em;
-}
-.signup .container .form .form-group {
-  width: 100%;
-  margin-top: 1.5em;
-}
-.signup .container .form .form-group * {
-  font-size: 1.1em;
-}
-.signup .container .form .form-group input {
-  width: 90%;
-  padding: 10px;
-  border-bottom: 1px solid #E1E5EA;
-  background: transparent;
-  text-align: left;
-  letter-spacing: 1px;
-}
-.signup .container .form .form-group input[type=date] {
-  margin-bottom: 0.8em;
 }
 .signup .container .form .form-group-row {
   display: flex;
@@ -126,14 +117,25 @@ table tr:nth-child(even) td {
   color: #343434 !important;
   background: #F7F6F2 !important;
 }
-.signup .container .form .error {
-  color: #FF3D68 !important;
-  text-align: left;
+
+.car .container .context_new_car {
   width: 80%;
-  padding-left: 2.5em;
+  margin: 0 auto;
+  text-align: center;
 }
-.signup .container .form .error::placeholder {
-  color: #FF3D68 !important;
+.car .container .context_new_car .form {
+  width: 60%;
+  margin: 0 auto;
+}
+.car .container .context_new_car .form .btn-container {
+  width: 60%;
+  margin: 3em auto;
+}
+.car .container .context_new_car .form .btn-container input {
+  border: 1px solid #E1E5EA;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=App.css.map */

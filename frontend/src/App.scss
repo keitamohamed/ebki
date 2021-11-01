@@ -19,12 +19,23 @@ table {
   }
 }
 
+.home {
+
+  .main {
+    .context_car {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1em;
+      padding: 15px;
+    }
+  }
+}
+
 .dashboard {
   width: 100%;
 }
 
 .signup {
-  //max-height: 90vh;
   min-height: 100%;
   margin-bottom: 0;
 
@@ -42,8 +53,8 @@ table {
       flex-direction: row;
       width: 100%;
       margin: 0 auto;
-      height: 100%;
-      min-height: 100vh;
+      min-height: 95vh;
+      //min-height: 100vh;
 
       .context_left, .context_right {
         width: 100%;
@@ -52,11 +63,15 @@ table {
 
         .title_title {
           margin-bottom: 2em;
+          text-transform: uppercase;
 
           h3 {
-            font-size: 1.7em;
             letter-spacing: .07em;
           }
+        }
+
+        .title_title.add_margin {
+          margin-top: 3em;
         }
       }
 
@@ -87,27 +102,6 @@ table {
         }
         .btn-container {
           margin-top: 5em;
-        }
-      }
-
-      .form-group {
-        width: 100%;
-        margin-top: 1.5em;
-        * {
-          font-size: 1.1em;
-        }
-
-        input {
-          width: 90%;
-          padding: 10px;
-          border-bottom: 1px solid #E1E5EA;
-          background: transparent;
-          text-align: left;
-          letter-spacing: 1px;
-        }
-
-        input[type = date] {
-          margin-bottom: .8em;
         }
       }
 
@@ -149,16 +143,35 @@ table {
           background: #F7F6F2 !important;
         }
       }
+    }
+  }
+}
 
-      .error {
-        color: #FF3D68 !important;
-        text-align: left;
-        width: 80%;
-        padding-left: 2.5em;
-      }
+.car {
 
-      .error::placeholder {
-        color: #FF3D68 !important;
+  .container {
+
+    .context_new_car {
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+
+      .form {
+        width: 60%;
+        margin: 0 auto;
+
+
+        .btn-container {
+          width: 60%;
+          margin: 3em auto;
+
+          input {
+            border: 1px solid #E1E5EA;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+          }
+        }
       }
     }
   }

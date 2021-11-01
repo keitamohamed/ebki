@@ -24,7 +24,26 @@ const validateAddress = address => {
     return addressError
 }
 
+const validateAuthenticate = auth => {
+    let authError = {}
+
+    authError.username = auth.username.trim() ? '' : 'Username is required'
+    authError.password = auth.password.trim() ? '' : 'Password is required'
+
+    return authError
+}
+
+const validateConformPassword = conformPass => {
+
+    let conformError = {}
+    conformError.conform = conformPass.conform.trim() ? '' : 'Conform password is required'
+
+    return conformError
+}
+
 export {
     validateDriver,
-    validateAddress
+    validateAddress,
+    validateAuthenticate,
+    validateConformPassword
 }

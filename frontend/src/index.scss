@@ -20,6 +20,93 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #E1E5EA;
 }
 
+.form-group {
+  width: 100%;
+  margin-top: 1.5em;
+  * {
+    font-size: 1.1em;
+  }
+
+  input {
+    width: 90%;
+    padding: 10px;
+    border-bottom: 1px solid #E1E5EA;
+    background: transparent;
+    text-align: left;
+    letter-spacing: 1px;
+  }
+
+  input[type = date] {
+    margin-bottom: .8em;
+  }
+}
+
+.card {
+  border: 1px solid #E1E5EA;
+  padding: 15px;
+
+  * {
+    font-weight: normal;
+    text-align: left;
+    padding: 5px;
+  }
+
+  .card_header {
+    h3 {
+      font-size: 1.3em;
+    }
+  }
+
+  .card_body {
+    padding-top: 15px;
+
+    * {
+      text-align: left;
+    }
+
+    h5 {
+      font-size: 1.2em;
+    }
+  }
+
+  .card_action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: .5em;
+
+    .btn:nth-child(1) {
+      width: 100%;
+    }
+    .btn:nth-child(2) {
+      width: 100%;
+    }
+
+    .btn {
+      text-align: center;
+      border: 1px solid #E1E5EA;
+      padding: 10px;
+      border-radius: 20px;
+      cursor: pointer;
+
+      &:hover {
+        border-color: #231E23;
+      }
+    }
+  }
+}
+
+.error {
+  color: #FF3D68 !important;
+  text-align: left;
+  width: 80%;
+  padding-left: 2.5em;
+}
+
+.error::placeholder {
+  color: #FF3D68 !important;
+}
+
 .header {
   width: 100%;
   background: transparent;
@@ -100,9 +187,10 @@ input:-webkit-autofill:active {
 
 .main {
   grid-area: main;
-  grid-template-columns: 100%;
-  min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url("image/home_bg.jpg") no-repeat center center;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  //min-height: 100vh;
+  //background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url("image/home_bg.jpg") no-repeat center center;
 }
 
 .footer {

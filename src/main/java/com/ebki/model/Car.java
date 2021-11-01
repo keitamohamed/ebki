@@ -30,7 +30,7 @@ public class Car implements Comparable<Integer> {
     private String model;
     @Column(nullable = false)
     @NotBlank(message = "Body style cannot be null or empty")
-    private String bodyStyle;
+    private String bodyType;
     @Column(nullable = false)
     @NotNull
     @Min(1985)
@@ -47,7 +47,7 @@ public class Car implements Comparable<Integer> {
         this.vin = carVinNumber;
         this.brand = brand;
         this.model = model;
-        this.bodyStyle = bodyStyle;
+        this.bodyType = bodyStyle;
         this.year = modelYear;
     }
 

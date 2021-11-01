@@ -21,7 +21,7 @@ public class CheckOutController {
     }
 
     @PostMapping(
-            value = {"/checkout/{driverID}/{vinNumber}"},
+            value = {"/add/{driverID}/{vinNumber}"},
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public void save(@RequestBody CarCheckout checkout,
                      @PathVariable("driverID") Long driverID,

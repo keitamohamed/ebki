@@ -1,10 +1,11 @@
 import {Header} from "../Header";
 import {useDriver} from "../form/useDriver";
-import {validateDriver, validateAddress} from "../form/FormValidation";
+import {validateDriver, validateAddress, validateAuthenticate, validateConformPassword} from "../form/FormValidation";
 
 const Signup = () => {
-    const {handleChange, addressHandleChange, onSubmit, error, errorA}
-        = useDriver(validateDriver, validateAddress)
+    const {handleChange, addressHandleChange, handleAuthenticateChange,
+        handleConformPasswordChange, onSubmit, error, errorA, errorC, errorD}
+        = useDriver(validateDriver, validateAddress, validateAuthenticate, validateConformPassword)
 
     return (
         <div className="signup">
@@ -67,10 +68,29 @@ const Signup = () => {
                             />
                             {error.dob && <p className='error'>{error.dob}</p>}
                         </div>
+
+                        <div className="form-group">
+                            <input type="text"
+                                   id="phoneNum"
+                                   name="phoneNum"
+                                   className={error.phoneNum ? 'error' : ''}
+                                   placeholder={error.phoneNum ? error.phoneNum : `Phone Number`}
+                                   onChange={handleChange}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input type="email"
+                                   id="email"
+                                   name="email"
+                                   className={error.email ? 'error' : ''}
+                                   placeholder={error.email ? error.email : `Email address`}
+                                   onChange={handleChange}
+                            />
+                        </div>
                     </div>
                     <div className="context_right">
                         <div className="title_title">
-                            <h3>Contact Details</h3>
+                            <h3>Address Detail</h3>
                         </div>
                         <div className="form-group">
                             <input type="text"
@@ -108,22 +128,37 @@ const Signup = () => {
                                    onChange={addressHandleChange}
                             />
                         </div>
+
+                        <div className="title_title add_margin">
+                            <h3>Authentication Detail</h3>
+                        </div>
+
                         <div className="form-group">
                             <input type="text"
-                                   id="phoneNum"
-                                   name="phoneNum"
-                                   className={error.phoneNum ? 'error' : ''}
-                                   placeholder={error.phoneNum ? error.phoneNum : `Phone Number`}
-                                   onChange={handleChange}
+                                   id="username"
+                                   name="username"
+                                   className={errorC.username ? 'error' : ''}
+                                   placeholder={errorC.username ? errorC.username : `username`}
+                                   onChange={handleAuthenticateChange}
                             />
                         </div>
                         <div className="form-group">
-                            <input type="email"
-                                   id="email"
-                                   name="email"
-                                   className={error.email ? 'error' : ''}
-                                   placeholder={error.email ? error.email : `Email address`}
-                                   onChange={handleChange}
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   className={errorC.password ? 'error' : ''}
+                                   placeholder={errorC.password ? errorC.password : `Password`}
+                                   onChange={handleAuthenticateChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <input type="password"
+                                   id="conform"
+                                   name="conform"
+                                   className={errorD.conform ? 'error' : ''}
+                                   placeholder={errorD.conform ? errorD.conform : `Conform password`}
+                                   onChange={handleConformPasswordChange}
                             />
                         </div>
                         <div className="form-group btn-container">

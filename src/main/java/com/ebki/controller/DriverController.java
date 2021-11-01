@@ -24,7 +24,7 @@ public class DriverController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void registerNewDriver(@RequestBody Driver driver) {
-        service.save(driver);
+//        service.save(driver);
     }
 
     @GetMapping(value = {"/find_by_id/{id}"})

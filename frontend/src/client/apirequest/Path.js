@@ -5,7 +5,9 @@ const Path = {
     FIND_DRIVER_BY_ID: ('driver/find_by_id/'),
     UPDATE_DRIVER_INFO: ('driver/update/'),
     DELETE_DRIVER: ('driver/delete/'),
-    CAR_LIST: ('car/carList')
+    ADD_NEW_CAR: ('car/add'),
+    CAR_LIST: ('car/carList'),
+    ADD_NEW_CHECKOUT: ('checkout/add/')
 }
 
 export {

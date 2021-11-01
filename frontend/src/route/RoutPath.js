@@ -2,6 +2,7 @@ import Home from "../component/page/Home";
 import {Login} from "../component/page/Login";
 import {Signup} from "../component/page/Signup";
 import {Dashboard} from "../component/page/Dashboard";
+import {Car} from "../component/page/Car";
 
 const routPath = [
     {
@@ -15,6 +16,12 @@ const routPath = [
         path: "/dashboard",
         protected: false,
         component: Dashboard
+    },
+    {
+        name: 'Car',
+        path: '/car',
+        protected: false,
+        component: Car
     },
     {
         name: "Login",
