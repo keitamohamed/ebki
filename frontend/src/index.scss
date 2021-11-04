@@ -20,6 +20,60 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #E1E5EA;
 }
 
+svg {
+  font-size: 1.3em;
+}
+
+li {
+  list-style: none;
+  text-align: left;
+
+  a {
+    text-decoration: none;
+    border: none !important;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      position: relative;
+      text-align: left;
+      font-size: .9em !important;
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    min-width: 12%;
+    z-index: 10;
+    background: #E1E5EA !important;
+    padding: 10px 15px 15px 15px;
+    margin-left: -.5em;
+    display: none;
+
+    li {
+      padding: 5px;
+      cursor: pointer;
+
+      &:hover {
+        font-size: 1.1em !important;
+      }
+    }
+  }
+}
+
+.dropdown_nav {
+  padding: 15px;
+  &:hover {
+    border: none !important;
+
+    .dropdown {
+      display: block;
+    }
+  }
+}
+
 .form-group {
   width: 100%;
   margin-top: 1.5em;
@@ -107,6 +161,62 @@ input:-webkit-autofill:active {
   color: #FF3D68 !important;
 }
 
+.context_sub_nav {
+  display: flex;
+  border-bottom: 1px solid #E1E5EA;
+  padding: 15px;
+
+  .search_container {
+    border-bottom: 1px solid #E1E5EA;
+    width: 40%;
+    text-align: left;
+
+    .search {
+      padding-bottom: 10px;
+      text-align: left;
+      padding-left: 5px;
+    }
+
+    svg {
+      fill: #57CC99;
+      position: absolute;
+    }
+  }
+
+  .btn_container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: .5em;
+
+    li {
+      border: 1px solid #E1E5EA;
+      list-style: none;
+      padding: 5px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      background: #57CC99;
+      border-radius: 10px;
+      width: 20%;
+
+      svg {
+        font-size: 1.2em;
+        background: transparent;
+        position: absolute;
+      }
+
+      &:hover {
+        font-size: 1.3em;
+        width: 25%;
+      }
+    }
+
+    * {
+      color: white;
+    }
+  }
+}
+
 .header {
   width: 100%;
   background: transparent;
@@ -133,6 +243,7 @@ input:-webkit-autofill:active {
 
       svg {
         width: 35%;
+        height: auto;
         float: left;
       }
     }
@@ -166,11 +277,10 @@ input:-webkit-autofill:active {
 
 .dashboard .dash_context_layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(300px, auto);
+  grid-template-columns: repeat(5, 1fr);
   grid-template-areas:
-          'header header header'
-          'dash_main dash_main checklist'
+          'header header header header header'
+          'dash_main dash_main dash_main checklist checklist'
 }
 
 .dash_main {
@@ -183,6 +293,7 @@ input:-webkit-autofill:active {
 
 .header {
   grid-area: header;
+  height: auto;
 }
 
 .main {

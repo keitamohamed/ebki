@@ -16,7 +16,7 @@ const POST_REQUEST = async (url, token, data) => {
         return error;
     }
 }
-const GET_REQUEST = async (url, token, id) => {
+const GET_REQUEST = async (url, id, token) => {
     try {
         return await axios({
             method: 'GET',

@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import {routPath} from "../route/RoutPath";
-import {Logo} from "./app_logo/Logo";
+import {routPath} from "../../route/RoutPath";
+import {Logo} from "../app_logo/Logo";
 
 const Header = ({contextRight}) => {
     return (

@@ -51,7 +51,7 @@ public class CarController {
         return service.findCarByBrandModelAndYear(service.findAll(), brand, model, year);
     }
 
-    @GetMapping(value = {"/find_car_vin/{vin}"})
+    @GetMapping(value = {"/vin/{vin}"})
     public Optional<Car> getCar(@PathVariable("vin") Long id) {
         return service.findCarById(id);
     }

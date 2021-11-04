@@ -20,6 +20,53 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #E1E5EA;
 }
 
+svg {
+  font-size: 1.3em;
+}
+
+li {
+  list-style: none;
+  text-align: left;
+}
+li a {
+  text-decoration: none;
+  border: none !important;
+}
+li ul {
+  list-style: none;
+}
+li ul li {
+  position: relative;
+  text-align: left;
+  font-size: 0.9em !important;
+}
+li .dropdown {
+  position: absolute;
+  min-width: 12%;
+  z-index: 10;
+  background: #E1E5EA !important;
+  padding: 10px 15px 15px 15px;
+  margin-left: -0.5em;
+  display: none;
+}
+li .dropdown li {
+  padding: 5px;
+  cursor: pointer;
+}
+li .dropdown li:hover {
+  font-size: 1.1em !important;
+}
+
+.dropdown_nav {
+  padding: 15px;
+}
+.dropdown_nav:hover {
+  border: none !important;
+}
+.dropdown_nav:hover .dropdown {
+  display: block;
+}
+
 .form-group {
   width: 100%;
   margin-top: 1.5em;
@@ -94,6 +141,54 @@ input:-webkit-autofill:active {
   color: #FF3D68 !important;
 }
 
+.context_sub_nav {
+  display: flex;
+  border-bottom: 1px solid #E1E5EA;
+  padding: 15px;
+}
+.context_sub_nav .search_container {
+  border-bottom: 1px solid #E1E5EA;
+  width: 40%;
+  text-align: left;
+}
+.context_sub_nav .search_container .search {
+  padding-bottom: 10px;
+  text-align: left;
+  padding-left: 5px;
+}
+.context_sub_nav .search_container svg {
+  fill: #57CC99;
+  position: absolute;
+}
+.context_sub_nav .btn_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+.context_sub_nav .btn_container li {
+  border: 1px solid #E1E5EA;
+  list-style: none;
+  padding: 5px 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  background: #57CC99;
+  border-radius: 10px;
+  width: 20%;
+}
+.context_sub_nav .btn_container li svg {
+  font-size: 1.2em;
+  background: transparent;
+  position: absolute;
+}
+.context_sub_nav .btn_container li:hover {
+  font-size: 1.3em;
+  width: 25%;
+}
+.context_sub_nav .btn_container * {
+  color: white;
+}
+
 .header {
   width: 100%;
   background: transparent;
@@ -117,6 +212,7 @@ input:-webkit-autofill:active {
 }
 .header .nave .hero_logo svg {
   width: 35%;
+  height: auto;
   float: left;
 }
 .header .nave .context_links {
@@ -141,9 +237,8 @@ input:-webkit-autofill:active {
 
 .dashboard .dash_context_layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(300px, auto);
-  grid-template-areas: "header header header" "dash_main dash_main checklist";
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "header header header header header" "dash_main dash_main dash_main checklist checklist";
 }
 
 .dash_main {
@@ -156,6 +251,7 @@ input:-webkit-autofill:active {
 
 .header {
   grid-area: header;
+  height: auto;
 }
 
 .main {

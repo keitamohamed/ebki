@@ -1,19 +1,62 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
+.table_container {
+  padding: 15px;
+  overflow: auto;
+}
+
 table {
   border-radius: 5px;
   font-weight: normal;
-  border: none;
   border-collapse: collapse;
   width: 100%;
   white-space: nowrap;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  margin-top: 2em;
+  border: 1px solid #E1E5EA;
+  padding-bottom: 15px;
+}
+table thead h5 {
+  text-transform: uppercase;
+  width: 55%;
+  text-align: left;
+  font-weight: normal;
+  border-bottom: 2px dotted #E1E5EA;
+  margin-bottom: 1em;
+}
+table thead, table tbody {
+  padding: 0 15px !important;
 }
 table * {
   padding: 15px;
   font-size: 1em;
 }
+table tr:hover {
+  cursor: pointer;
+}
+table tr:hover td {
+  background: #CEE5D0 !important;
+}
 table tr:nth-child(even) td {
   background: #E1E5EA;
+}
+table .pagination_wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+table .pagination_wrapper li {
+  list-style: none;
+  border: 1px solid #E1E5EA;
+  width: 90%;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+table .pagination_wrapper li:hover {
+  background: #E1E5EA;
+}
+
+.mt_remove {
+  margin-top: 0;
 }
 
 .home .main .context_car {
@@ -25,6 +68,56 @@ table tr:nth-child(even) td {
 
 .dashboard {
   width: 100%;
+}
+.dashboard .header {
+  margin-bottom: 2em;
+  border-bottom: 1px solid #E1E5EA;
+  background: #e1e5ea;
+  background: linear-gradient(90deg, #e1e5ea 0%, #e1e5ea 100%);
+}
+.dashboard .header * {
+  background: transparent;
+}
+.dashboard .checklist {
+  border-left: 1px solid #E1E5EA;
+}
+.dashboard .checklist .car_card {
+  width: 100%;
+}
+.dashboard .checklist .car_card h2 {
+  padding: 15px;
+  margin-top: 0.5em;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+.dashboard .checklist .car_card * {
+  text-align: left;
+}
+.dashboard .checklist .car_card .card_header {
+  padding: 15px;
+}
+.dashboard .checklist .car_card .card_header h3 {
+  font-weight: normal;
+  font-size: 1.2em;
+}
+.dashboard .checklist .car_card .card_header h3 span {
+  font-size: 1.3em;
+  padding-left: 15px;
+}
+.dashboard .checklist .car_card .card_body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.8em;
+  padding: 15px;
+}
+.dashboard .checklist .car_card .card_body * {
+  font-size: 1.1em;
+}
+.dashboard .checklist .car_card .card_body h5 {
+  font-weight: normal;
+}
+.dashboard .checklist .car_card .card_body h5 span {
+  font-size: 1.2em;
 }
 
 .signup {

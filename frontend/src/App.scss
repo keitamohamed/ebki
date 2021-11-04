@@ -1,22 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
+.table_container {
+  padding: 15px;
+  overflow: auto;
+}
+
 table {
   border-radius: 5px;
   font-weight: normal;
-  border: none;
   border-collapse: collapse;
   width: 100%;
   white-space: nowrap;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  margin-top: 2em;
+  border: 1px solid #E1E5EA;
+  padding-bottom: 15px;
+
+  thead {
+
+    h5 {
+      text-transform: uppercase;
+      width: 55%;
+      text-align: left;
+      font-weight: normal;
+      border-bottom: 2px dotted #E1E5EA;
+      margin-bottom: 1em;
+    }
+  }
+
+  thead, tbody {
+    padding: 0 15px !important;
+  }
 
   * {
     padding: 15px;
     font-size: 1em;
   }
 
+  tr {
+
+    &:hover {
+      cursor: pointer;
+      td {
+        background: #CEE5D0 !important;
+      }
+    }
+  }
+
   tr:nth-child(even) td {
     background: #E1E5EA;
   }
+
+  .pagination_wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    li {
+      list-style: none;
+      border: 1px solid #E1E5EA;
+      width: 90%;
+      border-radius: 20px;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        background: #E1E5EA;
+      }
+    }
+  }
+}
+
+.mt_remove {
+  margin-top: 0;
 }
 
 .home {
@@ -33,6 +88,70 @@ table {
 
 .dashboard {
   width: 100%;
+
+  .header {
+    margin-bottom: 2em;
+    border-bottom: 1px solid #E1E5EA;
+
+    background: rgb(225,229,234);
+    background: linear-gradient(90deg, rgba(225,229,234,1) 0%, rgba(225,229,234,1) 100%);
+
+    * {
+      background: transparent;
+    }
+  }
+
+  .checklist {
+    border-left: 1px solid #E1E5EA;
+
+    .car_card {
+      width: 100%;
+
+      h2 {
+        padding: 15px;
+        margin-top: .5em;
+        font-size: 1.5em;
+        font-weight: normal;
+      }
+
+      * {
+        text-align: left;
+      }
+
+      .card_header {
+        padding: 15px
+      ;
+        h3 {
+          font-weight: normal;
+          font-size: 1.2em;
+
+          span {
+            //font-weight: bold;
+            font-size: 1.3em;
+            padding-left: 15px;
+          }
+        }
+      }
+
+      .card_body {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: .8em;
+        padding: 15px;
+
+         * {
+           font-size: 1.1em;
+         }
+
+        h5 {
+          font-weight: normal;
+          span {
+            font-size: 1.2em;
+          }
+        }
+      }
+    }
+  }
 }
 
 .signup {
@@ -54,7 +173,6 @@ table {
       width: 100%;
       margin: 0 auto;
       min-height: 95vh;
-      //min-height: 100vh;
 
       .context_left, .context_right {
         width: 100%;

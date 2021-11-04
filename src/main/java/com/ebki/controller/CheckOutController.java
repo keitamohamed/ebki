@@ -36,7 +36,7 @@ public class CheckOutController {
         return service.findCheckOutByID(id);
     }
 
-    @GetMapping(value = "/find_all_cars_checkout")
+    @GetMapping(value = "/checkout_list")
     public List<Car> getAllCheckOutCar() {
         return service.carCheckOut();
     }

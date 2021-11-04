@@ -1,10 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 
 import {GET_REQUEST} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
+import {CarContext} from "../../context/Context";
 
 const useGetData = () => {
-
     const [car, setCar] = useState({cars: []})
     const [carCheckout, setCarCheckout] = useState({checkoutList: []})
     const [carCheckIn, setCarCheckIn] = useState({checkInList: []})

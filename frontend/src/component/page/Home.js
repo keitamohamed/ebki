@@ -1,4 +1,4 @@
-import {Header} from "../Header";
+import {Header} from "../header/Header";
 import {CarCard} from "../reusable/Card";
 import {useGetData} from "../custom_hook/useGetData";
 
