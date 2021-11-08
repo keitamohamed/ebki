@@ -20,6 +20,12 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #E1E5EA;
 }
 
+.successful_message {
+  font-size: 1em;
+  text-transform: capitalize;
+  color: #57CC99;
+}
+
 svg {
   font-size: 1.3em;
 }
@@ -74,24 +80,81 @@ li {
   }
 }
 
-.form-group {
-  width: 100%;
-  margin-top: 1.5em;
-  * {
-    font-size: 1.1em;
+.form {
+
+  width: 80%;
+  margin: 0 auto;
+
+  .title_content {
+    margin-bottom: 2em;
+    padding: 20px;
+
+    h3 {
+      text-transform: uppercase;
+    }
   }
 
-  input {
-    width: 90%;
-    padding: 10px;
-    border-bottom: 1px solid #E1E5EA;
-    background: transparent;
-    text-align: left;
-    letter-spacing: 1px;
+  .form-group {
+    width: 100%;
+    margin-top: 1.5em;
+
+    * {
+      font-size: 1.1em;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      border-bottom: 1px solid #E1E5EA;
+      background: transparent;
+      text-align: left;
+      letter-spacing: 1px;
+    }
+
+    input[type = date] {
+      margin-bottom: .8em;
+    }
   }
 
-  input[type = date] {
-    margin-bottom: .8em;
+  .form-group-row {
+    display: flex;
+    padding: 15px 25px;
+    * {
+      font-size: 1.1em;
+    }
+
+    .form-group {
+      display: flex;
+
+      gap: 1em;
+      input {
+        width: auto;
+      }
+
+      label {
+        margin-top: -.3em;
+      }
+    }
+  }
+
+  .btn-container {
+
+    input {
+      border: 1px solid #E1E5EA;
+      text-align: center;
+      border-radius: 20px;
+      text-transform: uppercase;
+
+      &:hover {
+        cursor: pointer;
+        background: #2FDD92;
+        color: white;
+      }
+    }
+  }
+
+  .display_none {
+    display: none;
   }
 }
 
@@ -162,28 +225,16 @@ li {
 }
 
 .context_sub_nav {
-  display: flex;
+  display: grid;
   border-bottom: 1px solid #E1E5EA;
   padding: 15px;
-
-  .search_container {
-    border-bottom: 1px solid #E1E5EA;
-    width: 40%;
-    text-align: left;
-
-    .search {
-      padding-bottom: 10px;
-      text-align: left;
-      padding-left: 5px;
-    }
-
-    svg {
-      fill: #57CC99;
-      position: absolute;
-    }
-  }
+  grid-gap: 1em;
+  grid-template-areas:
+          'btn_container btn_container btn_container search_container search_container'
+          'btn_show btn_show btn_show btn_show btn_show';
 
   .btn_container {
+    grid-area: btn_container;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -197,7 +248,8 @@ li {
       cursor: pointer;
       background: #57CC99;
       border-radius: 10px;
-      width: 20%;
+      text-align: center;
+      width: 100%;
 
       svg {
         font-size: 1.2em;
@@ -207,13 +259,34 @@ li {
 
       &:hover {
         font-size: 1.3em;
-        width: 25%;
       }
     }
 
     * {
       color: white;
     }
+  }
+  .btn_show {
+    grid-area: btn_show;
+  }
+}
+
+.search_container {
+  border-bottom: 1px solid #E1E5EA;
+  width: 80%;
+  text-align: left;
+  grid-area: search_container;
+
+  .search {
+    padding-bottom: 10px;
+    text-align: left;
+    padding-left: 5px;
+    width: 100%;
+  }
+
+  svg {
+    fill: #57CC99;
+    position: absolute;
   }
 }
 
@@ -267,6 +340,14 @@ li {
   }
 }
 
+.header.pro {
+  background: linear-gradient(90deg, #e1e5ea 0%, #e1e5ea 100%);
+
+  * {
+    background: transparent;
+  }
+}
+
 .home {
   display: grid;
   grid-template-areas:
@@ -281,6 +362,23 @@ li {
   grid-template-areas:
           'header header header header header'
           'dash_main dash_main dash_main checklist checklist'
+}
+
+.car {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+          'header header header'
+          'container container container';
+  grid-gap: 3em;
+
+  .header.pro {
+    grid-area: header;
+  }
+
+  .container {
+    grid-area: container;
+  }
 }
 
 .dash_main {
@@ -306,4 +404,39 @@ li {
 
 .footer {
   grid-area: footer;
+}
+
+.model {
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  position: absolute;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+
+  .model_content {
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+  }
+
+  .model_close_btn_container {
+     svg {
+       right: 0;
+       position: absolute;
+       margin-right: 1em;
+       cursor: pointer;
+       font-size: 2em;
+
+       &:hover {
+         color: #FF0000;
+       }
+     }
+  }
 }

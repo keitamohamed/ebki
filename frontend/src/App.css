@@ -78,11 +78,39 @@ table .pagination_wrapper li:hover {
 .dashboard .header * {
   background: transparent;
 }
+.dashboard .dash_main .btn_show {
+  padding-top: 4em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  grid-gap: 0.5em;
+}
+.dashboard .dash_main .btn_show li {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: auto;
+  border: 1px solid #E1E5EA;
+  padding: 10px 0;
+  border-radius: 20px;
+  font-size: 1.3em;
+  text-align: center;
+  cursor: pointer;
+}
+.dashboard .dash_main .btn_show li svg {
+  font-size: 1.3em;
+  margin-top: -0.09em;
+}
 .dashboard .checklist {
   border-left: 1px solid #E1E5EA;
 }
+.dashboard .checklist .search_container {
+  width: 80%;
+  margin: 0 auto 2em;
+}
 .dashboard .checklist .car_card {
   width: 100%;
+  padding: 15px;
 }
 .dashboard .checklist .car_card h2 {
   padding: 15px;
@@ -118,6 +146,88 @@ table .pagination_wrapper li:hover {
 }
 .dashboard .checklist .car_card .card_body h5 span {
   font-size: 1.2em;
+}
+.dashboard .checklist .driver {
+  width: 100%;
+  padding: 15px;
+}
+.dashboard .checklist .driver .title {
+  font-size: 1.1em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.dashboard .checklist .driver .driver_context *, .dashboard .checklist .driver .checkout_context * {
+  text-align: left;
+  font-size: 1.1em;
+}
+.dashboard .checklist .driver .driver_context:first-child, .dashboard .checklist .driver .checkout_context:first-child {
+  border: none;
+  margin: 0;
+}
+.dashboard .checklist .driver .driver_context .title, .dashboard .checklist .driver .checkout_context .title {
+  border-bottom: 2px dotted #E1E5EA;
+  padding: 15px 0 10px;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+}
+.dashboard .checklist .driver .driver_context span, .dashboard .checklist .driver .checkout_context span {
+  font-size: 1.1em;
+}
+.dashboard .checklist .driver .context.address {
+  display: list-item;
+  list-style-type: square;
+  padding-top: 0;
+  width: 90%;
+  margin: 0 auto;
+}
+.dashboard .checklist .driver .checkout_context {
+  padding-top: 1em;
+}
+.dashboard .checklist .driver .driver_context p {
+  padding: 5px;
+}
+.dashboard .checklist .driver .checkout_context .context {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+}
+.dashboard .checklist .driver .checkout_context .context p {
+  padding: 5px;
+}
+.dashboard .checklist .driver .checkout_context .context li {
+  font-size: 1.2em;
+  text-align: center;
+  list-style: square;
+}
+.dashboard .checklist .btn_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1em;
+  padding: 20px 0;
+  margin-top: 2em;
+}
+.dashboard .checklist .btn_container * {
+  text-align: center;
+}
+.dashboard .checklist .btn_container li {
+  border: 1px solid #E1E5EA;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.dashboard .checklist .btn_container li svg {
+  background: transparent;
+  font-size: 1.5em;
+}
+.dashboard .checklist .btn_container li:hover {
+  background: #2FDD92;
+}
+.dashboard .checklist .btn_container li:hover:hover {
+  color: white;
+}
+.dashboard .checklist .btn_container li:hover:last-child {
+  background: #E02401;
 }
 
 .signup {
@@ -177,23 +287,6 @@ table .pagination_wrapper li:hover {
 .signup .container .form .context_right .btn-container {
   margin-top: 5em;
 }
-.signup .container .form .form-group-row {
-  display: flex;
-  padding: 15px 25px;
-}
-.signup .container .form .form-group-row * {
-  font-size: 1.1em;
-}
-.signup .container .form .form-group-row .form-group {
-  display: flex;
-  gap: 1em;
-}
-.signup .container .form .form-group-row .form-group input {
-  width: auto;
-}
-.signup .container .form .form-group-row .form-group label {
-  margin-top: -0.3em;
-}
 .signup .container .form .btn-container {
   text-align: left;
   padding: 10px 30px;
@@ -211,17 +304,34 @@ table .pagination_wrapper li:hover {
   background: #F7F6F2 !important;
 }
 
+.car .container {
+  width: 100%;
+}
 .car .container .context_new_car {
-  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "form form form form car_container" "form form form form car_container" "form form form form car_container";
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 .car .container .context_new_car .form {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
+  padding-top: 5.5em;
+}
+.car .container .context_new_car .form .title_container h5 {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-align: left;
+  width: 55%;
+  border-bottom: 2px dotted #E1E5EA;
+  padding-bottom: 15px;
+  margin-bottom: 2em;
 }
 .car .container .context_new_car .form .btn-container {
-  width: 60%;
+  width: 100%;
   margin: 3em auto;
 }
 .car .container .context_new_car .form .btn-container input {
@@ -229,6 +339,30 @@ table .pagination_wrapper li:hover {
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
+}
+.car .container .context_new_car .form .btn-container input:hover {
+  background: #CEE5D0;
+}
+.car .container .form {
+  grid-area: form;
+}
+.car .container .car_container {
+  grid-area: car_container;
+}
+.car .container .car_container .search_container {
+  width: 100%;
+}
+.car .container .car_container .search_container input {
+  width: 90%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #E1E5EA;
+  font-size: 1.2em;
+  text-align: left;
+  padding-left: 10px;
+}
+.car .container .car_container .table {
+  border: none;
+  margin-top: 1em;
 }
 
 /*# sourceMappingURL=App.css.map */

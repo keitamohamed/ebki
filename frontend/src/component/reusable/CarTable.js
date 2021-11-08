@@ -1,6 +1,5 @@
-import {useContext, useEffect, useState} from "react";
-import UseClickCarID from "../custom_hook/useClickCarID";
-import {CarContext} from "../../context/Context";
+import {useContext, useEffect} from "react";
+import {CarContext, DashboardContext} from "../../context/Context";
 
 import {GET_REQUEST} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
@@ -11,21 +10,9 @@ import {UsePagination} from "../paginate/usePagination";
 
 const CarTable = (cars) => {
     const carCtx = useContext(CarContext)
+    const dashCtx = useContext(DashboardContext)
     const {post, currentPage, postPerPage, loading,setCurrentPage} = usePaginate(cars.car)
     const {currentPosts} = usePost(currentPage, postPerPage, cars.car)
-
-    const onClick = event => {
-        carCtx.setCarVin(UseClickCarID(event))
-    }
-
-    const onButtonClick = () => {
-        const element = document.querySelectorAll(".page")
-        element.forEach(element => {
-            element.addEventListener('click', evt => {
-                console.log(evt.target)
-            })
-        })
-    }
 
     useEffect(() => {
         const fetchData = () => {
@@ -33,6 +20,7 @@ const CarTable = (cars) => {
                 .then(response => {
                     const {data} = response
                     carCtx.setClickCarValue(data)
+                    dashCtx.setAction("SHOW_CAR")
                 })
         }
         fetchData()
@@ -63,7 +51,7 @@ const CarTable = (cars) => {
                         }
                     </table>
                 ) : (
-                    <p></p>
+                    ''
                 )
             }
         </div>

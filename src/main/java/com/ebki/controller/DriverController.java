@@ -24,17 +24,17 @@ public class DriverController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     public void registerNewDriver(@RequestBody Driver driver) {
-//        service.save(driver);
-    }
-
-    @GetMapping(value = {"/find_by_id/{id}"})
-    public Optional<Driver> findByID(@PathVariable("id") Long id) {
-        return service.findDriverByID(id);
+        service.save(driver);
     }
 
     @GetMapping(value = {"/get_drivers"})
     public List<Driver> getDrivers() {
         return service.drivers();
+    }
+
+    @GetMapping(value = {"/find_by_id/{id}"})
+    public Optional<Driver> findByID(@PathVariable("id") Long id) {
+        return service.findDriverByID(id);
     }
 
     @PutMapping(value = {"/update/{id}"})
@@ -45,6 +45,11 @@ public class DriverController {
     @DeleteMapping(value = {"/delete/{id}"})
     public void deleteDriver(@PathVariable("id") Long id) {
         service.deleteDriver(id);
+    }
+
+    @GetMapping(value = {"/email/{email}"})
+    public Optional<Driver> findDriverByEmail(@PathVariable("email") String email) {
+        return service.findDriverByEmail(email);
     }
 
 }

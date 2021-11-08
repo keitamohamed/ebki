@@ -8,9 +8,7 @@ const usePaginate = (post) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        // setPosts(post)
         setLoading(false)
-        console.log(posts)
     }, [posts])
     return {post, currentPage, postPerPage, loading, setCurrentPage}
 }

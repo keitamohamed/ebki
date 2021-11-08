@@ -12,7 +12,6 @@ const Home = () => {
                 <div className="context_car">
                     {
                         cars.map((car, index) => {
-                            console.log(car.brand)
                             return (
                                 <CarCard
                                     key={index}

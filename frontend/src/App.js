@@ -3,12 +3,15 @@ import './component/style/at_responsive.css'
 
 import {DynamicRoute} from "./route/DynamicRoute";
 import {CarProvider} from "./context/CarProvider";
+import {DashboardProvider} from "./context/DashboardProvider";
 
 function App() {
     return (
-        <CarProvider>
-            <DynamicRoute/>
-        </CarProvider>
+        <DashboardProvider>
+            <CarProvider>
+                <DynamicRoute/>
+            </CarProvider>
+        </DashboardProvider>
     );
 }
 

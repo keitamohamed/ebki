@@ -20,6 +20,12 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #E1E5EA;
 }
 
+.successful_message {
+  font-size: 1em;
+  text-transform: capitalize;
+  color: #57CC99;
+}
+
 svg {
   font-size: 1.3em;
 }
@@ -67,14 +73,25 @@ li .dropdown li:hover {
   display: block;
 }
 
-.form-group {
+.form {
+  width: 80%;
+  margin: 0 auto;
+}
+.form .title_content {
+  margin-bottom: 2em;
+  padding: 20px;
+}
+.form .title_content h3 {
+  text-transform: uppercase;
+}
+.form .form-group {
   width: 100%;
   margin-top: 1.5em;
 }
-.form-group * {
+.form .form-group * {
   font-size: 1.1em;
 }
-.form-group input {
+.form .form-group input {
   width: 90%;
   padding: 10px;
   border-bottom: 1px solid #E1E5EA;
@@ -82,8 +99,39 @@ li .dropdown li:hover {
   text-align: left;
   letter-spacing: 1px;
 }
-.form-group input[type=date] {
+.form .form-group input[type=date] {
   margin-bottom: 0.8em;
+}
+.form .form-group-row {
+  display: flex;
+  padding: 15px 25px;
+}
+.form .form-group-row * {
+  font-size: 1.1em;
+}
+.form .form-group-row .form-group {
+  display: flex;
+  gap: 1em;
+}
+.form .form-group-row .form-group input {
+  width: auto;
+}
+.form .form-group-row .form-group label {
+  margin-top: -0.3em;
+}
+.form .btn-container input {
+  border: 1px solid #E1E5EA;
+  text-align: center;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.form .btn-container input:hover {
+  cursor: pointer;
+  background: #2FDD92;
+  color: white;
+}
+.form .display_none {
+  display: none;
 }
 
 .card {
@@ -142,25 +190,14 @@ li .dropdown li:hover {
 }
 
 .context_sub_nav {
-  display: flex;
+  display: grid;
   border-bottom: 1px solid #E1E5EA;
   padding: 15px;
-}
-.context_sub_nav .search_container {
-  border-bottom: 1px solid #E1E5EA;
-  width: 40%;
-  text-align: left;
-}
-.context_sub_nav .search_container .search {
-  padding-bottom: 10px;
-  text-align: left;
-  padding-left: 5px;
-}
-.context_sub_nav .search_container svg {
-  fill: #57CC99;
-  position: absolute;
+  grid-gap: 1em;
+  grid-template-areas: "btn_container btn_container btn_container search_container search_container" "btn_show btn_show btn_show btn_show btn_show";
 }
 .context_sub_nav .btn_container {
+  grid-area: btn_container;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -174,7 +211,8 @@ li .dropdown li:hover {
   cursor: pointer;
   background: #57CC99;
   border-radius: 10px;
-  width: 20%;
+  text-align: center;
+  width: 100%;
 }
 .context_sub_nav .btn_container li svg {
   font-size: 1.2em;
@@ -183,10 +221,29 @@ li .dropdown li:hover {
 }
 .context_sub_nav .btn_container li:hover {
   font-size: 1.3em;
-  width: 25%;
 }
 .context_sub_nav .btn_container * {
   color: white;
+}
+.context_sub_nav .btn_show {
+  grid-area: btn_show;
+}
+
+.search_container {
+  border-bottom: 1px solid #E1E5EA;
+  width: 80%;
+  text-align: left;
+  grid-area: search_container;
+}
+.search_container .search {
+  padding-bottom: 10px;
+  text-align: left;
+  padding-left: 5px;
+  width: 100%;
+}
+.search_container svg {
+  fill: #57CC99;
+  position: absolute;
 }
 
 .header {
@@ -230,6 +287,13 @@ li .dropdown li:hover {
   display: none;
 }
 
+.header.pro {
+  background: linear-gradient(90deg, #e1e5ea 0%, #e1e5ea 100%);
+}
+.header.pro * {
+  background: transparent;
+}
+
 .home {
   display: grid;
   grid-template-areas: "header header header" "main main main" "footer footer footer";
@@ -239,6 +303,19 @@ li .dropdown li:hover {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "header header header header header" "dash_main dash_main dash_main checklist checklist";
+}
+
+.car {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "header header header" "container container container";
+  grid-gap: 3em;
+}
+.car .header.pro {
+  grid-area: header;
+}
+.car .container {
+  grid-area: container;
 }
 
 .dash_main {
@@ -262,6 +339,37 @@ li .dropdown li:hover {
 
 .footer {
   grid-area: footer;
+}
+
+.model {
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  position: absolute;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.model .model_content {
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative;
+}
+.model .model_close_btn_container svg {
+  right: 0;
+  position: absolute;
+  margin-right: 1em;
+  cursor: pointer;
+  font-size: 2em;
+}
+.model .model_close_btn_container svg:hover {
+  color: #FF0000;
 }
 
 /*# sourceMappingURL=index.css.map */

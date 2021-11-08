@@ -1,29 +1,43 @@
-import {useState} from "react";
-import {Path} from "../../client/apirequest/Path";
-import {POST_REQUEST} from "../../client/apirequest/Request";
-import {validateAuthenticate, validateConformPassword} from "./FormValidation";
+import {useEffect, useState} from "react";
+import {POST_REQUEST, PUT_REQUEST} from "../../client/apirequest/Request";
+import {Path,MappingType} from "../../client/apirequest/Path";
+import {isObjectEmpty} from "../util/Util";
 
 
-const useDriver = (validateDriver, validateAddress,
+const useDriver = (data, validateDriver, validateAddress,
                    validateAuthenticate, validateConformPassword) => {
 
-    const [driver, setDriver] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNum: '',
-        gender: '',
-        dob: '',
-        address: []
-    })
+    const initDriverUpdate = data => {
+        return {
+            driverID: data.driverID,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            phoneNum: data.phoneNum,
+            gender: data.gender,
+            dob: data.dob
+        }
+    }
 
+    const initDriver = (data) => {
+        return isObjectEmpty(data) === false ? initDriverUpdate(data) : {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phoneNum: '',
+            gender: '',
+            dob: '',
+            address: []
+        }
+    }
+
+    const [driver, setDriver] = useState(initDriver(data))
     const [address, setAddress] = useState({
         street: '',
         city: '',
         state: '',
         zipcode: 0
     })
-
     const [authenticate, setAuthenticate] = useState({
         username: '',
         password: ''
@@ -81,17 +95,33 @@ const useDriver = (validateDriver, validateAddress,
         const isAuthValid = Object.values(errorC).every(x => x === '')
         const isConformPass = Object.values(errorD).every(x => x === '')
 
-        if (!isDriverValid || !isAddressValid || isAuthValid || isConformPass) {
+        if (!isDriverValid || !isAddressValid || !isAuthValid || !isConformPass) {
             return
         }
 
         driver.address.push(address)
-        // const response = await POST_REQUEST(Path.ADD_NEW_DRIVER, null, driver)
-        // console.log(response.status)
+        await POST_REQUEST(MappingType.POST_MAPPING, Path.ADD_NEW_DRIVER, null, driver)
     }
 
+    const onSubmitOnUpdate = async event => {
+        event.preventDefault()
+
+        setError(validateDriver(driver))
+        const isDriverValid = Object.values(error).every(x => x === '')
+        if (!isDriverValid) {
+            return
+        }
+        await POST_REQUEST(MappingType.PUT_MAPPING, `${Path.UPDATE_DRIVER_INFO}${driver.driverID}`, null, driver)
+    }
+
+    useEffect(() => {
+        if (data !== null) {
+            setDriver(initDriver(data))
+        }
+    }, [data])
+
     return {handleChange, addressHandleChange, handleAuthenticateChange,
-        handleConformPasswordChange, onSubmit, driver, error, errorA, errorC, errorD}
+        handleConformPasswordChange, onSubmit, onSubmitOnUpdate, driver, error, errorA, errorC, errorD}
 }
 
 export {

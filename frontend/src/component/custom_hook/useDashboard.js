@@ -4,7 +4,6 @@ const useDashboard = () => {
     const {car, carCheckout, carCheckIn} = useGetData()
 
     return {car, carCheckout, carCheckIn}
-
 }
 
 export {

@@ -6,20 +6,29 @@ import {useDashboard} from "../custom_hook/useDashboard";
 import {useCheckout} from "../custom_hook/useCheckout";
 import CarTable from "../reusable/CarTable";
 import CheckoutTable from "../reusable/CheckoutTable";
-import DisplayCarDetail from "../sub_component/CarDetail";
+import DisplayCarClicked from "../sub_component/useCarClicked";
+import DisplayDriver from "../reusable/DisplayDriver";
 
 import {CarContext} from "../../context/Context";
-import {BsSearch, IoAdd} from "react-icons/all";
+import {BsSearch, IoAdd, AiOutlineUnorderedList} from "react-icons/all";
+import {getID} from "../util/Util";
+import useSearch from "../custom_hook/useSearch";
+
+import {DashboardContext} from "../../context/Context";
+import {DriverModel} from "../model/DriverModel";
 
 
 const Dashboard = () => {
     const history = useHistory();
-    const [carClick, setCarClick] = useState({})
-    const [checkout, setCheckout] = useState({checkoutID: null})
     const carCtx = useContext(CarContext)
-
+    const dashCtx = useContext(DashboardContext)
     const {car} = useDashboard()
     const {checkoutList} = useCheckout()
+    const {onEnter, data} = useSearch()
+
+    const [carClick, setCarClick] = useState({})
+    const [checkout, setCheckout] = useState({checkoutID: null})
+    const [show, setShow] = useState('Car')
 
     const carVin = () => {
         setCarClick(carCtx.getClickCar())
@@ -54,6 +63,10 @@ const Dashboard = () => {
         }
     }
 
+    const onClick = (event) => {
+        setShow(getID(event))
+    }
+
     useEffect(() => {
         carVin()
         setCheckoutCar()
@@ -63,6 +76,7 @@ const Dashboard = () => {
         <div className="dashboard">
             <div className="dash_context_layout">
                 <Header/>
+                <DriverModel data={data} />
                 <div className="dash_main">
                     <div className="context_sub_nav">
                         <div className="btn_container">
@@ -84,25 +98,51 @@ const Dashboard = () => {
                             >CheckIn <IoAdd />
                             </li>
                         </div>
-                        <div className="search_container">
-                            <input
-                                type="text"
-                                className="search"
-                                placeholder={'Search....'}
-                            />
-                            <BsSearch/>
+                        <div className="btn_show">
+                            <li className="btn"
+                                id={"Car"}
+                                onClick={onClick}
+                            >Car <AiOutlineUnorderedList/>
+                            </li>
+                            <li className="btn"
+                                id={"checkout"}
+                                onClick={onClick}
+                            >
+                                Checkout
+                                <AiOutlineUnorderedList/></li>
+                            <li className="btn"
+                                id={"Checkin"}
+                                onClick={onClick}
+                            >
+                                Checkin
+                                <AiOutlineUnorderedList/></li>
                         </div>
                     </div>
-                    <CheckoutTable checkoutCar={checkoutList}/>
-                    <CarTable car={car.cars}/>
+                    {
+                        show === 'Car' ? (
+                            <CarTable car={car.cars}/>
+                        ) : (
+                            <CheckoutTable checkoutCar={checkoutList}/>
+                        )
+                    }
                 </div>
                 <div className="checklist">
+                    <div className="search_container">
+                        <input
+                            type="text"
+                            className="search"
+                            name="search"
+                            placeholder={'Search...by id, vin  email, brand, year '}
+                            onClick={onEnter}
+                            onKeyDown={onEnter}
+                        />
+                        <BsSearch/>
+                    </div>
                     {
-                        carClick ? (
-                            <DisplayCarDetail car={carClick} checkout={checkout} />
-                        ) : (
-                            ''
-                        )
+                        dashCtx.show === "SHOW_DRIVER" && data !== null ?
+                            <DisplayDriver driver={data} />
+                        : dashCtx.show === "SHOW_CAR" && carClick !== null ?
+                                <DisplayCarClicked car={carClick} checkout={checkout} /> : ''
                     }
                 </div>
             </div>

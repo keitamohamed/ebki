@@ -1,14 +1,15 @@
 import {useContext} from "react";
 
-import {CarContext} from "../../context/Context";
+import {CarContext, DashboardContext} from "../../context/Context";
 import UseClickCarID from "../custom_hook/useClickCarID";
 
 const PaginationData = (post, loading) => {
-
+    const dashCtx = useContext(DashboardContext)
     const carCtx = useContext(CarContext)
 
     const setClickDataID = event => {
         carCtx.setCarVin(UseClickCarID(event))
+        // dashCtx.setAction("SHOW_CAR")
     }
 
     return loading === true ? <h1>Loading...</h1> : (
