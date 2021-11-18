@@ -1,33 +1,21 @@
 import {useContext, useEffect, useState} from "react";
-import {getElement, isArrayEmpty} from "../util/Util";
+import {isArrayEmpty} from "../util/Util";
 import {ListButton} from "./ListButton";
 import {DashboardContext} from "../../context/Context";
 import {toggleButtonID} from "../util/Util";
+import {useStyleComponent} from "../style/ComponentStyle";
 
 const DisplayDriver = ({driver}) => {
-    const dashCtx = useContext(DashboardContext)
+    useContext(DashboardContext);
     const [checkout, setCheckout] = useState(driver.checkout)
+    const {applyStyle} = useStyleComponent('driver_model')
 
     const onClick = event => {
-        // let {id} = event.target
-        // if (!id) {
-        //     id = event.target.parentNode.id
-        // }
-        // if (!id) {
-        //     id = event.target.parentNode.parentNode.id
-        // }
-        // if (!id) {
-        //     id = event.target.parentNode.parentNode.parentNode.id
-        // }
         const id = toggleButtonID(event)
-
         if (id === "DELETE") {
             return
         }
-        const element = getElement("driver_model");
-        element.style.zIndex = "10"
-        element.style.opacity = "1"
-        // dashCtx.displayModel(id)
+        applyStyle()
     }
 
     useEffect(() => {

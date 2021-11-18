@@ -39,11 +39,12 @@ table tr:hover td {
 table tr:nth-child(even) td {
   background: #E1E5EA;
 }
-table .pagination_wrapper {
+
+.pagination_wrapper {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
-table .pagination_wrapper li {
+.pagination_wrapper li {
   list-style: none;
   border: 1px solid #E1E5EA;
   width: 90%;
@@ -51,7 +52,7 @@ table .pagination_wrapper li {
   cursor: pointer;
   text-align: center;
 }
-table .pagination_wrapper li:hover {
+.pagination_wrapper li:hover {
   background: #E1E5EA;
 }
 
@@ -59,6 +60,70 @@ table .pagination_wrapper li:hover {
   margin-top: 0;
 }
 
+.home {
+  background: #FFF !important;
+}
+.home * {
+  background: transparent;
+}
+.home .main .content_container {
+  width: 100%;
+}
+.home .main .content_container .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.home .main .content_container .content * {
+  background: #171010;
+}
+.home .main .content_container .content .content_info {
+  padding: 4em 10px 15px;
+  color: #FFF;
+  width: auto;
+  height: auto;
+}
+.home .main .content_container .content .content_info * {
+  margin: auto;
+}
+.home .main .content_container .content .content_info h2 {
+  width: 50%;
+  font-size: 2em;
+  text-transform: capitalize;
+}
+.home .main .content_container .content .content_info p {
+  font-size: 1.3em;
+  width: 80%;
+  margin-top: 1em;
+}
+.home .main .content_container .content .content_info .btn_container {
+  width: 80%;
+  text-align: center;
+  margin: 5em auto auto;
+}
+.home .main .content_container .content .content_info .btn_container li {
+  font-size: 1.5em;
+  padding: 15px;
+  width: 60%;
+  text-align: center;
+  border: 1px solid #FF0000;
+  background: #FF0000;
+  border-radius: 15px;
+}
+.home .main .content_container .content .content_info .btn_container li:hover {
+  cursor: pointer;
+}
+.home .main .content_container .content .image_container {
+  width: 100%;
+  height: 100%;
+  background: #171010;
+}
+.home .main .content_container .content .image_container * {
+  background: #171010;
+}
+.home .main .content_container .content .image_container img {
+  width: 100%;
+  height: 100%;
+}
 .home .main .context_car {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -304,6 +369,35 @@ table .pagination_wrapper li:hover {
   background: #F7F6F2 !important;
 }
 
+.login {
+  min-height: 100vh;
+  background: #e1e5ea;
+  background: linear-gradient(to right, #e1e5ea 0%, #e1e5ea 100%);
+}
+.login * {
+  background: transparent;
+  color: #FFF;
+  font-size: 1.1em;
+}
+.login .content_container {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)), url("./assets/image/login.jpg") no-repeat right top;
+}
+.login .content_container .form {
+  width: 50%;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border: 1px solid #E1E5EA;
+  padding: 2em;
+}
+.login .content_container .form-group.btn-container .submit:hover {
+  background: #e1e5ea;
+  color: #000;
+}
+
 .car .container {
   width: 100%;
 }
@@ -363,6 +457,69 @@ table .pagination_wrapper li:hover {
 .car .container .car_container .table {
   border: none;
   margin-top: 1em;
+}
+
+.carInventory .car_inventory_layout {
+  padding: 5em 15px 20px;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-gap: 0.5em;
+  grid-template-areas: "sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav" "side_nav side_nav main main main main main main main main main main";
+}
+.carInventory .sub_nav {
+  grid-area: sub_nav;
+  border-bottom: 1px solid #E1E5EA;
+  padding: 15px;
+}
+.carInventory .sub_nav .content {
+  width: 50%;
+  margin: auto;
+}
+.carInventory .sub_nav .content .search_container {
+  width: 100%;
+}
+.carInventory .side_nav {
+  grid-area: side_nav;
+  border-right: 1px solid #E1E5EA;
+}
+.carInventory .side_nav .content_filter {
+  padding: 15px;
+}
+.carInventory .side_nav .content_filter h5 {
+  font-weight: normal;
+  border-bottom: 1px solid #E1E5EA;
+  padding-bottom: 5px;
+}
+.carInventory .main {
+  grid-area: main;
+}
+.carInventory .main .paginate_data_wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  grid-gap: 0.5em;
+  min-height: 60vh;
+}
+.carInventory .main .pagination_wrapper {
+  width: 80%;
+  margin: 2em auto auto;
+}
+.carInventory .main .pagination_wrapper li {
+  padding: 10px;
+}
+.carInventory .main .card .btn_container {
+  display: flex;
+  gap: 0.5em;
+}
+.carInventory .main .card .btn_container .btn {
+  border: 1px solid #E1E5EA;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.carInventory .main .no_data_found {
+  min-height: 20vh;
+  padding: 5em 15px 15px;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -53,6 +53,10 @@ const isArrayEmpty = (array) => {
   return array.length > 0;
 }
 
+const isNumeric = (num) => {
+    return !isNaN(num)
+}
+
 export {
     getElement,
     getElements,
@@ -62,5 +66,6 @@ export {
     isObjectEmpty,
     isArrayEmpty,
     isObjectUndefined,
-    toggleButtonID
+    toggleButtonID,
+    isNumeric
 }

@@ -4,7 +4,7 @@ import {GET_REQUEST} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
 import {CarContext} from "../../context/Context";
 
-const useGetData = () => {
+const useFetch = () => {
     const [car, setCar] = useState({cars: []})
     const [carCheckout, setCarCheckout] = useState({checkoutList: []})
     const [carCheckIn, setCarCheckIn] = useState({checkInList: []})
@@ -18,6 +18,7 @@ const useGetData = () => {
             })
         }
         fetchDate().then(r => r)
+
     }, [])
 
     return {car, carCheckout, carCheckIn}
@@ -25,5 +26,5 @@ const useGetData = () => {
 }
 
 export {
-    useGetData
+    useFetch
 }

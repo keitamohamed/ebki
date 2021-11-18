@@ -38,6 +38,15 @@ public class CarService {
         repository.save(car);
     }
 
+    public Optional<Car> updateCar(Long vin, Car car) {
+        if (findCarById(vin).isEmpty()) {
+            Util.throwIllegalStateException(String.format("No Driver found with an ID = [ %s ]", vin));
+        }
+        car.setVin(vin);
+        repository.save(car);
+       return findCarById(vin);
+    }
+
     public Optional<Car> findCarById (Long id) {
         if (repository.findById(id).isEmpty()) {
             return Optional.empty();

@@ -1,15 +1,13 @@
 import {useContext} from "react";
 
-import {CarContext, DashboardContext} from "../../context/Context";
+import {CarContext} from "../../context/Context";
 import UseClickCarID from "../custom_hook/useClickCarID";
 
-const PaginationData = (post, loading) => {
-    const dashCtx = useContext(DashboardContext)
+const CarPost = (post, loading) => {
     const carCtx = useContext(CarContext)
 
     const setClickDataID = event => {
         carCtx.setCarVin(UseClickCarID(event))
-        // dashCtx.setAction("SHOW_CAR")
     }
 
     return loading === true ? <h1>Loading...</h1> : (
@@ -23,6 +21,7 @@ const PaginationData = (post, loading) => {
                     <td>{car.year}</td>
                     <td>{car.brand}</td>
                     <td>{car.model}</td>
+                    <td>{car.bodyType}</td>
                 </tr>
             )
         })
@@ -30,4 +29,4 @@ const PaginationData = (post, loading) => {
 
 }
 
-export default PaginationData
+export default CarPost

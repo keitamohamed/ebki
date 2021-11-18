@@ -1,5 +1,6 @@
 import {Header} from "../header/Header";
 import {useDriver} from "../custom_hook/useDriver";
+import {DriverInputForm} from "../form/DriverInputForm";
 import {validateDriver, validateAddress, validateAuthenticate, validateConformPassword} from "../form/FormValidation";
 
 const Signup = () => {

@@ -6,10 +6,12 @@ const Path = {
     FIND_DRIVER_BY_EMAIL: ("driver/email/"),
     FIND_CAR_BY_ID: ('car/vin/'),
     FIND_CAR_BRAND: ('car/brand/'),
+    FIND_CAR_BY_YEAR: ('car/year/'),
     UPDATE_DRIVER_INFO: ('driver/update/'),
     DELETE_DRIVER: ('driver/delete/'),
     ADD_NEW_CAR: ('car/add'),
     CAR_LIST: ('car/carList'),
+    UPDATE_CAR_INFO: ('car/update/'),
     CHECKOUT_LIST:('checkout/checkout_list'),
     ADD_NEW_CHECKOUT: ('checkout/add/')
 }

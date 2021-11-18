@@ -1,10 +1,17 @@
-import {isObjectUndefined} from "../util/Util";
+import {getElement, isObjectUndefined} from "../util/Util";
 import {ListButton} from "../reusable/ListButton";
 import {toggleButtonID} from "../util/Util";
+import {useStyleComponent} from "../style/ComponentStyle";
 const DisplayCarClicked = ({car, checkout}) => {
+    const {applyStyle} = useStyleComponent("car_model")
+
     const onClick = event => {
         const clickButtonID = toggleButtonID(event)
-        console.log(clickButtonID)
+
+        if (clickButtonID === "DELETE") {
+            return
+        }
+        applyStyle()
     }
 
   return (

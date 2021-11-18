@@ -16,6 +16,7 @@ import useSearch from "../custom_hook/useSearch";
 
 import {DashboardContext} from "../../context/Context";
 import {DriverModel} from "../model/DriverModel";
+import {CarModel} from "../model/CarModel";
 
 
 const Dashboard = () => {
@@ -26,12 +27,15 @@ const Dashboard = () => {
     const {checkoutList} = useCheckout()
     const {onEnter, data} = useSearch()
 
-    const [carClick, setCarClick] = useState({})
+    const [carClick, setCarClick] = useState(null)
     const [checkout, setCheckout] = useState({checkoutID: null})
     const [show, setShow] = useState('Car')
 
     const carVin = () => {
-        setCarClick(carCtx.getClickCar())
+        const car = carCtx.getClickCar()
+        if (car !== undefined) {
+            setCarClick(car[0])
+        }
     }
 
     const navigate = (event) => {
@@ -48,7 +52,7 @@ const Dashboard = () => {
     const setCheckoutCar = () => {
         if (carCtx.getClickCar()) {
             const car = carCtx.getClickCar()
-            const {checkout} = car;
+            const {checkout} = car[0];
             if (checkout) {
                 setCheckout({
                     ...checkout,
@@ -77,6 +81,8 @@ const Dashboard = () => {
             <div className="dash_context_layout">
                 <Header/>
                 <DriverModel data={data} />
+                <CarModel carClick={carClick} />
+
                 <div className="dash_main">
                     <div className="context_sub_nav">
                         <div className="btn_container">
@@ -141,7 +147,7 @@ const Dashboard = () => {
                     {
                         dashCtx.show === "SHOW_DRIVER" && data !== null ?
                             <DisplayDriver driver={data} />
-                        : dashCtx.show === "SHOW_CAR" && carClick !== null ?
+                        : dashCtx.show === "SHOW_CAR" && carClick !== null?
                                 <DisplayCarClicked car={carClick} checkout={checkout} /> : ''
                     }
                 </div>

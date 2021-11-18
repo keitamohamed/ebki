@@ -4,14 +4,14 @@ import {CarContext, DashboardContext} from "../../context/Context";
 import {GET_REQUEST} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
 import {usePaginate, usePost} from "../paginate/usePaginate";
-import PaginationData from "../paginate/PaginationData";
+import CarPost from "../paginate/CarPost";
 import {UsePagination} from "../paginate/usePagination";
 
 
 const CarTable = (cars) => {
     const carCtx = useContext(CarContext)
     const dashCtx = useContext(DashboardContext)
-    const {post, currentPage, postPerPage, loading,setCurrentPage} = usePaginate(cars.car)
+    const {post, currentPage, postPerPage, loading,setCurrentPage} = usePaginate(cars.car, 10)
     const {currentPosts} = usePost(currentPage, postPerPage, cars.car)
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const CarTable = (cars) => {
                         </thead>
                         <tbody>
                         {
-                            <PaginationData post={currentPosts} loading={loading} />
+                            <CarPost post={currentPosts} loading={loading} />
                         }
                         </tbody>
                         {

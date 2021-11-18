@@ -1,17 +1,17 @@
 import {AiOutlineClose} from "react-icons/ai";
 import {useDriver} from "../custom_hook/useDriver";
 import {validateDriver} from "../form/FormValidation";
-import {DriverInputForm} from "../reusable/DriverInputForm";
-import {getElement} from "../util/Util";
+import {DriverInputForm} from "../form/DriverInputForm";
+import {useStyleComponent} from "../style/ComponentStyle";
 
 const DriverModel = ({data}) => {
     const {handleChange, onSubmitOnUpdate, error} = useDriver(data, validateDriver)
+    const {removeStyle} = useStyleComponent("driver_model")
 
     const closeModel = () => {
-        const element = getElement("driver_model");
-        element.style.zIndex = "-2"
-        element.style.opacity = "0"
+        removeStyle()
     }
+
     return (
         <div className="driver_model model">
             <div className="model_content">

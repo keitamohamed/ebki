@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 
-const usePaginate = (post) => {
+const usePaginate = (post, numPostPerPage) => {
 
     const [posts, setPosts] = useState({})
     const [currentPage, setCurrentPage] = useState(1)
-    const [postPerPage] = useState(7)
+    const [postPerPage] = useState(numPostPerPage)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         setLoading(false)
-    }, [posts])
+    }, [posts, numPostPerPage])
     return {post, currentPage, postPerPage, loading, setCurrentPage}
 }
 

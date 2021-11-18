@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ebik/car/**")
@@ -38,6 +39,10 @@ public class CarController {
         return service.findCarByBand(service.findAll(), brand);
     }
 
+//    public List<Car> findCarByModel(@PathVariable("model") String model) {
+//        return service.find
+//    }
+
     @GetMapping(path = {"/year/{year}"})
     public List<Car> findCarByYear(@PathVariable("year") int year) {
         return service.findCarByYear(service.findAll(), year);
@@ -52,7 +57,15 @@ public class CarController {
     }
 
     @GetMapping(value = {"/vin/{vin}"})
-    public Optional<Car> getCar(@PathVariable("vin") Long id) {
-        return service.findCarById(id);
+    public List<Car> getCar(@PathVariable("vin") Long id) {
+        return  service.findCarById(id)
+                .stream()
+                .collect(Collectors.toList());
+//        return service.findCarById(id);
+    }
+
+    @PutMapping(value = "/update/{vin}")
+    public void update(@RequestBody Car car, @PathVariable("vin") Long vin) {
+        service.updateCar(vin, car);
     }
 }

@@ -3,6 +3,7 @@ import {Login} from "../component/page/Login";
 import {Signup} from "../component/page/Signup";
 import {Dashboard} from "../component/page/Dashboard";
 import {Car} from "../component/page/Car";
+import CarInventory from "../component/page/CarInventory";
 
 const routPath = [
     {
@@ -16,6 +17,13 @@ const routPath = [
         path: "/dashboard",
         protected: false,
         component: Dashboard
+    },
+    {
+        name: 'Cars',
+        path: '/carlist',
+        protected: false,
+        component: CarInventory
+
     },
     {
         name: 'Car',
