@@ -65,6 +65,14 @@ public class CheckoutService {
         request.getCheckout().setCarCheckOut(carOptional.get());
     }
 
+    public List<Car> findCheckOutByDriverID(Long id) {
+        List<CarCheckout> list = repository.findCarCheckoutByDriverID(id);
+        return list
+                .stream()
+                .map(CarCheckout::getCarCheckOut)
+                .collect(Collectors.toList());
+    }
+
     private void setCheckOutID(CarCheckout carCheckout) {
         if (carCheckout.getCheckoutID() == null) {
             carCheckout.setCheckoutID(Util.generateID(672415261));

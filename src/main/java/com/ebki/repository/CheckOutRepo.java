@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CheckOutRepo extends CrudRepository<CarCheckout, Long> {
@@ -16,4 +17,7 @@ public interface CheckOutRepo extends CrudRepository<CarCheckout, Long> {
     @Modifying
     @Query(value = "DELETE FROM car_checkout WHERE checkoutid = :id", nativeQuery = true)
     int deleteByCheckoutID(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM car_checkout WHERE driverid = :id", nativeQuery = true)
+    List<CarCheckout> findCarCheckoutByDriverID(@Param("id") Long id);
 }

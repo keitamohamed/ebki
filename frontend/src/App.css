@@ -521,5 +521,79 @@ table tr:nth-child(even) td {
   min-height: 20vh;
   padding: 5em 15px 15px;
 }
+.profile .profile_layout {
+  padding: 20px 15px 15px;
+}
+.profile .profile_layout .content_left {
+  grid-area: content_left;
+  border-right: 1px solid #E1E5EA;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 3em;
+}
+.profile .profile_layout .content_left .content_img_container {
+  width: 100%;
+}
+.profile .profile_layout .content_left .content_img_container .content_profile {
+  width: 180px;
+  height: 180px;
+}
+.profile .profile_layout .content_left .content_img_container .content_profile img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+.profile .profile_layout .content_left .content {
+  width: 100%;
+  margin: auto;
+  text-align: left;
+}
+.profile .profile_layout .content_left .content .content_info {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 0.5em;
+  width: 100%;
+  text-align: left;
+  padding: 15px;
+}
+.profile .profile_layout .content_left .content .content_info h5, .profile .profile_layout .content_left .content .content_info h3 {
+  font-style: italic;
+}
+.profile .profile_layout .content_left .content .content_info h5 span, .profile .profile_layout .content_left .content .content_info h3 span {
+  font-size: 1.1em;
+  font-style: normal;
+}
+.profile .profile_layout .content_left .content .content_info * {
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.3em;
+}
+.profile .profile_layout .content_left .content .content_address {
+  width: 60%;
+  text-align: left;
+  padding: 15px;
+}
+.profile .profile_layout .content_left .content .content_address * {
+  text-align: left;
+}
+.profile .profile_layout .content_left .content .title_container {
+  margin-bottom: 1em;
+}
+.profile .profile_layout .content_left .content .title_container h5 {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: normal;
+  border-bottom: 1px solid #E1E5EA;
+  padding-bottom: 10px;
+}
+.profile .profile_layout .content_left .content p {
+  font-size: 1.3em;
+  line-height: 30px;
+}
+.profile .profile_layout .content_right {
+  grid-area: content_right;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
 
 /*# sourceMappingURL=App.css.map */

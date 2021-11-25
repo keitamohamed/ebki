@@ -1,11 +1,11 @@
 import {AiOutlineClose} from "react-icons/ai";
-import {useDriver} from "../custom_hook/useDriver";
+import {useDriverRegistration} from "../custom_hook/useDriverRegistration";
 import {validateDriver} from "../form/FormValidation";
 import {DriverInputForm} from "../form/DriverInputForm";
 import {useStyleComponent} from "../style/ComponentStyle";
 
 const DriverModel = ({data}) => {
-    const {handleChange, onSubmitOnUpdate, error} = useDriver(data, validateDriver)
+    const {handleChange, onSubmitOnUpdate, error} = useDriverRegistration(data, validateDriver)
     const {removeStyle} = useStyleComponent("driver_model")
 
     const closeModel = () => {

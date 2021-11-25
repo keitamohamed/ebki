@@ -321,6 +321,12 @@ li .dropdown li:hover {
   grid-template-areas: "header header header header header" "dash_main dash_main dash_main checklist checklist";
 }
 
+.profile .profile_layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "content_left content_right content_right" "content_left content_right content_right";
+}
+
 .car {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -332,6 +338,14 @@ li .dropdown li:hover {
 }
 .car .container {
   grid-area: container;
+}
+
+.content_left {
+  grid-area: content_left;
+}
+
+.content_right {
+  grid-area: content_right;
 }
 
 .dash_main {

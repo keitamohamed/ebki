@@ -36,6 +36,11 @@ public class CheckOutController {
         return service.findCheckOutByID(id);
     }
 
+    @GetMapping(path = {"/find_checkout_by_driver_id/{id}"})
+    public List<Car> findCheckoutByDriverID(@PathVariable("id") Long id) {
+        return service.findCheckOutByDriverID(id);
+    }
+
     @GetMapping(value = "/checkout_list")
     public List<Car> getAllCheckOutCar() {
         return service.carCheckOut();

@@ -13,6 +13,7 @@ const Path = {
     CAR_LIST: ('car/carList'),
     UPDATE_CAR_INFO: ('car/update/'),
     CHECKOUT_LIST:('checkout/checkout_list'),
+    FIND_CHECK_OUT_BY_DRIVER_ID: ("checkout/find_checkout_by_driver_id/"),
     ADD_NEW_CHECKOUT: ('checkout/add/')
 }
 
