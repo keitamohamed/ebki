@@ -5,7 +5,7 @@ const CarPosts = ({post, loading}) => {
 
     const onCheckout = async event => {
         const {id} = event.target
-        await POST_REQUEST('POST', `${Path.ADD_NEW_CHECKOUT}${825125692}/${id}`, null, {})
+        await POST_REQUEST('POST', `${Path.ADD_NEW_CHECKOUT}${440281376}/${id}`, null, {})
     }
 
     return loading === true ? <h1>Loading...</h1> : (

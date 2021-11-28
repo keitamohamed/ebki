@@ -1,10 +1,9 @@
-
 @mixin responsive_max($break_point) {
 
   @if map_has-key($break_points, $break_point) {
 
     $breakpoint_value: map-get($break_points, $break_point);
-    @media screen and (max-width: $breakpoint_value){
+    @media screen and (max-width: $breakpoint_value) {
       @content
     }
   } @else {

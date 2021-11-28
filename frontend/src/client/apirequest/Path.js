@@ -1,5 +1,5 @@
 const Path = {
-    LOGIN: ('driver/login'),
+    LOGIN: ('/login'),
     ADD_NEW_DRIVER: ('driver/add'),
     GET_DRIVER: ('driver/get_driver'),
     FIND_DRIVER_BY_ID: ('driver/find_by_id/'),
@@ -12,7 +12,7 @@ const Path = {
     ADD_NEW_CAR: ('car/add'),
     CAR_LIST: ('car/carList'),
     UPDATE_CAR_INFO: ('car/update/'),
-    CHECKOUT_LIST:('checkout/checkout_list'),
+    CHECKOUT_LIST: ('checkout/checkout_list'),
     FIND_CHECK_OUT_BY_DRIVER_ID: ("checkout/find_checkout_by_driver_id/"),
     ADD_NEW_CHECKOUT: ('checkout/add/')
 }

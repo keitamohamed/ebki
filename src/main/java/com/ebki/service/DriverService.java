@@ -5,6 +5,7 @@ import com.ebki.model.Driver;
 import com.ebki.repository.DriverRepo;
 import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,6 +20,8 @@ public class DriverService {
     private CheckoutService checkoutService;
     @Autowired
     private CarService carService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Autowired
@@ -84,7 +87,6 @@ public class DriverService {
         repository.deleteById(id);
     }
 
-    // Just wrote this code. Need to add test
     public Optional<Driver> findDriverByEmail(String email) {
         return repository.findDriverByEmailAddress(email);
     }

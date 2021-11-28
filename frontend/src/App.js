@@ -1,5 +1,5 @@
 import './App.css';
-import './component/style/at_responsive.css'
+import './style/at_responsive.css'
 
 import {DynamicRoute} from "./route/DynamicRoute";
 import {CarProvider} from "./context/CarProvider";

@@ -2,11 +2,10 @@ import {useEffect} from "react";
 import ProtHeader from "../header/ProtHeader";
 import {usePaginate} from "../paginate/usePaginate";
 import {useDriver} from "../custom_hook/useDriver";
-import CheckoutTable from "../reusable/CheckoutTable";
-
+import {DisplayCheckTable} from "../reusable/CheckTable";
 
 const Profile = () => {
-    const {driver, address, checkout, loaded} = useDriver(825125692)
+    const {driver, address, checkout, loaded} = useDriver(440281376)
     const {} = usePaginate()
 
     const birthDay = () => {
@@ -14,6 +13,7 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        console.log(checkout())
 
     }, [])
 
@@ -56,12 +56,18 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="content_right">
-                    <div className="content_top"></div>
+                    <div className="content_top">
+                        <div className="content_recent_checkout">
+                            <div className="car_image_container">
+                                <img src="./image/car/cal_img.jpg" alt="car"/>
+                            </div>
+                        </div>
+                    </div>
                     <div className="content_bottom">
                         {
                             console.log(checkout())
                         }
-                        {/*<CheckoutTable />*/}
+                        <DisplayCheckTable checkout={checkout()} title={'Car Checkout'}/>
                     </div>
                 </div>
             </div>

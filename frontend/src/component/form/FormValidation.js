@@ -15,7 +15,6 @@ const validateDriver = driver => {
 
 const validateAddress = address => {
     let addressError = {}
-
     addressError.street = address.street.trim() ? '' : 'Street is required'
     addressError.city = address.city.trim() ? '' : 'City is required'
     addressError.state = address.state.trim() ? '' : 'State is required'

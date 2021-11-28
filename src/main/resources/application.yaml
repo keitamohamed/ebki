@@ -13,10 +13,15 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/ebik?serverTimezone=UTC
     username: postgres
-    password: 'springbootwebapplication!2'
+    password: 'developer'
 
 logging:
   level:
     org:
       hibernate:
         type: trace
+
+jwt:
+  securityKey: 'securesecuresecurehbsfljjkdwnlDWscjkcfbkt8322yroyo823ye29ogdiqeo2y282u7g2d28u2fwiut821yw'
+  tokenPrefix: 'Bearer'
+  expirationAfterDays: 14

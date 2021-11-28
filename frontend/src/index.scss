@@ -1,3 +1,5 @@
+@import "style/at_variable";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,6 +12,7 @@
   outline: none;
   transition: all .2s ease-in-out;
   background: #F4F9F9;
+  font-family: $default_font_family;
 }
 
 input:-webkit-autofill,
@@ -71,6 +74,7 @@ li {
 
 .dropdown_nav {
   padding: 15px;
+
   &:hover {
     border: none !important;
 
@@ -129,6 +133,7 @@ li {
   .form-group-row {
     display: flex;
     padding: 15px 25px;
+
     * {
       font-size: 1.1em;
     }
@@ -137,6 +142,7 @@ li {
       display: flex;
 
       gap: 1em;
+
       input {
         width: auto;
       }
@@ -205,6 +211,7 @@ li {
     .btn:nth-child(1) {
       width: 100%;
     }
+
     .btn:nth-child(2) {
       width: 100%;
     }
@@ -284,6 +291,7 @@ li {
       color: white;
     }
   }
+
   .btn_show {
     grid-area: btn_show;
   }
@@ -391,7 +399,7 @@ li {
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
             'content_left content_right content_right'
-            'content_left content_right content_right';
+            'content_left content_right content_right'
   }
 }
 
@@ -439,6 +447,7 @@ li {
 
 .carousel {
   grid-area: carousel;
+
   .content_container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -466,10 +475,11 @@ li {
 
       &:hover {
         background: #171010;
-         * {
-           background: #171010;
-           color: #FFF;
-         }
+
+        * {
+          background: #171010;
+          color: #FFF;
+        }
       }
     }
   }
@@ -496,8 +506,8 @@ li {
   top: 0;
   position: absolute;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   transition: opacity 150ms 400ms ease;
 
   .model_content {
@@ -512,17 +522,17 @@ li {
   }
 
   .model_close_btn_container {
-     svg {
-       right: 0;
-       position: absolute;
-       margin-right: 1em;
-       cursor: pointer;
-       font-size: 2em;
+    svg {
+      right: 0;
+      position: absolute;
+      margin-right: 1em;
+      cursor: pointer;
+      font-size: 2em;
 
-       &:hover {
-         color: #FF0000;
-       }
-     }
+      &:hover {
+        color: #FF0000;
+      }
+    }
   }
 }
 
@@ -573,6 +583,7 @@ li {
       background: transparent;
       display: none;
     }
+
     .next {
       left: auto;
       right: 0;
@@ -580,7 +591,7 @@ li {
     }
 
     .prev:hover, .next:hover {
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0, 0, 0, 0.8);
     }
 
     .fade {
@@ -619,11 +630,19 @@ li {
 
 
 @-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
 }
 
 @keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
 }

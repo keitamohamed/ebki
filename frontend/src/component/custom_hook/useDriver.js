@@ -13,7 +13,6 @@ const useDriver = (driverID) => {
     }
 
     const checkout = () => {
-        console.log(driver.checkout)
         return driver.checkout
     }
 

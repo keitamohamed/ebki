@@ -1,12 +1,11 @@
 import {Header} from "../header/Header";
 import {useDriverRegistration} from "../custom_hook/useDriverRegistration";
-import {DriverInputForm} from "../form/DriverInputForm";
 import {validateDriver, validateAddress, validateAuthenticate, validateConformPassword} from "../form/FormValidation";
 
 const Signup = () => {
     const {handleChange, addressHandleChange, handleAuthenticateChange,
         handleConformPasswordChange, onSubmit, error, errorA, errorC, errorD}
-        = useDriverRegistration(validateDriver, validateAddress, validateAuthenticate, validateConformPassword)
+        = useDriverRegistration(null, validateDriver, validateAddress, validateAuthenticate, validateConformPassword)
 
     return (
         <div className="signup">

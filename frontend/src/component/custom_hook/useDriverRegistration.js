@@ -5,7 +5,6 @@ import {isObjectEmpty} from "../util/Util";
 
 const useDriverRegistration = (data, validateDriver, validateAddress,
                                validateAuthenticate, validateConformPassword) => {
-
     const initDriverUpdate = data => {
         return {
             driverID: data.driverID,

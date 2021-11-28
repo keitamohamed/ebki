@@ -1,5 +1,7 @@
 import {Header} from "../header/Header";
 import {useState} from "react";
+import {POST_REQUEST} from "../../client/apirequest/Request";
+import {Path} from "../../client/apirequest/Path";
 
 const Login = () => {
 
@@ -41,7 +43,15 @@ const Login = () => {
     const onSubmit = event => {
         event.preventDefault()
         const isValid = isInputValid()
-        console.log(login, ' is input valid ', isValid)
+        if (!isValid) {
+            return
+        }
+        POST_REQUEST('POST', Path.LOGIN, null, login)
+            .then(response => {
+                {
+                    console.log(response)
+                }
+            })
     }
 
     return (
@@ -69,7 +79,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="form-group btn-container">
-                        <input type="submit" className="submit" value="Submit" />
+                        <input type="submit" className="submit" value="Submit"/>
                     </div>
                 </form>
             </div>

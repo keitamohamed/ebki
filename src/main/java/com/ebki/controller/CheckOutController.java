@@ -26,7 +26,6 @@ public class CheckOutController {
     public void save(@RequestBody CarCheckout checkout,
                      @PathVariable("driverID") Long driverID,
                      @PathVariable("vinNumber") Long vinNumber) {
-        System.out.println("Driver id " + driverID);
         CheckOut requestCheckOut = new CheckOut(checkout);
         service.save(requestCheckOut.getCheckout(), driverID, vinNumber);
     }
