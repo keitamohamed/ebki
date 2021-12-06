@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import {MappingType, Path} from "../../client/apirequest/Path";
-import {POST_REQUEST} from "../../client/apirequest/Request";
+import {REQUEST_MAPPING} from "../../client/apirequest/Request";
 import {useFetch} from "./useFetch";
 import {AuthContext} from "../../context/Context";
 import useFile from "./useFile";
@@ -47,14 +47,14 @@ const useCar = (carClick, validateCarInput) => {
             return
         }
         const {access_token} = authCtx.cookie
-        const response = await POST_REQUEST(MappingType.POST_MAPPING, Path.ADD_NEW_CAR, access_token, newCar)
+        const response = await REQUEST_MAPPING(MappingType.POST_MAPPING, Path.ADD_NEW_CAR, access_token, newCar)
         if (response.status === 200) {
             setMessage({
                 ...message,
                 msg: `Successfully added ${newCar.year} ${newCar.brand} ${newCar.model}`
             })
             const {headers: {vin}} = response
-            uploadFile(authCtx.cookie.access_token, vin, true)
+            uploadFile(access_token, vin, true, false)
         }
     }
 
@@ -64,7 +64,9 @@ const useCar = (carClick, validateCarInput) => {
             return
         }
         const {access_token} = authCtx.cookie
-        await POST_REQUEST(MappingType.PUT_MAPPING, `${Path.UPDATE_CAR_INFO}${carClick.vin}`, access_token, newCar)
+        await REQUEST_MAPPING(MappingType.PUT_MAPPING, `${Path.UPDATE_CAR_INFO}${carClick.vin}`, access_token, newCar)
+        await REQUEST_MAPPING(MappingType.DELETE_MAPPING, `${Path.CAR_DELETE_IMAGE}${carClick.vin}`, access_token)
+        uploadFile(access_token, carClick.vin, true, true)
     }
 
     const isInputValidate = () => {

@@ -14,6 +14,7 @@ const Path = {
     CAR_LIST: ('car/carList'),
     CAR_SAVE_IMAGE: ('car/save-car-image/'),
     CAR_DOWNLOAD_IMAGE: ("car/download-image/"),
+    CAR_DELETE_IMAGE: ("car/delete-image/"),
     UPDATE_CAR_INFO: ('car/update/'),
     CHECKOUT_LIST: ('checkout/checkout_list'),
     FIND_CHECK_OUT_BY_DRIVER_ID: ("checkout/find_checkout_by_driver_id/"),
@@ -23,6 +24,7 @@ const Path = {
 const MappingType = {
     POST_MAPPING: ('POST'),
     PUT_MAPPING: ('PUT'),
+    DELETE_MAPPING: ('DELETE')
 }
 
 const imageUrl = (id, isCarImage) => {

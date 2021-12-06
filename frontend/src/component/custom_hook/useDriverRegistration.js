@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {POST_REQUEST} from "../../client/apirequest/Request";
+import {REQUEST_MAPPING} from "../../client/apirequest/Request";
 import {MappingType, Path} from "../../client/apirequest/Path";
 import {isObjectEmpty} from "../util/Util";
 
@@ -103,7 +103,7 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
         }
 
         driver.address.push(address)
-        await POST_REQUEST(MappingType.POST_MAPPING, Path.ADD_NEW_DRIVER, null, driver)
+        await REQUEST_MAPPING(MappingType.POST_MAPPING, Path.ADD_NEW_DRIVER, null, driver)
     }
 
     const onSubmitOnUpdate = async event => {
@@ -114,7 +114,7 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
         if (!isDriverValid) {
             return
         }
-        await POST_REQUEST(MappingType.PUT_MAPPING, `${Path.UPDATE_DRIVER_INFO}${driver.driverID}`, null, driver)
+        await REQUEST_MAPPING(MappingType.PUT_MAPPING, `${Path.UPDATE_DRIVER_INFO}${driver.driverID}`, null, driver)
     }
 
     useEffect(() => {

@@ -20,7 +20,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #E1E5EA;
+  -webkit-text-fill-color: hsl(0%, 0%, 30%) !important;
+  font-size: 1.2em;
 }
 
 .successful_message {
@@ -339,6 +340,10 @@ li {
   svg {
     fill: #57CC99;
     position: absolute;
+  }
+
+  input {
+    font-size: 1.2em;
   }
 }
 

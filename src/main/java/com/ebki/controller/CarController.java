@@ -49,7 +49,7 @@ public class CarController {
 
     @DeleteMapping(value = "/delete-image/{vin}")
     public void deleteImage(@PathVariable("vin") Long vin) {
-
+        service.deleteFile(vin);
     }
 
     @GetMapping(value = {"/carList"})

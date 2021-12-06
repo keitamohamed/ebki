@@ -2,7 +2,7 @@ import {useContext, useState} from "react";
 import {useHistory} from "react-router-dom"
 
 import {Header} from "../header/Header";
-import {POST_REQUEST} from "../../client/apirequest/Request";
+import {REQUEST_MAPPING} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
 import {AuthContext} from "../../context/Context";
 
@@ -50,7 +50,7 @@ const Login = () => {
         if (!isValid) {
             return
         }
-        POST_REQUEST('POST', Path.LOGIN, null, login)
+        REQUEST_MAPPING('POST', Path.LOGIN, null, login)
             .then(response => {
                 {
                     const {headers} = response

@@ -1,12 +1,12 @@
 import {useState} from "react";
-import {POST_REQUEST} from "../../client/apirequest/Request";
-import {Path, MappingType} from "../../client/apirequest/Path";
+import {REQUEST_MAPPING} from "../../client/apirequest/Request";
+import {MappingType, Path} from "../../client/apirequest/Path";
 
 const CarCard = ({data}) => {
     const [car, setCar] = useState(data)
 
     const onCheckout = async event => {
-        await POST_REQUEST(MappingType.POST_MAPPING,`${Path.ADD_NEW_CHECKOUT}${825125692}/${car.vin}`, null, {})
+        await REQUEST_MAPPING(MappingType.POST_MAPPING, `${Path.ADD_NEW_CHECKOUT}${825125692}/${car.vin}`, null, {})
     }
 
 
@@ -21,7 +21,7 @@ const CarCard = ({data}) => {
                 <h5>{`Year: ${car.year}`}</h5>
             </div>
             <div className="card_action">
-                <input type="button" className="btn" value='View' />
+                <input type="button" className="btn" value='View'/>
                 <input type="button"
                        className="btn"
                        value='Checkout'

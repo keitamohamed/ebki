@@ -19,7 +19,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #E1E5EA;
+  -webkit-text-fill-color: #4d4d4d !important;
+  font-size: 1.2em;
 }
 
 .successful_message {
@@ -280,6 +281,9 @@ li .dropdown li:hover {
 .search_container svg {
   fill: #57CC99;
   position: absolute;
+}
+.search_container input {
+  font-size: 1.2em;
 }
 
 .header {

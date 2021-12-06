@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const POST_REQUEST = async (action, url, token, data) => {
+const REQUEST_MAPPING = async (action, url, token, data) => {
     try {
         return await axios({
             method: action,
@@ -67,7 +67,7 @@ const GET_REQUEST = async (url, inputValue, token) => {
 
 
 export {
-    POST_REQUEST,
+    REQUEST_MAPPING,
     POST_REQUEST_FILE,
     GET_REQUEST,
     PUT_REQUEST

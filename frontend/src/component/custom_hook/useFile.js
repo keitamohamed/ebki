@@ -90,7 +90,7 @@ const useFile = () => {
         })
     }
 
-    const uploadFile = (token, id, isCarImage) => {
+    const uploadFile = (token, id, isCarImage, doUpdateFiles) => {
         if (id === undefined) {
             getElement(".file_send_error").style.display = 'block'
             return
@@ -101,12 +101,19 @@ const useFile = () => {
         files.file.map(async file => {
             const formData = new FormData()
             formData.append('file', file)
-            if (isCarImage) {
+            if (isCarImage && doUpdateFiles === false) {
                 await POST_REQUEST_FILE('POST', `${Path.CAR_SAVE_IMAGE}${id}`, token, formData)
                     .then(res => console.log(res))
                     .catch(err => console.log(err))
                 setFiles({file: []})
+            } else if (!isCarImage && doUpdateFiles === false) {
+                console.log("Add driver image")
+            } else if (isCarImage && doUpdateFiles === true) {
+                if (files.file.length > 0) {
+                    await POST_REQUEST_FILE('POST', `${Path.CAR_SAVE_IMAGE}${id}`, token, formData)
+                }
             }
+
         })
         files.file.forEach((value, index) => {
             files.file.slice(index, index)

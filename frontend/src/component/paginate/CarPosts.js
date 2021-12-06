@@ -1,6 +1,6 @@
 import {imageUrl, Path} from "../../client/apirequest/Path";
 
-import {POST_REQUEST} from "../../client/apirequest/Request";
+import {REQUEST_MAPPING} from "../../client/apirequest/Request";
 import {useContext} from "react";
 import {AuthContext} from "../../context/Context";
 
@@ -8,7 +8,7 @@ const CarPosts = ({post, loading}) => {
     const authCtx = useContext(AuthContext)
     const onCheckout = async event => {
         const {id} = event.target
-        await POST_REQUEST('POST', `${Path.ADD_NEW_CHECKOUT}${authCtx.cookie.id}/${id}`, null, {})
+        await REQUEST_MAPPING('POST', `${Path.ADD_NEW_CHECKOUT}${authCtx.cookie.id}/${id}`, null, {})
     }
 
     return loading === true ? <h1>Loading...</h1> : (

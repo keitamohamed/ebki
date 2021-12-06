@@ -49,6 +49,10 @@ public class CarService {
         return fileService.downloadImage(id, true, repository, null);
     }
 
+    public void deleteFile(Long vin) {
+        fileService.deleteFile(vin, repository, true);
+    }
+
     public Optional<Car> updateCar(Long vin, Car car) {
         if (findCarById(vin).isEmpty()) {
             Util.throwIllegalStateException(String.format("No Driver found with an ID = [ %s ]", vin));

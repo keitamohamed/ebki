@@ -95,6 +95,18 @@ public class FileService {
         return null;
     }
 
+    public void deleteFile(Long vin, CarRepo carRepo, boolean isCarImage) {
+        Optional<Car> findCar = carRepo.findById(vin);
+        if (findCar.isEmpty()) {
+            return;
+        }
+        if (isCarImage) {
+            String carImagePath = String.format("%s/%s", BucketCarImage.CARE_IMAGE.getBUCKET_CAR(), vin);
+            ImageFile imageFile = findCar.get().getCarImg();
+            fileStore.deleteFile(carImagePath, imageFile.getCarImageLink());
+        }
+    }
+
 
     private boolean isFileAnImage(MultipartFile file) {
         return Arrays.asList(IMAGE_JPEG.getMimeType(), IMAGE_PNG.getMimeType()).contains(file.getContentType());
