@@ -1,7 +1,7 @@
 import {Switch} from "react-router-dom";
 
-import {routPath} from "./RoutPath";
-import {Router} from "./Navigate"
+import routPath from "./RoutPath";
+import Router from "./Navigate"
 
 const DynamicRoute = () => {
     return (

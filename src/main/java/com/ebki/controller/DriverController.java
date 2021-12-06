@@ -1,7 +1,9 @@
 package com.ebki.controller;
 
+import com.ebki.config.AwsConfig;
 import com.ebki.model.Driver;
 import com.ebki.service.DriverService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class DriverController {
 
     private final DriverService service;
+    @Autowired
+    private AwsConfig awsConfig;
 
     public DriverController(DriverService driverService) {
         this.service = driverService;
@@ -35,6 +39,12 @@ public class DriverController {
     @GetMapping(value = {"/find_by_id/{id}"})
     public Optional<Driver> findByID(@PathVariable("id") Long id) {
         return service.findDriverByID(id);
+    }
+
+    @GetMapping(value = {"/find_by_username/{username}"})
+    public Driver findDriverByUsername(@PathVariable("username") String username) {
+        System.out.println("Key " + awsConfig.getSecreteKey());
+        return service.findByUsername(username);
     }
 
     @PutMapping(value = {"/update/{id}"})

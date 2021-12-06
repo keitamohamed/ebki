@@ -1,11 +1,13 @@
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import ProtHeader from "../header/ProtHeader";
 import {usePaginate} from "../paginate/usePaginate";
 import {useDriver} from "../custom_hook/useDriver";
-import {DisplayCheckTable} from "../reusable/CheckTable";
+import {AuthContext} from "../../context/Context";
+import {DisplayCheckTable} from "../reusable/CheckTable"
 
 const Profile = () => {
-    const {driver, address, checkout, loaded} = useDriver(440281376)
+    const authCtx = useContext(AuthContext)
+    const {driver, address, checkout, loaded} = useDriver(authCtx.cookie.username)
     const {} = usePaginate()
 
     const birthDay = () => {
@@ -13,7 +15,6 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        console.log(checkout())
 
     }, [])
 
@@ -64,9 +65,6 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="content_bottom">
-                        {
-                            console.log(checkout())
-                        }
                         <DisplayCheckTable checkout={checkout()} title={'Car Checkout'}/>
                     </div>
                 </div>

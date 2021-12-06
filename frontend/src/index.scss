@@ -175,8 +175,10 @@ li {
 }
 
 .card {
+  width: 100%;
   border: 1px solid #E1E5EA;
-  padding: 15px;
+  position: relative;
+  text-align: center;
 
   * {
     font-weight: normal;
@@ -200,6 +202,30 @@ li {
     h5 {
       font-size: 1.2em;
     }
+  }
+
+  .image_container {
+    width: 100%;
+    height: 100%;
+
+    .content_image {
+      //display: grid;
+      //grid-template-columns: repeat(1, 1fr);
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .car_info {
+    margin-top: .5em;
+    position: absolute;
+    bottom: 1em;
+    width: 100%;
+    background: transparent;
   }
 
   .card_action {
@@ -489,8 +515,6 @@ li {
   grid-area: main;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  //min-height: 100vh;
-  //background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url("image/home_bg.jpg") no-repeat center center;
 }
 
 .footer {
@@ -625,6 +649,67 @@ li {
 
   .active, .dot:hover {
     background-color: #717171;
+  }
+}
+
+.file-upload-container {
+  text-align: center;
+  padding: 20px 15px;
+  margin-top: 1em;
+
+  * {
+    font-size: 1.1em;
+    text-align: center;
+  }
+
+  .drop-zone-content {
+    display: grid;
+    border: 1px dotted #E1E5EA;
+    padding: 30px 15px;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 15vh;
+    cursor: pointer;
+    margin: auto;
+
+    svg {
+      font-size: 2.5em;
+
+      &:hover {
+        fill: #34BE82;
+      }
+    }
+
+    p {
+      text-transform: capitalize;
+    }
+
+    .drop_zone_input {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+  }
+
+  .content_file_preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1em;
+    grid-auto-rows: 200px;
+    grid-auto-flow: dense;
+    margin: 1em auto;
+    visibility: hidden;
+
+    .content_image {
+      border: 1px solid #E1E5EA;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }
 

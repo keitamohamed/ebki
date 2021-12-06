@@ -1,11 +1,14 @@
-import {Path} from "../../client/apirequest/Path";
+import {imageUrl, Path} from "../../client/apirequest/Path";
+
 import {POST_REQUEST} from "../../client/apirequest/Request";
+import {useContext} from "react";
+import {AuthContext} from "../../context/Context";
 
 const CarPosts = ({post, loading}) => {
-
+    const authCtx = useContext(AuthContext)
     const onCheckout = async event => {
         const {id} = event.target
-        await POST_REQUEST('POST', `${Path.ADD_NEW_CHECKOUT}${440281376}/${id}`, null, {})
+        await POST_REQUEST('POST', `${Path.ADD_NEW_CHECKOUT}${authCtx.cookie.id}/${id}`, null, {})
     }
 
     return loading === true ? <h1>Loading...</h1> : (
@@ -14,7 +17,11 @@ const CarPosts = ({post, loading}) => {
                 <div className="card"
                      key={car.vin}
                 >
-                    <div className="image_container"></div>
+                    <div className="image_container">
+                        <div className="content_image">
+                            <img src={imageUrl(car.vin, true)} alt={car.model}/>
+                        </div>
+                    </div>
                     <div className="car_info">
                         <h5>{`${car.year} ${car.brand} ${car.model}`}</h5>
                         <div className="btn_container">
@@ -22,7 +29,8 @@ const CarPosts = ({post, loading}) => {
                             <li className="btn"
                                 id={car.vin}
                                 onClick={onCheckout}
-                            >Check out</li>
+                            >Check out
+                            </li>
                         </div>
                     </div>
                 </div>

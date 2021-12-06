@@ -1,10 +1,14 @@
+import {useContext, useState} from "react";
+import {useHistory} from "react-router-dom"
+
 import {Header} from "../header/Header";
-import {useState} from "react";
 import {POST_REQUEST} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
+import {AuthContext} from "../../context/Context";
 
 const Login = () => {
-
+    const history = useHistory()
+    const authCtx = useContext(AuthContext)
     const [login, setLogin] = useState({
         username: '',
         password: ''
@@ -49,9 +53,12 @@ const Login = () => {
         POST_REQUEST('POST', Path.LOGIN, null, login)
             .then(response => {
                 {
-                    console.log(response)
+                    const {headers} = response
+                    authCtx.setAuthenticate(headers)
                 }
             })
+        console.log(authCtx.cookie.username)
+        history.push("/")
     }
 
     return (

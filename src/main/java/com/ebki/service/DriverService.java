@@ -1,7 +1,10 @@
 package com.ebki.service;
 
 import com.ebki.model.Address;
+import com.ebki.model.Authenticate;
 import com.ebki.model.Driver;
+import com.ebki.model.Role;
+import com.ebki.repository.AuthRepo;
 import com.ebki.repository.DriverRepo;
 import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ public class DriverService {
 
     private final DriverRepo repository;
     @Autowired
+    private AuthRepo authRepo;
+    @Autowired
     private CheckoutService checkoutService;
     @Autowired
     private CarService carService;
@@ -30,6 +35,8 @@ public class DriverService {
     }
 
     public void save(Driver driver) {
+        System.out.println("Driver " + driver.getAuthenticate().getUsername());
+
         if (findDriverByEmail(driver.getEmail()).isPresent()) {
             Driver searchResult = findDriverByEmail(driver.getEmail()).get();
             if (searchResult.getFirstName().equals(driver.getFirstName())) {
@@ -41,10 +48,63 @@ public class DriverService {
             driver.setDriverID(Util.generateID(999999999));
         }
 
-        System.out.println("Date is " + driver.getDob());
-
+        setAuthIDIfNull(driver);
+        authenticateDriver(driver);
+        encodePassword(driver);
         setAddressIDIfNull(driver);
         repository.save(driver);
+    }
+
+    public Driver findByUsername(String username) {
+        Authenticate authenticate = authRepo.findByUsername(username);
+        if (authenticate == null) {
+            return new Driver();
+        }
+        return createNewDriver(authenticate.getAuthDriver());
+    }
+
+    private Driver createNewDriver(Driver driver) {
+        Driver newDriver = new Driver();
+        newDriver.setDriverID(driver.getDriverID());
+        newDriver.setFirstName(driver.getFirstName());
+        newDriver.setLastName(driver.getLastName());
+        newDriver.setGender(driver.getGender());
+        newDriver.setDob(driver.getDob());
+        newDriver.setEmail(driver.getEmail());
+        newDriver.setPhoneNum(driver.getPhoneNum());
+        newDriver.setAddress(driver.getAddress());
+        newDriver.setCheckout(driver.getCheckout());
+        newDriver.setCarCheckIns(driver.getCarCheckIns());
+        return newDriver;
+    }
+
+    private void setAuthIDIfNull(Driver driver) {
+        System.out.println("Driver " + driver.getAuthenticate().getUsername());
+        Authenticate authenticate = driver.getAuthenticate();
+        if (authenticate.getAuthID() == null) {
+            authenticate.setAuthID(Util.generateID(99999999));
+        }
+        setRoleIDIfNull(authenticate);
+    }
+
+    private void setRoleIDIfNull(Authenticate authenticate) {
+        Role role = authenticate.getRole();
+        if (role.getRoleID() == null) {
+            role.setRoleID(Util.generateID(999999));
+        }
+    }
+
+    private void authenticateDriver(Driver driver) {
+        Authenticate authenticate = driver.getAuthenticate();
+        authenticate.setAccountNonExpired(true);
+        authenticate.setAccountNotLocked(true);
+        authenticate.setCredentialsNonExpired(true);
+        authenticate.setEnabled(true);
+    }
+
+    private void encodePassword(Driver driver) {
+        Authenticate authenticate = driver.getAuthenticate();
+        authenticate.setPassword(passwordEncoder.encode(authenticate.getPassword()));
     }
 
     private void setAddressIDIfNull(Driver driver) {

@@ -1,9 +1,13 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {MappingType, Path} from "../../client/apirequest/Path";
 import {POST_REQUEST} from "../../client/apirequest/Request";
 import {useFetch} from "./useFetch";
+import {AuthContext} from "../../context/Context";
+import useFile from "./useFile";
 
 const useCar = (carClick, validateCarInput) => {
+    const {dropZone, uploadFile} = useFile()
+    const authCtx = useContext(AuthContext)
     const {car} = useFetch()
 
     const initCarUpdate = (carClick) => {
@@ -16,12 +20,12 @@ const useCar = (carClick, validateCarInput) => {
     }
 
     const initCar = () => {
-      return carClick !== null && carClick !== undefined ? initCarUpdate(carClick) : {
-          brand: '',
-          model: '',
-          bodyType: '',
-          year: 0,
-      }
+        return carClick !== null && carClick !== undefined ? initCarUpdate(carClick) : {
+            brand: '',
+            model: '',
+            bodyType: '',
+            year: 0,
+        }
     }
     const [newCar, setNewCar] = useState(initCar)
 
@@ -42,12 +46,15 @@ const useCar = (carClick, validateCarInput) => {
         if (!isInputValidate()) {
             return
         }
-        const response = await POST_REQUEST(MappingType.POST_MAPPING, Path.ADD_NEW_CAR, null, newCar)
+        const {access_token} = authCtx.cookie
+        const response = await POST_REQUEST(MappingType.POST_MAPPING, Path.ADD_NEW_CAR, access_token, newCar)
         if (response.status === 200) {
             setMessage({
                 ...message,
                 msg: `Successfully added ${newCar.year} ${newCar.brand} ${newCar.model}`
             })
+            const {headers: {vin}} = response
+            uploadFile(authCtx.cookie.access_token, vin, true)
         }
     }
 
@@ -56,7 +63,8 @@ const useCar = (carClick, validateCarInput) => {
         if (!isInputValidate()) {
             return
         }
-        await POST_REQUEST(MappingType.PUT_MAPPING, `${Path.UPDATE_CAR_INFO}${carClick.vin}`, null, newCar)
+        const {access_token} = authCtx.cookie
+        await POST_REQUEST(MappingType.PUT_MAPPING, `${Path.UPDATE_CAR_INFO}${carClick.vin}`, access_token, newCar)
     }
 
     const isInputValidate = () => {
@@ -68,6 +76,7 @@ const useCar = (carClick, validateCarInput) => {
         if (carClick !== null) {
             setNewCar(initCar())
         }
+        dropZone()
     }, [carClick])
 
     return {car, handleChange, onSubmit, onUpdateSubmit, error, message}

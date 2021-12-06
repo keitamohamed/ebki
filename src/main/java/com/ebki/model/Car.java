@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 //@MappedSuperclass
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -36,6 +37,9 @@ public class Car implements Comparable<Integer> {
     @Min(1985)
     private int year;
 
+    @OneToOne(mappedBy = "carImg", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "carImg")
+    private ImageFile carImg;
     @OneToOne(mappedBy = "carCheckOut", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "carCheckOut")
     private CarCheckout checkout;
@@ -49,6 +53,10 @@ public class Car implements Comparable<Integer> {
         this.model = model;
         this.bodyType = bodyStyle;
         this.year = modelYear;
+    }
+
+    public Optional<ImageFile> getImageFile() {
+        return Optional.ofNullable(carImg);
     }
 
     @Override

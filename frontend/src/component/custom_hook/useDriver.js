@@ -1,10 +1,12 @@
 import {useFetch} from "./useFetch";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {GET_REQUEST} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
+import {AuthContext} from "../../context/Context";
 
 const useDriver = (driverID) => {
-    const {driver, fetchDriver} = useFetch()
+    const authCtx = useContext(AuthContext)
+    const {driver, fetchDriver} = useFetch(authCtx.cookie.access_token)
     const [loaded, setLoaded] = useState({})
     // const [address, setAddress] = useState({})
 
@@ -18,15 +20,13 @@ const useDriver = (driverID) => {
 
     useEffect(() => {
         const getDriver = async () => {
-            await fetchDriver(driverID)
+            await fetchDriver(authCtx.cookie.username, authCtx.cookie.access_token)
                 .then(res => {
-                    // setAddress(driver.address)
                     setLoaded(true)
                 })
         }
         const checkout = async () => {
-            const response = GET_REQUEST(Path.FIND_CHECK_OUT_BY_DRIVER_ID, driverID, null)
-            console.log(response.data)
+            await GET_REQUEST(Path.FIND_CHECK_OUT_BY_DRIVER_ID, driverID, authCtx.cookie.access_token);
         }
 
         checkout()

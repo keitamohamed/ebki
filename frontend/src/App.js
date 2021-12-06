@@ -4,14 +4,17 @@ import './style/at_responsive.css'
 import {DynamicRoute} from "./route/DynamicRoute";
 import {CarProvider} from "./context/CarProvider";
 import {DashboardProvider} from "./context/DashboardProvider";
+import {AuthProvider} from "./context/AuthProvider";
 
 function App() {
     return (
-        <DashboardProvider>
-            <CarProvider>
-                <DynamicRoute/>
-            </CarProvider>
-        </DashboardProvider>
+        <AuthProvider>
+            <DashboardProvider>
+                <CarProvider>
+                    <DynamicRoute/>
+                </CarProvider>
+            </DashboardProvider>
+        </AuthProvider>
     );
 }
 

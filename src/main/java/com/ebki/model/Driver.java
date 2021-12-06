@@ -53,6 +53,11 @@ public class Driver {
         this.phoneNum = phoneNum;
     }
 
+    @OneToOne(mappedBy = "authDriver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "authDriver")
+    private Authenticate authenticate;
+
+
     @OneToMany(mappedBy = "driverAddress", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "driverAddress")
     private Set<Address> address;

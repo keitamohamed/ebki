@@ -1,16 +1,19 @@
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 
 import ProtHeader from "../header/ProtHeader";
 import CarPostsDisplay from "../reusable/CarPostsDisplay";
 import {useFetch} from "../custom_hook/useFetch";
 import {BsSearch} from "react-icons/all";
 import useSearch from "../custom_hook/useSearch";
+import {AuthContext} from "../../context/Context";
 
 const CarInventory = () => {
-    const {car} = useFetch()
+    const authCtx = useContext(AuthContext)
+    const {car} = useFetch(authCtx.cookie.access_token)
     const {onEnterSearchCar, onKeyup, data} = useSearch()
 
     useEffect(() => {
+
     }, [car, data])
 
     return (
@@ -40,7 +43,12 @@ const CarInventory = () => {
                 </div>
                 <div className={`main`}>
                     {
-                        data !== null ? (<CarPostsDisplay car={data} />) : (<CarPostsDisplay car={car.cars} />)
+                        car !== undefined ? (
+                            data !== null ? (<CarPostsDisplay numPost={6} car={data}/>) : (
+                                <CarPostsDisplay numPost={6} car={car.cars}/>)
+                        ) : (<div className="no_car_display">
+                            <h4>No car to display. Please check again later</h4>
+                        </div>)
                     }
                 </div>
             </div>

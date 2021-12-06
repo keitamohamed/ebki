@@ -3,10 +3,14 @@ package com.ebki.controller;
 import com.ebki.model.Car;
 import com.ebki.request.CarRegistration;
 import com.ebki.service.CarService;
+import io.micrometer.core.ipc.http.HttpSender;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,9 +27,29 @@ public class CarController {
     @RequestMapping(value = {"/add"},
             consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.POST)
-    public void registerCar(@RequestBody Car car) {
+    public void registerCar(@RequestBody Car car, HttpServletResponse response) {
         CarRegistration registration = new CarRegistration(car);
-        service.save(registration.getCar());
+        response.setHeader("vin", service.save(registration.getCar()));
+    }
+
+    @PostMapping(path = {"/save-car-image/{id}"},
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void saveCarImage(
+            @PathVariable("id") Long id,
+            @RequestParam("file") MultipartFile file) {
+        service.saveCarImage(id, file);
+    }
+
+    @GetMapping(value = {"/download-image/{id}"})
+    public byte[] downloadImage(@PathVariable("id") Long id) {
+        return service.downloadImage(id);
+    }
+
+    @DeleteMapping(value = "/delete-image/{vin}")
+    public void deleteImage(@PathVariable("vin") Long vin) {
+
     }
 
     @GetMapping(value = {"/carList"})
@@ -60,7 +84,6 @@ public class CarController {
         return  service.findCarById(id)
                 .stream()
                 .collect(Collectors.toList());
-//        return service.findCarById(id);
     }
 
     @PutMapping(value = "/update/{vin}")

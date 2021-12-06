@@ -20,7 +20,7 @@ public class Role {
     @Id
     @NotNull
     private Long roleID;
-    private String roleType;
+    private String role;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "authID")
     @JsonBackReference

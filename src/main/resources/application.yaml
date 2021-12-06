@@ -14,12 +14,25 @@ spring:
     url: jdbc:postgresql://localhost:5432/ebik?serverTimezone=UTC
     username: postgres
     password: 'developer'
+  servlet:
+    multipart:
+      max-file-size: 5MB
+  http:
+    multipart:
+      max-file-size: 5MB
 
 logging:
   level:
     org:
       hibernate:
         type: trace
+
+cloud:
+  aws:
+    credentials:
+      accessKey: "AKIA4DJABAECM3SZY7MR"
+      secreteKey: "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"
+      region: "us-east-1"
 
 jwt:
   securityKey: 'securesecuresecurehbsfljjkdwnlDWscjkcfbkt8322yroyo823ye29ogdiqeo2y282u7g2d28u2fwiut821yw'

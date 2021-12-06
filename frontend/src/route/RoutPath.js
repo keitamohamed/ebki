@@ -16,7 +16,8 @@ const routPath = [
     {
         name: "Dashboard",
         path: "/dashboard",
-        protected: false,
+        protected: true,
+        adminProtected: true,
         component: Dashboard
     },
     {
@@ -29,13 +30,14 @@ const routPath = [
     {
         name: 'Car',
         path: '/car',
-        protected: false,
+        protected: true,
+        adminProtected: true,
         component: Car
     },
     {
         name: "Profile",
         path: "/profile",
-        protected: false,
+        protected: true,
         component: Profile
     },
     {
@@ -52,6 +54,4 @@ const routPath = [
     }
 ]
 
-export {
-    routPath
-}
+export default routPath

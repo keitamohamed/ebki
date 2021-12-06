@@ -1,7 +1,5 @@
 package com.ebki.config;
 
-import com.google.common.net.HttpHeaders;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,16 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "jwt")
+@ConfigurationProperties(prefix = "cloud.aws.credentials")
 @Component
-@Data @Setter @Getter
-public class JwtConfig {
-
-    private String securityKey;
-    private String tokenPrefix;
-    private int expirationAfterDays;
-
-    public String authorizationHeader() {
-        return HttpHeaders.AUTHORIZATION;
-    }
+@Getter @Setter
+public class AwsConfig {
+    private String accessKey;
+    private String secreteKey;
+    private String region;
 }

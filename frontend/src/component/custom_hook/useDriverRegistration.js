@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {POST_REQUEST, PUT_REQUEST} from "../../client/apirequest/Request";
-import {Path,MappingType} from "../../client/apirequest/Path";
+import {POST_REQUEST} from "../../client/apirequest/Request";
+import {MappingType, Path} from "../../client/apirequest/Path";
 import {isObjectEmpty} from "../util/Util";
 
 const useDriverRegistration = (data, validateDriver, validateAddress,
@@ -38,7 +38,12 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
     })
     const [authenticate, setAuthenticate] = useState({
         username: '',
-        password: ''
+        password: '',
+        'role': [
+            {
+                'role': 'Driver'
+            }
+        ]
     })
 
     const [conformPassword, setConformPassword] = useState({conform: ''})
@@ -60,7 +65,7 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
     const addressHandleChange = event => {
         setAddress({
             ...address,
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
@@ -118,8 +123,10 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
         }
     }, [data])
 
-    return {handleChange, addressHandleChange, handleAuthenticateChange,
-        handleConformPasswordChange, onSubmit, onSubmitOnUpdate, driver, error, errorA, errorC, errorD}
+    return {
+        handleChange, addressHandleChange, handleAuthenticateChange,
+        handleConformPasswordChange, onSubmit, onSubmitOnUpdate, driver, error, errorA, errorC, errorD
+    }
 }
 
 export {

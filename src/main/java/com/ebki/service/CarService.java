@@ -3,25 +3,27 @@ package com.ebki.service;
 import com.ebki.repository.CarRepo;
 import com.ebki.model.Car;
 import com.ebki.util.Util;
+import io.micrometer.core.ipc.http.HttpSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class CarService {
 
     private final CarRepo repository;
+    @Autowired
+    private FileService fileService;
 
     @Autowired
     public CarService(CarRepo carRepository) {
         this.repository = carRepository;
     }
 
-    public void save(Car car) {
+    public String save(Car car) {
 
         if (car.getVin() == null) {
             car.setVin(Util.generateID(999999999));
@@ -31,11 +33,20 @@ public class CarService {
         if (optionalCar.isPresent()) {
             Car dbCar = optionalCar.get();
             if (dbCar.getModel().equals(car.getModel())) {
-                return;
+                return null;
             }
             Util.throwIllegalStateException(String.format("Vin number [%s] is taken", car.getVin()));
         }
         repository.save(car);
+        return String.valueOf(car.getVin());
+    }
+
+    public void saveCarImage(Long id, MultipartFile file) {
+        fileService.saveFile(id, file, true, repository, null);
+    }
+
+    public byte[] downloadImage(Long id) {
+        return fileService.downloadImage(id, true, repository, null);
     }
 
     public Optional<Car> updateCar(Long vin, Car car) {

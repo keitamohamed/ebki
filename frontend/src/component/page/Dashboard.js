@@ -9,22 +9,21 @@ import CheckoutTable from "../reusable/CheckoutTable";
 import DisplayCarClicked from "../sub_component/useCarClicked";
 import DisplayDriver from "../reusable/DisplayDriver";
 
-import {CarContext} from "../../context/Context";
-import {BsSearch, IoAdd, AiOutlineUnorderedList} from "react-icons/all";
+import {AuthContext, CarContext, DashboardContext} from "../../context/Context";
+import {AiOutlineUnorderedList, BsSearch, IoAdd} from "react-icons/all";
 import {getID} from "../util/Util";
 import useSearch from "../custom_hook/useSearch";
-
-import {DashboardContext} from "../../context/Context";
 import {DriverModel} from "../model/DriverModel";
 import {CarModel} from "../model/CarModel";
 
 
 const Dashboard = () => {
+    const authCtx = useContext(AuthContext);
     const history = useHistory();
     const carCtx = useContext(CarContext)
     const dashCtx = useContext(DashboardContext)
     const {car} = useDashboard()
-    const {checkoutList} = useCheckout()
+    const {checkoutList} = useCheckout(authCtx.cookie.access_token)
     const {onEnter, data} = useSearch()
 
     const [carClick, setCarClick] = useState(null)
@@ -80,8 +79,8 @@ const Dashboard = () => {
         <div className="dashboard">
             <div className="dash_context_layout">
                 <Header/>
-                <DriverModel data={data} />
-                <CarModel carClick={carClick} />
+                <DriverModel data={data}/>
+                <CarModel carClick={carClick}/>
 
                 <div className="dash_main">
                     <div className="context_sub_nav">
@@ -89,7 +88,7 @@ const Dashboard = () => {
                             <li
                                 className="btn li_btn"
                                 id={'/car'}
-                                onClick={navigate}>Car <IoAdd />
+                                onClick={navigate}>Car <IoAdd/>
                             </li>
                             <li
                                 id={'/checkout'}
@@ -101,7 +100,7 @@ const Dashboard = () => {
                                 id={'/checkin'}
                                 className="btn li_btn"
                                 onClick={navigate}
-                            >CheckIn <IoAdd />
+                            >CheckIn <IoAdd/>
                             </li>
                         </div>
                         <div className="btn_show">
@@ -146,9 +145,9 @@ const Dashboard = () => {
                     </div>
                     {
                         dashCtx.show === "SHOW_DRIVER" && data !== null ?
-                            <DisplayDriver driver={data} />
-                        : dashCtx.show === "SHOW_CAR" && carClick !== null?
-                                <DisplayCarClicked car={carClick} checkout={checkout} /> : ''
+                            <DisplayDriver driver={data}/>
+                            : dashCtx.show === "SHOW_CAR" && carClick !== null ?
+                                <DisplayCarClicked car={carClick} checkout={checkout}/> : ''
                     }
                 </div>
             </div>
