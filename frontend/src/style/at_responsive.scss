@@ -153,6 +153,8 @@
       }
 
       .form {
+        width: 95% !important;
+
         .title_container {
           padding: 0 10px;
 
@@ -171,11 +173,6 @@
 
             p {
               font-size: 18px;
-
-              &:after {
-                content: "Click to Upload";
-                text-indent: 1px;
-              }
             }
           }
         }
@@ -257,6 +254,17 @@
 
         }
       }
+    }
+  }
+
+  .dashboard {
+
+    .dash_context_layout {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas:
+              "header header header"
+              "checklist checklist checklist"
+              "dash_main dash_main dash_main" !important;
     }
   }
 }
