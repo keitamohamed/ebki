@@ -8,10 +8,10 @@ import CarPost from "../paginate/CarPost";
 import {UsePagination} from "../paginate/usePagination";
 
 
-const CarTable = (cars) => {
+const CarTable = (cars, reSetData) => {
     const carCtx = useContext(CarContext)
     const dashCtx = useContext(DashboardContext)
-    const {post, currentPage, postPerPage, loading,setCurrentPage} = usePaginate(cars.car, 10)
+    const {post, currentPage, postPerPage, loading, setCurrentPage} = usePaginate(cars.car, 10)
     const {currentPosts} = usePost(currentPage, postPerPage, cars.car)
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const CarTable = (cars) => {
                         </thead>
                         <tbody>
                         {
-                            <CarPost post={currentPosts} loading={loading} />
+                            <CarPost post={currentPosts} loading={loading}/>
                         }
                         </tbody>
                         {

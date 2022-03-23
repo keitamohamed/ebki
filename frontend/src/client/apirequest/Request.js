@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-const REQUEST_MAPPING = async (action, url, token, data) => {
+const REQUEST_MAPPING = async (action, url, id, token, data) => {
     try {
         return await axios({
             method: action,
-            url: url,
+            url: `${url}${id ? id : ''}`,
             data: data,
             headers: {
                 Authorization: token ? `Bearer ${token}` : 'Bearer',
@@ -16,6 +16,21 @@ const REQUEST_MAPPING = async (action, url, token, data) => {
         return error;
     }
 }
+
+const DELETE_REQUEST_MAPPING = async (url, token) => {
+    try {
+        return await axios({
+            method: 'DELETE',
+            url: url,
+            headers: {
+                Authorization: token ? `Bearer ${token}` : 'Bearer'
+            }
+        })
+    } catch (error) {
+        return error;
+    }
+}
+
 
 const POST_REQUEST_FILE = async (action, url, token, data) => {
     try {
@@ -70,5 +85,6 @@ export {
     REQUEST_MAPPING,
     POST_REQUEST_FILE,
     GET_REQUEST,
-    PUT_REQUEST
+    PUT_REQUEST,
+    DELETE_REQUEST_MAPPING
 }

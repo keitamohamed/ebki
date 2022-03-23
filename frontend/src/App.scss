@@ -1,3 +1,4 @@
+@import "style/at_variable";
 
 .table_container {
   padding: 15px;
@@ -12,7 +13,7 @@ table {
   white-space: nowrap;
   font-size: 1.1em;
   margin-top: 2em;
-  border: 1px solid #E1E5EA;
+  border: 1px solid $border_color;
   padding-bottom: 15px;
 
   thead {
@@ -22,7 +23,7 @@ table {
       width: 55%;
       text-align: left;
       font-weight: normal;
-      border-bottom: 2px dotted #E1E5EA;
+      border-bottom: 2px dotted $border_color;
       margin-bottom: 1em;
     }
   }
@@ -48,7 +49,7 @@ table {
   }
 
   tr:nth-child(even) td {
-    background: #E1E5EA;
+    background: $border_color;
   }
 }
 
@@ -58,14 +59,14 @@ table {
 
   li {
     list-style: none;
-    border: 1px solid #E1E5EA;
+    border: 1px solid $border_color;
     width: 90%;
     border-radius: 20px;
     cursor: pointer;
     text-align: center;
 
     &:hover {
-      background: #E1E5EA;
+      background: $border_color;
     }
   }
 }
@@ -150,7 +151,6 @@ table {
           img {
             width: 100%;
             height: 100%;
-            //object-fit: cover;
           }
         }
       }
@@ -170,14 +170,6 @@ table {
 
   .header {
     margin-bottom: 2em;
-    border-bottom: 1px solid #E1E5EA;
-
-    background: rgb(225, 229, 234);
-    background: linear-gradient(90deg, rgba(225, 229, 234, 1) 0%, rgba(225, 229, 234, 1) 100%);
-
-    * {
-      background: transparent;
-    }
   }
 
   .dash_main {
@@ -194,7 +186,7 @@ table {
         display: grid;
         grid-template-columns: 2fr 1fr;
         grid-auto-rows: auto;
-        border: 1px solid #E1E5EA;
+        border: 1px solid $border_color;
         padding: 10px 0;
         border-radius: 20px;
         font-size: 1.3em;
@@ -211,7 +203,7 @@ table {
 
   .checklist {
 
-    border-left: 1px solid #E1E5EA;
+    border-left: 1px solid $border_color;
 
     .search_container {
       width: 80%;
@@ -289,7 +281,7 @@ table {
         }
 
         .title {
-          border-bottom: 2px dotted #E1E5EA;
+          border-bottom: 2px dotted $border_color;
           padding: 15px 0 10px;
           margin-bottom: 1em;
           font-size: 1.2em;
@@ -349,7 +341,7 @@ table {
       }
 
       li {
-        border: 1px solid #E1E5EA;
+        border: 1px solid $border_color;
         padding: 5px 10px;
         border-radius: 10px;
         font-size: 1.2em;
@@ -361,7 +353,7 @@ table {
         }
 
         &:hover {
-          background: #2FDD92;
+          background: $hover_color_green;
 
           &:hover {
             color: white;
@@ -427,20 +419,20 @@ table {
       }
 
       .context_right {
-        color: #E1E5EA;
+        color: $border_color;
         background: #495664;
 
         * {
           background: #495664;
-          color: #E1E5EA !important;
+          color: $border_color !important;
         }
 
         input::placeholder {
-          color: #E1E5EA;
+          color: $border_color;
         }
 
         input {
-          color: #E1E5EA;
+          color: $border_color;
         }
 
         .btn-container {
@@ -492,14 +484,14 @@ table {
       top: 50%;
       transform: translate(-50%, -50%);
       position: absolute;
-      border: 1px solid #E1E5EA;
+      border: 1px solid $border_color;
       padding: 2em;
     }
 
     .form-group.btn-container {
 
       .submit:hover {
-        background: #e1e5ea;
+        background: $border_color;
         color: #000;
       }
     }
@@ -535,7 +527,7 @@ table {
             font-weight: normal;
             text-align: left;
             width: 55%;
-            border-bottom: 2px dotted #E1E5EA;
+            border-bottom: 2px dotted $border_color;
             padding-bottom: 15px;
             margin-bottom: 2em;
           }
@@ -546,7 +538,7 @@ table {
           margin: 3em auto;
 
           input {
-            border: 1px solid #E1E5EA;
+            border: 1px solid $border_color;
             text-align: center;
             border-radius: 10px;
             cursor: pointer;
@@ -572,7 +564,7 @@ table {
         input {
           width: 90%;
           padding-bottom: 10px;
-          border-bottom: 1px solid #E1E5EA;
+          border-bottom: 1px solid $border_color;
           font-size: 1.2em;
           text-align: left;
           padding-left: 10px;
@@ -591,16 +583,16 @@ table {
   .car_inventory_layout {
     padding: 5em 15px 20px;
     display: grid;
-    grid-template-columns: repeat(11, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: .5em;
     grid-template-areas:
-            'sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav'
-            'side_nav side_nav main main main main main main main main main main';
+            'sub_nav sub_nav sub_nav'
+            'main main main';
   }
 
   .sub_nav {
     grid-area: sub_nav;
-    border-bottom: 1px solid #E1E5EA;
+    border-bottom: 1px solid $border_color;
     padding: 15px;
 
     .content {
@@ -615,14 +607,14 @@ table {
 
   .side_nav {
     grid-area: side_nav;
-    border-right: 1px solid #E1E5EA;
+    border-right: 1px solid $border_color;
 
     .content_filter {
       padding: 15px;
 
       h5 {
         font-weight: normal;
-        border-bottom: 1px solid #E1E5EA;
+        border-bottom: 1px solid $border_color;
         padding-bottom: 5px;
       }
     }
@@ -655,7 +647,7 @@ table {
         gap: .5em;
 
         .btn {
-          border: 1px solid #E1E5EA;
+          border: 1px solid $border_color;
           width: 100%;
           text-align: center;
           cursor: pointer;
@@ -693,22 +685,85 @@ table {
 
     .content_left {
       grid-area: content_left;
-      border-right: 1px solid #E1E5EA;
+      border-right: 1px solid $border_color;
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      //grid-gap: 3em;
 
       .content_img_container {
-        width: 100%;
+        width: auto;
 
         .content_profile {
-          width: 180px;
-          height: 180px;
+          width: 150px;
+          height: 150px;
+          text-align: center;
+          padding-left: 4em;
+          cursor: pointer;
+          position: relative;
 
           img {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
+          }
+
+          svg {
+            position: absolute;
+            top: 90%;
+            left: 110%;
+            transform: translate(-90%, -110%);
+            font-size: 4em;
+            background: transparent;
+            color: #FFF;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s linear;
+          }
+
+          img:hover ~ svg {
+            visibility: visible;
+            opacity: 1;
+          }
+
+          svg:hover {
+            opacity: 1;
+          }
+        }
+
+        .user_name_container {
+          padding: 20px 15px 15px;
+
+          h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            text-transform: uppercase;
+            text-align: center;
+            width: 50%;
+
+            p {
+              width: 100%;
+              text-align: center;
+              padding-top: 5px;
+              font-size: .8em;
+              font-weight: 520;
+            }
+          }
+        }
+
+        .btn_container {
+          display: flex;
+          gap: 15px;
+          padding: 0 15px 15px;
+          margin-top: 1em;
+          border-bottom: 2px dotted $border_color;
+
+          li {
+            font-size: 1em;
+            border: .1em solid $border_color;
+            padding: 5px 10px;
+            cursor: pointer;
+            background: $border_color;
+            text-transform: uppercase;
+            background: #9BA4B4;
+            color: #FFF;
           }
         }
       }
@@ -724,14 +779,14 @@ table {
           grid-gap: .5em;
           width: 100%;
           text-align: left;
-          padding: 0 15px 15px;
-          border-bottom: 2px dotted #E1E5EA;
+          padding: 15px 15px;
+          border-bottom: 2px dotted $border_color;
 
           h5, h3 {
             font-style: italic;
 
             span {
-              font-size: 1.1em;
+              font-size: 1em;
               font-style: normal;
             }
           }
@@ -744,24 +799,54 @@ table {
         }
 
         .content_address {
-          width: 60%;
+          width: 80%;
           text-align: left;
           padding: 15px;
 
           * {
             text-align: left;
           }
-        }
 
-        .title_container {
-          margin-bottom: 1em;
+          .content {
+            display: flex;
+            width: 100%;
+            gap: 15px;
+            margin-bottom: .5em;
 
-          h5 {
-            font-size: 1.2em;
-            text-transform: uppercase;
-            font-weight: normal;
-            border-bottom: 1px solid #E1E5EA;
-            padding-bottom: 10px;
+            .address {
+              display: list-item;
+              list-style-type: square;
+              flex: 2 1 0;
+            }
+
+            .btn_content {
+              text-align: center;
+              padding-top: 20px;
+              display: flex;
+              gap: 1.5em;
+
+              * {
+                font-size: 1.1em;
+                text-transform: uppercase;
+              }
+
+              svg {
+                font-size: 1.7em;
+                cursor: pointer;
+
+                &:hover {
+                  font-size: 2em;
+                }
+              }
+
+              svg:first-child {
+                fill: $message_color;
+              }
+
+              svg:last-child {
+                fill: #F90716;
+              }
+            }
           }
         }
 
@@ -779,18 +864,52 @@ table {
       padding: 0 15px;
       grid-gap: 1em;
 
+      .title_container {
+        padding: 15px;
+
+        h3 {
+          font-size: 1.5em;
+        }
+      }
+
       .content_top {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        grid-gap: 3em;
+        border-bottom: 2px dotted $border_color;
 
-        .content_recent_checkout {
+        .car_image_container {
           width: 100%;
+          height: 100%;
 
-          .car_image_container {
-            width: 100%;
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+          }
+        }
 
-            img {
-              max-width: 100%;
+        .recent_content {
+          width: 100%;
+          height: 100%;
+          border-left: 2px dotted $border_color;
+          padding-left: 2em;
+
+          .content {
+            margin-top: 5em;
+
+            .content_car {
+              * {
+                font-weight: normal;
+                font-size: 1.2em;
+                text-align: left;
+                padding: 5px 10px;
+                font-style: italic;
+              }
+
+              span {
+                font-style: normal;
+              }
             }
           }
         }
@@ -798,10 +917,10 @@ table {
 
       .content_bottom {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 3fr 4fr;
 
         .check-table {
-          border: 1px solid #E1E5EA;
+          border: 1px solid $border_color;
           border-radius: 5px;
           padding: 15px;
 
@@ -810,7 +929,7 @@ table {
             font-weight: normal;
             font-size: 1.2em;
             text-transform: uppercase;
-            border-bottom: 1px solid #E1E5EA;
+            border-bottom: 1px solid $border_color;
             margin-bottom: 1em;
           }
 
@@ -828,12 +947,68 @@ table {
               &:hover {
                 background: #B8E4F0 !important;
               }
+
+              .click_checkout {
+                background: transparent;
+                font-size: 1em;
+              }
+
+              .check_in_car {
+                font-size: 1.1em;
+                width: 100%;
+                text-align: center;
+                margin-left: 2em;
+                background: transparent;
+                padding: 0 15px;
+
+                &:hover {
+                  background: #9BA4B4;
+                  padding: 5px 15px;
+                  color: #FFF;
+                }
+              }
             }
 
             li:nth-child(even) {
-              background: #E1E5EA;
+              background: $border_color;
             }
           }
+        }
+
+        .content {
+          width: 100%;
+
+          .img_caption {
+            padding: 15px;
+            bottom: .5em;
+            width: 100%;
+            text-align: center;
+
+            * {
+              font-size: 1.4em;
+            }
+          }
+
+          .image_slide {
+            width: 600px;
+          }
+
+          img {
+            max-width: 60%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      .container {
+        padding: 15px;
+
+        text-align: left;
+
+        p {
+          font-size: 1.2em;
+          text-align: left;
+          color: $message_color;
         }
       }
     }

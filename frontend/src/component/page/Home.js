@@ -7,12 +7,10 @@ import {Carousel} from "../reusable/Carousel";
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/Context";
 import {GET_REQUEST} from "../../client/apirequest/Request";
-import {isObjectUndefined} from "../util/Util"
 
 const Home = () => {
     const authCtx = useContext(AuthContext)
     const [url] = useState("http://localhost:8080/ebik/car/download-image")
-    const {fetchDriver} = useFetch()
     const history = useHistory()
     const [post, setPost] = useState([
         {
@@ -46,22 +44,12 @@ const Home = () => {
     const {car: {cars}} = useFetch()
 
     useEffect(() => {
-        const loadData = async () => {
-            const response = await fetchDriver(authCtx.cookie.username, authCtx.cookie.access_token)
-            if (!isObjectUndefined(response)) {
-                authCtx.setUserID(response)
-            }
-        }
-        loadData()
     }, [])
 
     return (
         <div className="home">
             <Header/>
             <Slider/>
-            <di className="image_container">
-                <img src={`${url}/115015964`}/>
-            </di>
             <Carousel post={post}/>
             <div className="main">
                 <div className="content_container">

@@ -13,7 +13,6 @@ const useFile = () => {
             for (let i = 0; i < inputElement.files.length; i++) {
                 const newFile = inputElement.files[i]
                 const {file} = files
-                console.log(newFile)
                 file.push(newFile)
             }
             previewFile()
@@ -51,9 +50,12 @@ const useFile = () => {
         })
     }
 
+    const onClickGetSelectedFiles = () => {
+
+    }
+
     const dropZone = () => {
         const elements = getElements("drop_zone_input")
-
         elements.forEach(inputElement => {
             const dropZoneElement = inputElement.closest('.drop_zone');
             const pElement = getElement("drop_zone p")
@@ -63,10 +65,11 @@ const useFile = () => {
             })
 
             dropZoneElement.addEventListener('change', (event) => {
-                saveFile(inputElement, dropZoneElement)
+                saveFile(inputElement)
             })
 
             dropZoneElement.addEventListener("dragover", (event) => {
+                console.log('Dropping drop zone')
                 event.preventDefault()
                 dropZoneElement.classList.add("drop_zone__over")
                 pElement.innerHTML = `Release to Upload File's`
@@ -85,7 +88,7 @@ const useFile = () => {
                 event.preventDefault()
                 dropZoneElement.classList.remove('drop_zone__over')
                 pElement.innerHTML = `Drag & drop file here or click to upload`
-                saveFile(event.dataTransfer, dropZoneElement)
+                saveFile(event.dataTransfer)
             })
         })
     }

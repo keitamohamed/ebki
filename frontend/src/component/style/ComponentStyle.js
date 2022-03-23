@@ -2,8 +2,8 @@ import {getElement} from "../util/Util";
 
 const useStyleComponent = (className) => {
 
-    const applyStyle = () => {
-        const element = getElement(className);
+    const applyStyle = (classNameChange) => {
+        const element = getElement(classNameChange ? classNameChange : className);
         const modelContent = element.querySelector(".model_content")
 
         element.style.zIndex = "10"
@@ -22,7 +22,7 @@ const useStyleComponent = (className) => {
         modelContent.style.transform = "scale(0.2)"
         modelContent.style.transition = "opacity 250ms 250ms ease, transform 300ms 250ms ease"
 
-        element.style.zIndex = "-2"
+        element.style.zIndex = "-5"
         element.style.opacity = "0"
     }
 

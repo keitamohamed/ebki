@@ -1,12 +1,15 @@
 package com.ebki.controller;
 
 import com.ebki.config.AwsConfig;
+import com.ebki.model.Address;
+import com.ebki.model.Authenticate;
 import com.ebki.model.Driver;
 import com.ebki.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +19,6 @@ import java.util.Optional;
 public class DriverController {
 
     private final DriverService service;
-    @Autowired
-    private AwsConfig awsConfig;
 
     public DriverController(DriverService driverService) {
         this.service = driverService;
@@ -29,6 +30,12 @@ public class DriverController {
     )
     public void registerNewDriver(@RequestBody Driver driver) {
         service.save(driver);
+    }
+
+    @PostMapping(value = {"add_address/{id}"},
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addNewAddress(@RequestBody Address address, @PathVariable("id") Long driverID, HttpServletResponse response) {
+        service.saveAddress(address, driverID, response);
     }
 
     @GetMapping(value = {"/get_drivers"})
@@ -43,7 +50,6 @@ public class DriverController {
 
     @GetMapping(value = {"/find_by_username/{username}"})
     public Driver findDriverByUsername(@PathVariable("username") String username) {
-        System.out.println("Key " + awsConfig.getSecreteKey());
         return service.findByUsername(username);
     }
 
@@ -52,9 +58,34 @@ public class DriverController {
         return service.updateDriver(id, driver);
     }
 
+    @GetMapping(value = {"/find_address/{id}"})
+    public Address address (@PathVariable("id") Long id) {
+        Optional<Address> address = service.findAddress(id);
+        return address.orElseGet(Address::new);
+    }
+
+    @PutMapping(value = {"/update_password/{id}"})
+    public void updatePassword(@RequestBody Authenticate authenticate,
+                               @PathVariable("id") Long id,
+                               HttpServletResponse response) {
+        service.updatePassword(authenticate, id, response);
+    }
+
+    @PutMapping(value = {"/update_address/{id}"})
+    public void updateAddress(@RequestBody Address address,
+                              @PathVariable("id") Long id,
+                              HttpServletResponse response) {
+        service.updateAddress(address, id, response);
+    }
+
     @DeleteMapping(value = {"/delete/{id}"})
     public void deleteDriver(@PathVariable("id") Long id) {
         service.deleteDriver(id);
+    }
+
+    @DeleteMapping(value = {"/delete_address_by_id/{id}"})
+    public void deleteAddress(@PathVariable("id") Long id, HttpServletResponse response) {
+        service.deleteAddress(id, response);
     }
 
     @GetMapping(value = {"/email/{email}"})

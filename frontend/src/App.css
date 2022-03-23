@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
 .table_container {
   padding: 15px;
   overflow: auto;
@@ -135,12 +136,6 @@ table tr:nth-child(even) td {
 }
 .dashboard .header {
   margin-bottom: 2em;
-  border-bottom: 1px solid #E1E5EA;
-  background: #e1e5ea;
-  background: linear-gradient(90deg, #e1e5ea 0%, #e1e5ea 100%);
-}
-.dashboard .header * {
-  background: transparent;
 }
 .dashboard .dash_main .btn_show {
   padding-top: 4em;
@@ -393,7 +388,7 @@ table tr:nth-child(even) td {
   padding: 2em;
 }
 .login .content_container .form-group.btn-container .submit:hover {
-  background: #e1e5ea;
+  background: #E1E5EA;
   color: #000;
 }
 
@@ -461,9 +456,9 @@ table tr:nth-child(even) td {
 .carInventory .car_inventory_layout {
   padding: 5em 15px 20px;
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 0.5em;
-  grid-template-areas: "sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav sub_nav" "side_nav side_nav main main main main main main main main main main";
+  grid-template-areas: "sub_nav sub_nav sub_nav" "main main main";
 }
 .carInventory .sub_nav {
   grid-area: sub_nav;
@@ -541,16 +536,72 @@ table tr:nth-child(even) td {
   grid-template-columns: repeat(1, 1fr);
 }
 .profile .profile_layout .content_left .content_img_container {
-  width: 100%;
+  width: auto;
 }
 .profile .profile_layout .content_left .content_img_container .content_profile {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  padding-left: 4em;
+  cursor: pointer;
+  position: relative;
 }
 .profile .profile_layout .content_left .content_img_container .content_profile img {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+}
+.profile .profile_layout .content_left .content_img_container .content_profile svg {
+  position: absolute;
+  top: 90%;
+  left: 110%;
+  transform: translate(-90%, -110%);
+  font-size: 4em;
+  background: transparent;
+  color: #FFF;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+.profile .profile_layout .content_left .content_img_container .content_profile img:hover ~ svg {
+  visibility: visible;
+  opacity: 1;
+}
+.profile .profile_layout .content_left .content_img_container .content_profile svg:hover {
+  opacity: 1;
+}
+.profile .profile_layout .content_left .content_img_container .user_name_container {
+  padding: 20px 15px 15px;
+}
+.profile .profile_layout .content_left .content_img_container .user_name_container h2 {
+  font-size: 1.5em;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-align: center;
+  width: 50%;
+}
+.profile .profile_layout .content_left .content_img_container .user_name_container h2 p {
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  font-size: 0.8em;
+  font-weight: 520;
+}
+.profile .profile_layout .content_left .content_img_container .btn_container {
+  display: flex;
+  gap: 15px;
+  padding: 0 15px 15px;
+  margin-top: 1em;
+  border-bottom: 2px dotted #E1E5EA;
+}
+.profile .profile_layout .content_left .content_img_container .btn_container li {
+  font-size: 1em;
+  border: 0.1em solid #E1E5EA;
+  padding: 5px 10px;
+  cursor: pointer;
+  background: #E1E5EA;
+  text-transform: uppercase;
+  background: #9BA4B4;
+  color: #FFF;
 }
 .profile .profile_layout .content_left .content {
   width: 100%;
@@ -563,14 +614,14 @@ table tr:nth-child(even) td {
   grid-gap: 0.5em;
   width: 100%;
   text-align: left;
-  padding: 0 15px 15px;
+  padding: 15px 15px;
   border-bottom: 2px dotted #E1E5EA;
 }
 .profile .profile_layout .content_left .content .content_info h5, .profile .profile_layout .content_left .content .content_info h3 {
   font-style: italic;
 }
 .profile .profile_layout .content_left .content .content_info h5 span, .profile .profile_layout .content_left .content .content_info h3 span {
-  font-size: 1.1em;
+  font-size: 1em;
   font-style: normal;
 }
 .profile .profile_layout .content_left .content .content_info * {
@@ -579,22 +630,46 @@ table tr:nth-child(even) td {
   font-size: 1.3em;
 }
 .profile .profile_layout .content_left .content .content_address {
-  width: 60%;
+  width: 80%;
   text-align: left;
   padding: 15px;
 }
 .profile .profile_layout .content_left .content .content_address * {
   text-align: left;
 }
-.profile .profile_layout .content_left .content .title_container {
-  margin-bottom: 1em;
+.profile .profile_layout .content_left .content .content_address .content {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  margin-bottom: 0.5em;
 }
-.profile .profile_layout .content_left .content .title_container h5 {
-  font-size: 1.2em;
+.profile .profile_layout .content_left .content .content_address .content .address {
+  display: list-item;
+  list-style-type: square;
+  flex: 2 1 0;
+}
+.profile .profile_layout .content_left .content .content_address .content .btn_content {
+  text-align: center;
+  padding-top: 20px;
+  display: flex;
+  gap: 1.5em;
+}
+.profile .profile_layout .content_left .content .content_address .content .btn_content * {
+  font-size: 1.1em;
   text-transform: uppercase;
-  font-weight: normal;
-  border-bottom: 1px solid #E1E5EA;
-  padding-bottom: 10px;
+}
+.profile .profile_layout .content_left .content .content_address .content .btn_content svg {
+  font-size: 1.7em;
+  cursor: pointer;
+}
+.profile .profile_layout .content_left .content .content_address .content .btn_content svg:hover {
+  font-size: 2em;
+}
+.profile .profile_layout .content_left .content .content_address .content .btn_content svg:first-child {
+  fill: #34BE82;
+}
+.profile .profile_layout .content_left .content .content_address .content .btn_content svg:last-child {
+  fill: #F90716;
 }
 .profile .profile_layout .content_left .content p {
   font-size: 1.3em;
@@ -607,22 +682,49 @@ table tr:nth-child(even) td {
   padding: 0 15px;
   grid-gap: 1em;
 }
+.profile .profile_layout .content_right .title_container {
+  padding: 15px;
+}
+.profile .profile_layout .content_right .title_container h3 {
+  font-size: 1.5em;
+}
 .profile .profile_layout .content_right .content_top {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 3em;
+  border-bottom: 2px dotted #E1E5EA;
 }
-.profile .profile_layout .content_right .content_top .content_recent_checkout {
+.profile .profile_layout .content_right .content_top .car_image_container {
   width: 100%;
+  height: 100%;
 }
-.profile .profile_layout .content_right .content_top .content_recent_checkout .car_image_container {
-  width: 100%;
-}
-.profile .profile_layout .content_right .content_top .content_recent_checkout .car_image_container img {
+.profile .profile_layout .content_right .content_top .car_image_container img {
   max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.profile .profile_layout .content_right .content_top .recent_content {
+  width: 100%;
+  height: 100%;
+  border-left: 2px dotted #E1E5EA;
+  padding-left: 2em;
+}
+.profile .profile_layout .content_right .content_top .recent_content .content {
+  margin-top: 5em;
+}
+.profile .profile_layout .content_right .content_top .recent_content .content .content_car * {
+  font-weight: normal;
+  font-size: 1.2em;
+  text-align: left;
+  padding: 5px 10px;
+  font-style: italic;
+}
+.profile .profile_layout .content_right .content_top .recent_content .content .content_car span {
+  font-style: normal;
 }
 .profile .profile_layout .content_right .content_bottom {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 3fr 4fr;
 }
 .profile .profile_layout .content_right .content_bottom .check-table {
   border: 1px solid #E1E5EA;
@@ -650,8 +752,53 @@ table tr:nth-child(even) td {
 .profile .profile_layout .content_right .content_bottom .check-table .tbody li:hover {
   background: #B8E4F0 !important;
 }
+.profile .profile_layout .content_right .content_bottom .check-table .tbody li .click_checkout {
+  background: transparent;
+  font-size: 1em;
+}
+.profile .profile_layout .content_right .content_bottom .check-table .tbody li .check_in_car {
+  font-size: 1.1em;
+  width: 100%;
+  text-align: center;
+  margin-left: 2em;
+  background: transparent;
+  padding: 0 15px;
+}
+.profile .profile_layout .content_right .content_bottom .check-table .tbody li .check_in_car:hover {
+  background: #9BA4B4;
+  padding: 5px 15px;
+  color: #FFF;
+}
 .profile .profile_layout .content_right .content_bottom .check-table .tbody li:nth-child(even) {
   background: #E1E5EA;
+}
+.profile .profile_layout .content_right .content_bottom .content {
+  width: 100%;
+}
+.profile .profile_layout .content_right .content_bottom .content .img_caption {
+  padding: 15px;
+  bottom: 0.5em;
+  width: 100%;
+  text-align: center;
+}
+.profile .profile_layout .content_right .content_bottom .content .img_caption * {
+  font-size: 1.4em;
+}
+.profile .profile_layout .content_right .content_bottom .content .image_slide {
+  width: 600px;
+}
+.profile .profile_layout .content_right .content_bottom .content img {
+  max-width: 60%;
+  object-fit: cover;
+}
+.profile .profile_layout .content_right .container {
+  padding: 15px;
+  text-align: left;
+}
+.profile .profile_layout .content_right .container p {
+  font-size: 1.2em;
+  text-align: left;
+  color: #34BE82;
 }
 
 /*# sourceMappingURL=App.css.map */

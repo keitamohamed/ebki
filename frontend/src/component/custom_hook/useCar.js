@@ -71,7 +71,7 @@ const useCar = (carClick, validateCarInput) => {
 
     const isInputValidate = () => {
         setError(validateCarInput(newCar))
-        return Object.values(error).every(x => x === '');
+        return Object.values(error).every(x => x === '' || x === 0);
     }
 
     useEffect(() => {

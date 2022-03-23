@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 $default_font_family: Roboto serif;
-
 $break_points: (
         xs: 575px,
         sm: 760px,
         sml: 800px,
         md: 900px,
         lg: 1200px
-)
+);
+
+$hover_color_green: #2FDD92;
+$border_color: #E1E5EA;
+$message_color: #34BE82;
+$color_green_s: #57CC99;
+
 

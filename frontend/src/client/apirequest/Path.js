@@ -1,14 +1,19 @@
 const Path = {
     LOGIN: ('/login'),
     ADD_NEW_DRIVER: ('driver/add'),
+    ADD_NEW_ADDRESS: ('driver/add_address/'),
     GET_DRIVER: ('driver/get_driver'),
     FIND_DRIVER_BY_ID: ('driver/find_by_id/'),
     FIND_DRIVER_BY_EMAIL: ("driver/email/"),
     FIND_DRIVER_BY_USERNAME: ("driver/find_by_username/"),
+    FIND_ADDRESS_BY_ID: ('driver/find_address/'),
+    DELETE_ADDRESS_BY_ID: ('driver/delete_address_by_id'),
     FIND_CAR_BY_ID: ('car/vin/'),
     FIND_CAR_BRAND: ('car/brand/'),
     FIND_CAR_BY_YEAR: ('car/year/'),
     UPDATE_DRIVER_INFO: ('driver/update/'),
+    UPDATE_DRIVER_ADDRESS: ('driver/update_address/'),
+    UPDATE_DRIVER_PASSWORD: ('driver/update_password/'),
     DELETE_DRIVER: ('driver/delete/'),
     ADD_NEW_CAR: ('car/add'),
     CAR_LIST: ('car/carList'),
@@ -17,7 +22,10 @@ const Path = {
     CAR_DELETE_IMAGE: ("car/delete-image/"),
     UPDATE_CAR_INFO: ('car/update/'),
     CHECKOUT_LIST: ('checkout/checkout_list'),
+    CHECK_IN_CAR: ('checkout/check_in_car'),
+    FIND_CHECKOUT_BY_ID: ('checkout/find-by-id/'),
     FIND_CHECK_OUT_BY_DRIVER_ID: ("checkout/find_checkout_by_driver_id/"),
+    FIND_RECENT_CHECKOUT: ('checkout/recent_checkout/'),
     ADD_NEW_CHECKOUT: ('checkout/add/')
 }
 

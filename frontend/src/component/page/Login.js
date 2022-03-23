@@ -5,10 +5,13 @@ import {Header} from "../header/Header";
 import {REQUEST_MAPPING} from "../../client/apirequest/Request";
 import {Path} from "../../client/apirequest/Path";
 import {AuthContext} from "../../context/Context";
+import {isObjectUndefined} from "../util/Util";
+import {useFetch} from "../custom_hook/useFetch";
 
 const Login = () => {
     const history = useHistory()
     const authCtx = useContext(AuthContext)
+    const {fetchDriver} = useFetch()
     const [login, setLogin] = useState({
         username: '',
         password: ''
@@ -50,14 +53,17 @@ const Login = () => {
         if (!isValid) {
             return
         }
-        REQUEST_MAPPING('POST', Path.LOGIN, null, login)
-            .then(response => {
+        REQUEST_MAPPING('POST', Path.LOGIN, null, null, login)
+            .then(async response => {
                 {
                     const {headers} = response
                     authCtx.setAuthenticate(headers)
+                    const driverSearchResponse = await fetchDriver(headers.username, authCtx.cookie.access_token)
+                    if (!isObjectUndefined(driverSearchResponse)) {
+                        authCtx.setUserID(driverSearchResponse)
+                    }
                 }
             })
-        console.log(authCtx.cookie.username)
         history.push("/")
     }
 

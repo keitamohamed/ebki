@@ -26,7 +26,7 @@ input:-webkit-autofill:active {
 .successful_message {
   font-size: 1em;
   text-transform: capitalize;
-  color: #57CC99;
+  color: #34BE82;
 }
 
 svg {
@@ -51,9 +51,8 @@ li ul li {
 }
 li .dropdown {
   position: absolute;
-  min-width: 12%;
+  min-width: 18%;
   z-index: 10;
-  background: #E1E5EA !important;
   padding: 10px 15px 15px 15px;
   margin-left: -0.5em;
   display: none;
@@ -294,9 +293,8 @@ li .dropdown li:hover {
 .header * {
   text-underline: none;
   text-decoration: none;
-  font-size: 1.1em;
+  font-size: 23px;
   color: #151515;
-  font-family: "Roboto", sans-serif;
 }
 .header .nave {
   display: flex;
@@ -326,12 +324,41 @@ li .dropdown li:hover {
 .header .nave .context_active_false {
   display: none;
 }
+.header .add-padding-top {
+  padding-top: 15px;
+}
+.header * {
+  background: transparent;
+}
+.header .context_links {
+  background: #FFF;
+}
+.header .context_links * {
+  background: #FFF;
+}
+.header .context_links a:hover {
+  cursor: pointer;
+}
+.header .context_links li .dropdown {
+  max-width: 150px;
+}
+.header .context_links li .dropdown li {
+  width: 100%;
+}
+.header .context_links .user_name:hover {
+  cursor: default;
+}
 
 .header.pro {
-  background: linear-gradient(90deg, #e1e5ea 0%, #e1e5ea 100%);
+  background: linear-gradient(90deg, #E1E5EA 0%, #E1E5EA 100%);
+  background: #1e2936;
 }
 .header.pro * {
-  background: transparent;
+  background: #1e2936;
+  color: #e6e6e6;
+}
+.header.pro .toProfile {
+  cursor: pointer;
 }
 
 .home {
@@ -435,7 +462,7 @@ li .dropdown li:hover {
 .model {
   width: 100%;
   height: 100%;
-  z-index: -2;
+  z-index: -5;
   opacity: 0;
   left: 0;
   top: 0;
@@ -568,7 +595,7 @@ li .dropdown li:hover {
   font-size: 2.5em;
 }
 .file-upload-container .drop-zone-content svg:hover {
-  fill: #34BE82;
+  fill: #2FDD92;
 }
 .file-upload-container .drop-zone-content p {
   text-transform: capitalize;

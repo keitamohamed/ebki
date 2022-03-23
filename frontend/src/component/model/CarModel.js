@@ -1,6 +1,6 @@
 import {AiOutlineClose} from "react-icons/ai";
 import {CarInputForm} from "../form/CarInputForm";
-import {validateCarInput} from "../custom_hook/useCarValidate";
+import {validateCarInput} from "../custom_hook/useInputValidation";
 import {useCar} from "../custom_hook/useCar";
 import {useStyleComponent} from "../style/ComponentStyle";
 

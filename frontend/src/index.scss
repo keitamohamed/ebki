@@ -27,7 +27,7 @@ input:-webkit-autofill:active {
 .successful_message {
   font-size: 1em;
   text-transform: capitalize;
-  color: #57CC99;
+  color: $message_color;
 }
 
 svg {
@@ -55,9 +55,8 @@ li {
 
   .dropdown {
     position: absolute;
-    min-width: 12%;
+    min-width: 18%;
     z-index: 10;
-    background: #E1E5EA !important;
     padding: 10px 15px 15px 15px;
     margin-left: -.5em;
     display: none;
@@ -120,7 +119,7 @@ li {
     input {
       width: 90%;
       padding: 10px;
-      border-bottom: 1px solid #E1E5EA;
+      border-bottom: 1px solid $border_color;
       background: transparent;
       text-align: left;
       letter-spacing: 1px;
@@ -157,14 +156,14 @@ li {
   .btn-container {
 
     input {
-      border: 1px solid #E1E5EA;
+      border: 1px solid $border_color;
       text-align: center;
       border-radius: 20px;
       text-transform: uppercase;
 
       &:hover {
         cursor: pointer;
-        background: #2FDD92;
+        background: $hover_color_green;
         color: white;
       }
     }
@@ -177,7 +176,7 @@ li {
 
 .card {
   width: 100%;
-  border: 1px solid #E1E5EA;
+  border: 1px solid $border_color;
   position: relative;
   text-align: center;
 
@@ -245,7 +244,7 @@ li {
 
     .btn {
       text-align: center;
-      border: 1px solid #E1E5EA;
+      border: 1px solid $border_color;
       padding: 10px;
       border-radius: 20px;
       cursor: pointer;
@@ -278,7 +277,7 @@ li {
 
 .context_sub_nav {
   display: grid;
-  border-bottom: 1px solid #E1E5EA;
+  border-bottom: 1px solid $border_color;
   padding: 15px;
   grid-gap: 1em;
   grid-template-areas:
@@ -293,12 +292,12 @@ li {
     gap: .5em;
 
     li {
-      border: 1px solid #E1E5EA;
+      border: 1px solid $border_color;
       list-style: none;
       padding: 5px 20px;
       font-size: 1.2em;
       cursor: pointer;
-      background: #57CC99;
+      background: $color_green_s;
       border-radius: 10px;
       text-align: center;
       width: 100%;
@@ -325,7 +324,7 @@ li {
 }
 
 .search_container {
-  border-bottom: 1px solid #E1E5EA;
+  border-bottom: 1px solid $border_color;
   width: 80%;
   text-align: left;
   grid-area: search_container;
@@ -338,7 +337,7 @@ li {
   }
 
   svg {
-    fill: #57CC99;
+    fill: $color_green_s;
     position: absolute;
   }
 
@@ -355,9 +354,8 @@ li {
   * {
     text-underline: none;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 23px;
     color: #151515;
-    font-family: 'Roboto', sans-serif;;
   }
 
   .nave {
@@ -395,13 +393,51 @@ li {
       display: none;
     }
   }
-}
 
-.header.pro {
-  background: linear-gradient(90deg, #e1e5ea 0%, #e1e5ea 100%);
+  .add-padding-top {
+    padding-top: 15px;
+  }
 
   * {
     background: transparent;
+  }
+
+  .context_links {
+    background: #FFF;
+
+    * {
+      background: #FFF;
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+
+    li .dropdown {
+      max-width: 150px;
+
+      li {
+        width: 100%;
+      }
+    }
+
+    .user_name:hover {
+      cursor: default;
+    }
+  }
+}
+
+.header.pro {
+  background: linear-gradient(90deg, $border_color 0%, $border_color 100%);
+  background: hsl(213, 28.6, 16.5);
+
+  * {
+    background: hsl(213, 28.6, 16.5);
+    color: hsl(0, 0, 90);
+  }
+
+  .toProfile {
+    cursor: pointer;
   }
 }
 
@@ -529,7 +565,7 @@ li {
 .model {
   width: 100%;
   height: 100%;
-  z-index: -2;
+  z-index: -5;
   opacity: 0;
   left: 0;
   top: 0;
@@ -669,7 +705,7 @@ li {
 
   .drop-zone-content {
     display: grid;
-    border: 1px dotted #E1E5EA;
+    border: 1px dotted $border_color;
     padding: 30px 15px;
     justify-content: center;
     align-items: center;
@@ -682,7 +718,7 @@ li {
       font-size: 2.5em;
 
       &:hover {
-        fill: #34BE82;
+        fill: $hover_color_green;
       }
     }
 
@@ -707,7 +743,7 @@ li {
     visibility: hidden;
 
     .content_image {
-      border: 1px solid #E1E5EA;
+      border: 1px solid $border_color;
 
       img {
         max-width: 100%;

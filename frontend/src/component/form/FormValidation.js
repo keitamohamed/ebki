@@ -1,4 +1,3 @@
-
 const validateDriver = driver => {
 
     let driverError = {}
@@ -40,9 +39,19 @@ const validateConformPassword = conformPass => {
     return conformError
 }
 
+const validatePasswords = (password, conformPassword) => {
+    let error = {}
+
+    error.password = password.password.trim() ? '' : 'Validate password is required'
+    error.conformPassword = conformPassword.conformPassword.trim() ? '' : 'Conform password required'
+    
+    return error
+}
+
 export {
     validateDriver,
     validateAddress,
     validateAuthenticate,
-    validateConformPassword
+    validateConformPassword,
+    validatePasswords,
 }

@@ -52,6 +52,7 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
     const [errorA, setErrorA] = useState({})
     const [errorC, setErrorC] = useState({})
     const [errorD, setErrorD] = useState({})
+    const [message, setMessage] = useState('')
 
 
     const handleChange = event => {
@@ -115,6 +116,7 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
             return
         }
         await REQUEST_MAPPING(MappingType.PUT_MAPPING, `${Path.UPDATE_DRIVER_INFO}${driver.driverID}`, null, driver)
+        setMessage('Information has been updated successfully!!')
     }
 
     useEffect(() => {
@@ -125,7 +127,7 @@ const useDriverRegistration = (data, validateDriver, validateAddress,
 
     return {
         handleChange, addressHandleChange, handleAuthenticateChange,
-        handleConformPasswordChange, onSubmit, onSubmitOnUpdate, driver, error, errorA, errorC, errorD
+        handleConformPasswordChange, onSubmit, onSubmitOnUpdate, driver, message, error, errorA, errorC, errorD
     }
 }
 

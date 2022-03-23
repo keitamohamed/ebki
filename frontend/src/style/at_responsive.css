@@ -4,5 +4,153 @@
     flex-direction: column;
   }
 }
+@media screen and (max-width: 575px) {
+  .nave .hero_logo {
+    flex: 1 1 0;
+  }
+  .nave .context_links {
+    grid-gap: 0;
+    padding: 0;
+  }
+  .nave .context_links a {
+    font-size: 19px;
+    padding-top: 17px;
+  }
+
+  .home .carousel .content_container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0.2em;
+  }
+  .home .carousel .content_container .card {
+    border: none;
+  }
+  .home .carousel .content_container .card .image_container img {
+    display: block;
+    margin: 0 auto;
+  }
+  .home .main .content_container .content {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .home .main .content_container .content * {
+    border: none !important;
+  }
+  .home .main .content_container .content .image_container img {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .home .main .content_container .content .content_info h2 {
+    width: 80%;
+    font-size: 1.5em;
+  }
+  .home .main .content_container .content .content_info .btn_container {
+    margin: 3em auto auto;
+    width: 50%;
+  }
+  .home .main .content_container .content .content_info .btn_container li {
+    width: 100%;
+    font-size: 1.3em;
+  }
+
+  .carInventory .sub_nav .content {
+    width: 100%;
+  }
+  .carInventory .main .paginate_data_wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .carInventory .main .paginate_data_wrapper .card {
+    display: flex;
+    flex-direction: column;
+  }
+  .carInventory .main .paginate_data_wrapper .card .image_container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .car .context_new_car {
+    display: flex !important;
+    flex-direction: column;
+  }
+  .car .context_new_car .table_container {
+    text-align: left;
+  }
+  .car .context_new_car .table_container .table {
+    width: 90%;
+  }
+  .car .context_new_car .table_container .table tbody {
+    padding: 0 5px !important;
+  }
+  .car .context_new_car .table_container .table tbody tr {
+    padding: 5px;
+  }
+  .car .context_new_car .form .title_container {
+    padding: 0 10px;
+  }
+  .car .context_new_car .form .title_container h5 {
+    width: 100% !important;
+  }
+  .car .context_new_car .form .file-upload-container {
+    width: 100%;
+  }
+  .car .context_new_car .form .file-upload-container .drop-zone-content {
+    width: 100%;
+    height: 100%;
+  }
+  .car .context_new_car .form .file-upload-container .drop-zone-content p {
+    font-size: 18px;
+  }
+  .car .context_new_car .form .file-upload-container .drop-zone-content p:after {
+    content: "Click to Upload";
+    text-indent: 1px;
+  }
+
+  .profile .profile_layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile .profile_layout .content_left .content_profile {
+    padding-left: 6em !important;
+  }
+  .profile .profile_layout .content_left .user_name_container h2 {
+    width: 100% !important;
+  }
+  .profile .profile_layout .content_left .content .content {
+    flex-direction: column;
+    padding-bottom: 1.5em;
+  }
+  .profile .profile_layout .content_left .content .content .btn_content {
+    padding: 5px 0 10px 5px !important;
+    border-bottom: 1px solid #E1E5EA;
+    grid-gap: 2em !important;
+  }
+  .profile .profile_layout .content_left .content .content:last-child {
+    padding-bottom: 0;
+  }
+  .profile .profile_layout .content_right .content_top {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0;
+  }
+  .profile .profile_layout .content_right .content_top .recent_content {
+    border-left: none;
+    padding: 0;
+  }
+  .profile .profile_layout .content_right .content_top .recent_content .content {
+    margin-top: 2em;
+  }
+  .profile .profile_layout .content_right .content_bottom {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile .profile_layout .content_right .content_bottom .content {
+    padding-top: 2em;
+  }
+  .profile .profile_layout .content_right .content_bottom .content .image_slide {
+    width: 100% !important;
+  }
+  .profile .profile_layout .content_right .content_bottom .content .image_slide img {
+    max-width: 100%;
+  }
+}
 
 /*# sourceMappingURL=at_responsive.css.map */

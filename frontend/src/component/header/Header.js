@@ -1,14 +1,17 @@
-import {Link} from "react-router-dom";
+import {useContext} from "react";
+
+import {Link, useHistory} from "react-router-dom";
 import routPath from "../../route/RoutPath";
 import {Logo} from "../app_logo/Logo";
 import {AuthContext} from "../../context/Context";
-import {useContext} from "react";
+
 
 const Header = ({contextRight}) => {
+    const history = useHistory()
     const authCtx = useContext(AuthContext)
 
-    const logout = () => {
-        
+    const navigateTo = event => {
+        history.push(event.target.id)
     }
 
     return (
@@ -24,17 +27,44 @@ const Header = ({contextRight}) => {
                 <div className={contextRight ? contextRight : 'context_links'}>
                     {
                         routPath.map((link, index) => {
-                            if ((link.name === 'Login' || link.name === 'Signup') && authCtx.cookie.access_token) {
-                                return
+                            if (link.protected === false && !authCtx.cookie.access_token && link.name !== 'Home') {
+                                return <Link className={"add-padding-top"} key={index} to={link.path}>{link.name}</Link>
+                            } else {
+                                if (link.name === 'Cars' && authCtx.cookie.access_token) {
+                                    return <Link className={"add-padding-top"} key={index}
+                                                 to={link.path}>{link.name}</Link>
+                                }
                             }
-                            if (link.protected && !authCtx.cookie.access_token) {
-                                return
-                            }
-                            if (link.name === 'Home') {
-                                return
-                            }
-                            return <Link key={index} to={link.path}>{link.name}</Link>
                         })
+                    }
+                    {
+                        authCtx.cookie.access_token ? (
+                            <div className={'context_links'}>
+                                <li className={'dropdown_nav'}>
+                                    <a className="user_name">
+                                        {authCtx.cookie.name} &#9662;
+                                    </a>
+                                    <ul className="dropdown">
+                                        {
+                                            routPath.map((link, index) => {
+                                                if (link.protected === false) {
+                                                    return
+                                                }
+                                                if (link.adminProtected === true) {
+                                                    return <li key={index} id={link.path}
+                                                               onClick={navigateTo}>{link.name}</li>
+                                                }
+                                                if (link.protected) {
+                                                    return <li key={index} id={link.path}
+                                                               onClick={navigateTo}>{link.name}</li>;
+                                                }
+                                            })
+                                        }
+                                        <li onClick={authCtx.logout}>Logout</li>
+                                    </ul>
+                                </li>
+                            </div>
+                        ) : ''
                     }
                 </div>
             </div>

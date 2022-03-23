@@ -1,18 +1,21 @@
 import {useCar} from "../custom_hook/useCar";
-import {validateCarInput} from "../custom_hook/useCarValidate";
+import {validateCarInput} from "../custom_hook/useInputValidation";
 import ProtHeader from "../header/ProtHeader";
 import CarTable from "../reusable/CarTable";
 import {CarInputForm} from "../form/CarInputForm";
 import {isObjectUndefined} from "../util/Util";
-import useFile from "../custom_hook/useFile";
+import {useContext} from "react";
+import {AuthContext} from "../../context/Context";
+import {useDriver} from "../custom_hook/useDriver";
 
 const Car = () => {
-    const {dropZone, uploadFile} = useFile()
+    const authCtx = useContext(AuthContext)
+    const {driver} = useDriver(authCtx.cookie.username)
     const {car, handleChange, onSubmit, error, message} = useCar(null, validateCarInput)
 
     return (
         <div className="car">
-            <ProtHeader/>
+            <ProtHeader driver={driver}/>
             <div className="container">
                 <div className="context_new_car">
                     <div className="car_container">

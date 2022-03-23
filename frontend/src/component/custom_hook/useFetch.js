@@ -16,6 +16,12 @@ const useFetch = (token) => {
         return data
     }
 
+    const reSetData = () => {
+        setDriver({});
+        setCarCheckout({checkoutList: []});
+        setCarCheckIn({checkInList: []})
+    }
+
     useEffect(() => {
         const fetchDate = async () => {
             const result = await GET_REQUEST(Path.CAR_LIST, null, token)
@@ -27,7 +33,7 @@ const useFetch = (token) => {
         fetchDate().then(r => r)
     }, [])
 
-    return {driver, car, carCheckout, carCheckIn, fetchDriver}
+    return {driver, car, carCheckout, carCheckIn, fetchDriver, reSetData}
 
 }
 

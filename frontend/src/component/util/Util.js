@@ -4,8 +4,8 @@ const getElement = className => {
 }
 
 const getElements = className => {
-  const elements = document.querySelectorAll(`.${className}`);
-  return elements ? elements : null
+    const elements = document.querySelectorAll(`.${className}`);
+    return elements ? elements : null
 }
 
 const reFormatDate = (vale) => {
@@ -45,12 +45,19 @@ const isObjectEmpty = (object) => {
     return typeof object === undefined || object === null || Object.keys(object).length === 0
 }
 
+const isObjectEmptyKeys = (object) => {
+    if (object === undefined || null) {
+        return true
+    }
+    return Object.keys(object).length === 0;
+}
+
 const isObjectUndefined = object => {
     return object === undefined || object === 'undefined'
 }
 
 const isArrayEmpty = (array) => {
-  return array.length > 0;
+    return array.length > 0;
 }
 
 const isNumeric = (num) => {
@@ -64,6 +71,7 @@ export {
     getID,
     isEmailValid,
     isObjectEmpty,
+    isObjectEmptyKeys,
     isArrayEmpty,
     isObjectUndefined,
     toggleButtonID,

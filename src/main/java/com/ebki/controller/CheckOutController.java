@@ -7,6 +7,7 @@ import com.ebki.service.CheckoutService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -50,6 +51,11 @@ public class CheckOutController {
         return service.findCheckOutByCarBrand(service.checkoutList(), brand);
     }
 
+    @GetMapping(path = {"/recent_checkout/{id}"})
+    public Car getRecentCheckout(@PathVariable("id") Long id) {
+        return service.getRecentCheckout(id).getCarCheckOut();
+    }
+
     @GetMapping(value = {"/find_checkout_by_year/{year}"})
     public List<Car> findCheckOutByCarYear(@PathVariable("year") int year) {
         return service.findCheckOutByCarYear(service.checkoutList(), year);
@@ -59,6 +65,11 @@ public class CheckOutController {
     public List<Car> findCheckOutByBrandAndModel(@PathVariable("brand") String brand,
                                                  @PathVariable("model") String model) {
         return service.findCheckOutByCarBrandAndModel(service.checkoutList(), brand, model);
+    }
+
+    @DeleteMapping(value = "/check_in_car/{id}")
+    public void checkinCar(@PathVariable("id") Long id, HttpServletResponse response) {
+        service.checkInCar(id, response);
     }
 
     @DeleteMapping(value = {"/delete/{id}"})

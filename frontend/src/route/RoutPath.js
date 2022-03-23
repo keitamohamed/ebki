@@ -14,6 +14,12 @@ const routPath = [
         component: Home
     },
     {
+        name: "Profile",
+        path: "/profile",
+        protected: true,
+        component: Profile
+    },
+    {
         name: "Dashboard",
         path: "/dashboard",
         protected: true,
@@ -33,12 +39,6 @@ const routPath = [
         protected: true,
         adminProtected: true,
         component: Car
-    },
-    {
-        name: "Profile",
-        path: "/profile",
-        protected: true,
-        component: Profile
     },
     {
         name: "Login",

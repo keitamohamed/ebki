@@ -9,6 +9,7 @@ import com.ebki.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -50,6 +51,22 @@ public class CheckoutService {
         }
         throwExceptionWhenDriverOrCarDoesNotExists(driverID, carID, optionalDriver, carOptional, request);
         repository.save(request.getCheckout());
+    }
+
+    public CarCheckout getRecentCheckout(Long driverID) {
+        return findCheckoutByDriverID(driverID)
+                .stream()
+                .reduce((first, second) -> (second))
+                .orElse(null);
+    }
+
+    public void checkInCar(Long id, HttpServletResponse response) {
+        Optional<CarCheckout> car = findCarCheckoutByID(id);
+        if (car.isEmpty()) {
+            response.setHeader("message", "Checkout ID does not exist");
+        }
+        repository.deleteByCheckoutID(id);
+        response.setHeader("message", String.format("Car with checkout id [ %s ] have been checkin", id));
     }
 
     public void throwExceptionWhenDriverOrCarDoesNotExists(
@@ -130,6 +147,10 @@ public class CheckoutService {
             Util.throwIllegalStateException(String.format("There is no check out with an ID [ %s ]", checkoutID));
         }
         repository.deleteByCheckoutID(checkoutID);
+    }
+
+    public List<CarCheckout> findCheckoutByDriverID(Long driverID) {
+        return repository.findCarCheckoutByDriverID(driverID);
     }
 
     public Car findCheckOutByID(Long checkOutID) {

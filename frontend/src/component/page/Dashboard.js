@@ -1,20 +1,21 @@
 import {useContext, useEffect, useState} from "react";
 
 import {useHistory} from 'react-router-dom'
-import Header from "../header/ProtHeader";
+import AuthorizeHeader from "../header/ProtHeader";
 import {useDashboard} from "../custom_hook/useDashboard";
 import {useCheckout} from "../custom_hook/useCheckout";
 import CarTable from "../reusable/CarTable";
 import CheckoutTable from "../reusable/CheckoutTable";
 import DisplayCarClicked from "../sub_component/useCarClicked";
 import DisplayDriver from "../reusable/DisplayDriver";
-
+import DisplayCarSearcher from "../sub_component/useCarSearch";
 import {AuthContext, CarContext, DashboardContext} from "../../context/Context";
 import {AiOutlineUnorderedList, BsSearch, IoAdd} from "react-icons/all";
 import {getID} from "../util/Util";
 import useSearch from "../custom_hook/useSearch";
 import {DriverModel} from "../model/DriverModel";
 import {CarModel} from "../model/CarModel";
+import {useDriver} from "../custom_hook/useDriver";
 
 
 const Dashboard = () => {
@@ -24,7 +25,8 @@ const Dashboard = () => {
     const dashCtx = useContext(DashboardContext)
     const {car} = useDashboard()
     const {checkoutList} = useCheckout(authCtx.cookie.access_token)
-    const {onEnter, data} = useSearch()
+    const {onEnter, data, setData} = useSearch()
+    const {driver} = useDriver(authCtx.cookie.username)
 
     const [carClick, setCarClick] = useState(null)
     const [checkout, setCheckout] = useState({checkoutID: null})
@@ -70,6 +72,11 @@ const Dashboard = () => {
         setShow(getID(event))
     }
 
+    const reSetData = () => {
+        console.log('Re-Setting')
+        setData(null)
+    }
+
     useEffect(() => {
         carVin()
         setCheckoutCar()
@@ -78,7 +85,7 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <div className="dash_context_layout">
-                <Header/>
+                <AuthorizeHeader driver={driver}/>
                 <DriverModel data={data}/>
                 <CarModel carClick={carClick}/>
 
@@ -125,7 +132,7 @@ const Dashboard = () => {
                     </div>
                     {
                         show === 'Car' ? (
-                            <CarTable car={car.cars}/>
+                            <CarTable car={car.cars} reSetData={reSetData}/>
                         ) : (
                             <CheckoutTable checkoutCar={checkoutList}/>
                         )
@@ -146,8 +153,10 @@ const Dashboard = () => {
                     {
                         dashCtx.show === "SHOW_DRIVER" && data !== null ?
                             <DisplayDriver driver={data}/>
-                            : dashCtx.show === "SHOW_CAR" && carClick !== null ?
-                                <DisplayCarClicked car={carClick} checkout={checkout}/> : ''
+                            : dashCtx.show === "SHOW_CAR_SEARCH" && data !== null ?
+                                <DisplayCarSearcher car={data}/>
+                                : dashCtx.show === "SHOW_CAR" && carClick !== null ?
+                                    <DisplayCarClicked car={carClick} checkout={checkout}/> : ''
                     }
                 </div>
             </div>

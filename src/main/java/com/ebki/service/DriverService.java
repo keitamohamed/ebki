@@ -4,6 +4,7 @@ import com.ebki.model.Address;
 import com.ebki.model.Authenticate;
 import com.ebki.model.Driver;
 import com.ebki.model.Role;
+import com.ebki.repository.AddressRepo;
 import com.ebki.repository.AuthRepo;
 import com.ebki.repository.DriverRepo;
 import com.ebki.util.Util;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -21,6 +23,8 @@ public class DriverService {
     private final DriverRepo repository;
     @Autowired
     private AuthRepo authRepo;
+    @Autowired
+    private AddressRepo addressRepo;
     @Autowired
     private CheckoutService checkoutService;
     @Autowired
@@ -35,8 +39,6 @@ public class DriverService {
     }
 
     public void save(Driver driver) {
-        System.out.println("Driver " + driver.getAuthenticate().getUsername());
-
         if (findDriverByEmail(driver.getEmail()).isPresent()) {
             Driver searchResult = findDriverByEmail(driver.getEmail()).get();
             if (searchResult.getFirstName().equals(driver.getFirstName())) {
@@ -53,6 +55,62 @@ public class DriverService {
         encodePassword(driver);
         setAddressIDIfNull(driver);
         repository.save(driver);
+    }
+
+    public void saveAddress(Address address, Long driverID, HttpServletResponse response) {
+        Optional<Driver> findDriver = findDriverByID(driverID);
+        if (findDriver.isEmpty()) {
+            return;
+        }
+        Set<Address> addresses = findDriver.get().getAddress();
+        if (addresses.size() == 3) {
+            response.setHeader("message", String.format("Address not added. Maximum number of address can be added is [ %s ]", 3));
+            return;
+        }
+        Driver driver = findDriver.get();
+        address.setAddressID(Util.generateID(999999999));
+        address.setDriverAddress(driver);
+        addresses.add(address);
+        repository.save(driver);
+        response.setHeader("message", "New address have been successfully added");
+    }
+
+    public void updatePassword(Authenticate authenticate, Long driverID, HttpServletResponse response) {
+        Optional<Driver> optionalDriver = findDriverByID(driverID);
+        if (optionalDriver.isEmpty()) {
+            response.setHeader("message", "Error: Password not updated");
+            return;
+        }
+        Authenticate optionalAuth = optionalDriver.get().getAuthenticate();
+        optionalAuth.setPassword(passwordEncoder.encode(authenticate.getPassword()));
+        repository.save(optionalDriver.get());
+        response.setHeader("message", "Password have been successfully updated!!");
+    }
+
+    public void updateAddress(Address address, Long id, HttpServletResponse response) {
+        Optional<Address> optional = findAddress(id);
+        if (optional.isEmpty()) {
+            response.setHeader("message", String.format("No address match with an id [ %s ]", id));
+            return;
+        }
+        Address dbAddress = optional.get();
+        dbAddress.setStreet(address.getStreet());
+        dbAddress.setCity(address.getCity());
+        dbAddress.setState(address.getState());
+        dbAddress.setZipcode(address.getZipcode());
+
+        addressRepo.save(dbAddress);
+        response.setHeader("message", "Address have been successfully updated");
+    }
+
+    public void deleteAddress(Long id, HttpServletResponse response) {
+        Optional<Address> findAddress = findAddress(id);
+        if (findAddress.isEmpty()) {
+            response.setHeader("message", String.format("No Address found for an id of [ %s ]", id));
+            return;
+        }
+        addressRepo.deleteAddressByAddressID(id);
+        response.setHeader("message", String.format("Successfully deleted address with an id [ %s ]", id));
     }
 
     public Driver findByUsername(String username) {
@@ -149,6 +207,10 @@ public class DriverService {
 
     public Optional<Driver> findDriverByEmail(String email) {
         return repository.findDriverByEmailAddress(email);
+    }
+
+    public Optional<Address> findAddress(Long id) {
+        return addressRepo.findById(id);
     }
 
 }

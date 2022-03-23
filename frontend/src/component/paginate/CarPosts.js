@@ -8,7 +8,7 @@ const CarPosts = ({post, loading}) => {
     const authCtx = useContext(AuthContext)
     const onCheckout = async event => {
         const {id} = event.target
-        await REQUEST_MAPPING('POST', `${Path.ADD_NEW_CHECKOUT}${authCtx.cookie.id}/${id}`, null, {})
+        await REQUEST_MAPPING('POST', Path.ADD_NEW_CHECKOUT, `${authCtx.cookie.id}/${id}`, authCtx.cookie.access_token, {})
     }
 
     return loading === true ? <h1>Loading...</h1> : (
