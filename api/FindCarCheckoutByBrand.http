@@ -1,2 +1,0 @@
-GET localhost:8080/ebik/checkout/find_checkout_by_brand/toyota
-Content-Type: application/json

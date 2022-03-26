@@ -1,6 +1,0 @@
-POST http://localhost:8080/ebik/check_in/new_checkin/267522526/637121954
-Content-Type: application/json
-
-{
-  "checkInID": 635461612
-}

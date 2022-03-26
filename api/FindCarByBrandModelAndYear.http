@@ -1,2 +1,0 @@
-GET localhost:8080/ebik/car/find_by_brand_mode_year/nissa/Frontier RPO-x/2022
-Content-Type: application/json

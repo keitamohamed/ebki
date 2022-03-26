@@ -1,3 +1,0 @@
-GET localhost:8080/ebik/car/find_car_vin/375094251
-Content-Type: application/json
-

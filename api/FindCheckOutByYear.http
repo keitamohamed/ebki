@@ -1,2 +1,0 @@
-GET localhost:8080/ebik/checkout/find_checkout_by_year/2016
-Content-Type: application/json
