@@ -7,7 +7,7 @@ const CarouselImage = ({carClick}) => {
             <div className="image_slide">
                 <img src={imageUrl(carClick.vin, true)} alt={carClick.model}/>
                 <div className="img_caption">
-                    <p>{`${carClick.year} ${carClick.brand} ${carClick.model}. Vin: ${carClick.vin}`}</p>
+                    <p>{`Detail: ${carClick.year} ${carClick.brand} ${carClick.model}`}</p>
                 </div>
             </div>
         </div>

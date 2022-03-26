@@ -138,7 +138,6 @@ table tr:nth-child(even) td {
   margin-bottom: 2em;
 }
 .dashboard .dash_main .btn_show {
-  padding-top: 4em;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;

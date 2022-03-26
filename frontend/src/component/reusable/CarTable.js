@@ -33,7 +33,7 @@ const CarTable = (cars, reSetData) => {
         <div className="table_container">
             {
                 cars.car.length > 0 ? (
-                    <table className="table">
+                    <table className="table mt_remove">
                         <thead>
                         <h5>List of available cars</h5>
                         </thead>

@@ -69,7 +69,7 @@ const Login = () => {
 
     return (
         <div className="login">
-            <Header contextRight={'context_active_false'}/>
+            <Header contextRight={'context_active_false'} color={'#FFF'}/>
             <div className="content_container">
                 <form action=""
                       className="form"

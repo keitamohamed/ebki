@@ -2,12 +2,10 @@ import {useHistory} from "react-router-dom";
 import {useCookies} from 'react-cookie'
 
 import {AuthContext} from "./Context";
-import {useFetch} from "../component/custom_hook/useFetch";
 
 const {Provider} = AuthContext
 
 const AuthProvider = ({children}) => {
-    const {reSetData} = useFetch()
     const history = useHistory()
     const [cookie, setCookie, removeCookie] = useCookies(['access_token', 'refresh_token', 'id', 'name', 'read', 'write', 'role'])
 
@@ -20,7 +18,6 @@ const AuthProvider = ({children}) => {
     }
 
     const setUserID = ({firstName, driverID}) => {
-        console.log('Name is', firstName)
         setCookie('name', firstName)
         setCookie('id', driverID);
     }

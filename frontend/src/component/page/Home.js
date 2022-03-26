@@ -4,12 +4,9 @@ import {Header} from "../header/Header";
 import {useFetch} from "../custom_hook/useFetch";
 import Slider from "../reusable/Slider";
 import {Carousel} from "../reusable/Carousel";
-import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../context/Context";
-import {GET_REQUEST} from "../../client/apirequest/Request";
+import {useEffect, useState} from "react";
 
 const Home = () => {
-    const authCtx = useContext(AuthContext)
     const [url] = useState("http://localhost:8080/ebik/car/download-image")
     const history = useHistory()
     const [post, setPost] = useState([
@@ -32,10 +29,6 @@ const Home = () => {
             url: 'audi_q33.png'
         }
     ])
-
-    const downloadImage = async () => {
-        return await GET_REQUEST(`${url}/115015964`, null, authCtx.cookie.access_token);
-    }
 
     const navigateToCarList = () => {
         history.push("/carlist")

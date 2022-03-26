@@ -15,8 +15,7 @@ import {useStyleComponent} from "../style/ComponentStyle";
 import {AiFillCamera, AiFillDelete, AiFillEdit} from "react-icons/ai";
 import {DELETE_REQUEST_MAPPING, GET_REQUEST} from "../../client/apirequest/Request";
 import {imageUrl, Path} from "../../client/apirequest/Path"
-import {isObjectEmptyKeys} from "../util/Util";
-import useFile from "../custom_hook/useFile";
+import {isObjectEmptyKeys, isObjectUndefined} from "../util/Util";
 
 const Profile = () => {
     const history = useHistory()
@@ -27,7 +26,6 @@ const Profile = () => {
     const {} = usePaginate()
     const [type, setType] = useState({})
     const {applyStyle} = useStyleComponent()
-    const {dropZone, uploadFile} = useFile()
     const [message, setMessage] = useState({})
 
     const birthDay = () => {
@@ -145,18 +143,25 @@ const Profile = () => {
                     <div className="content_top">
                         <div className="content_recent_checkout">
                             <div className="car_image_container">
-                                <img src={imageUrl(recentCheckout.vin, true)} alt="car"/>
+                                {
+                                    !isObjectUndefined(recentCheckout) ?
+                                        <img src={imageUrl(recentCheckout.vin, true)} alt="car"/> : ''
+                                }
                             </div>
                         </div>
                         <div className="recent_content">
                             <div className="content">
-                                <div className="content_car">
-                                    <h4>Vin: <span>{recentCheckout.vin}</span></h4>
-                                    <h5>Year: <span>{recentCheckout.year}</span></h5>
-                                    <h5>Brand: <span>{recentCheckout.brand}</span></h5>
-                                    <h5>Model: <span>{recentCheckout.model}</span></h5>
-                                    <h5>Body Type: <span>{recentCheckout.bodyType}</span></h5>
-                                </div>
+                                {
+                                    !isObjectUndefined(recentCheckout) ?
+                                        <div className="content_car">
+                                            <h4>Vin: <span>{recentCheckout.vin}</span></h4>
+                                            <h5><span>{`${recentCheckout.year}
+                                                ${recentCheckout.brand}
+                                                ${recentCheckout.model}
+                                                ${recentCheckout.bodyType}`}</span>
+                                            </h5>
+                                        </div> : ''
+                                }
                             </div>
                         </div>
                     </div>

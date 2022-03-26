@@ -30,6 +30,7 @@ const useDriver = (driverID) => {
             await GET_REQUEST(Path.FIND_CHECK_OUT_BY_DRIVER_ID, driverID, authCtx.cookie.access_token);
         }
 
+
         const findRecentCheckout = async () => {
             const response = await GET_REQUEST(Path.FIND_RECENT_CHECKOUT, driverID, authCtx.cookie.access_token)
             setRecentCheckout(response.data)

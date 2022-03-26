@@ -10,7 +10,7 @@ import DisplayCarClicked from "../sub_component/useCarClicked";
 import DisplayDriver from "../reusable/DisplayDriver";
 import DisplayCarSearcher from "../sub_component/useCarSearch";
 import {AuthContext, CarContext, DashboardContext} from "../../context/Context";
-import {AiOutlineUnorderedList, BsSearch, IoAdd} from "react-icons/all";
+import {AiOutlineUnorderedList, BsSearch} from "react-icons/all";
 import {getID} from "../util/Util";
 import useSearch from "../custom_hook/useSearch";
 import {DriverModel} from "../model/DriverModel";
@@ -37,17 +37,6 @@ const Dashboard = () => {
         if (car !== undefined) {
             setCarClick(car[0])
         }
-    }
-
-    const navigate = (event) => {
-        let url = event.target.id
-        if (!url) {
-            url = event.target.parentNode.id
-        }
-        if (!url) {
-            url = event.target.parentNode.parentNode.id
-        }
-        history.push(url)
     }
 
     const setCheckoutCar = () => {
@@ -91,25 +80,6 @@ const Dashboard = () => {
 
                 <div className="dash_main">
                     <div className="context_sub_nav">
-                        <div className="btn_container">
-                            <li
-                                className="btn li_btn"
-                                id={'/car'}
-                                onClick={navigate}>Car <IoAdd/>
-                            </li>
-                            <li
-                                id={'/checkout'}
-                                className="btn li_btn"
-                                onClick={navigate}
-                            >Checkout <IoAdd/>
-                            </li>
-                            <li
-                                id={'/checkin'}
-                                className="btn li_btn"
-                                onClick={navigate}
-                            >CheckIn <IoAdd/>
-                            </li>
-                        </div>
                         <div className="btn_show">
                             <li className="btn"
                                 id={"Car"}
@@ -121,12 +91,6 @@ const Dashboard = () => {
                                 onClick={onClick}
                             >
                                 Checkout
-                                <AiOutlineUnorderedList/></li>
-                            <li className="btn"
-                                id={"Checkin"}
-                                onClick={onClick}
-                            >
-                                Checkin
                                 <AiOutlineUnorderedList/></li>
                         </div>
                     </div>

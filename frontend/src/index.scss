@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   scroll-behavior: smooth;
   box-shadow: none;
@@ -22,6 +22,17 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: hsl(0%, 0%, 30%) !important;
   font-size: 1.2em;
+}
+
+.login, .signup .context_right {
+  input::-webkit-input-placeholder,
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    color: #FFFF !important;
+    -webkit-text-fill-color: hsl(0%, 0%, 80%) !important;
+    -webkit-box-shadow: transparent !important;
+  }
 }
 
 .successful_message {
@@ -281,42 +292,8 @@ li {
   padding: 15px;
   grid-gap: 1em;
   grid-template-areas:
-          'btn_container btn_container btn_container search_container search_container'
-          'btn_show btn_show btn_show btn_show btn_show';
-
-  .btn_container {
-    grid-area: btn_container;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: .5em;
-
-    li {
-      border: 1px solid $border_color;
-      list-style: none;
-      padding: 5px 20px;
-      font-size: 1.2em;
-      cursor: pointer;
-      background: $color_green_s;
-      border-radius: 10px;
-      text-align: center;
-      width: 100%;
-
-      svg {
-        font-size: 1.2em;
-        background: transparent;
-        position: absolute;
-      }
-
-      &:hover {
-        font-size: 1.3em;
-      }
-    }
-
-    * {
-      color: white;
-    }
-  }
+          'search_container search_container search_container'
+          'btn_show btn_show btn_show';
 
   .btn_show {
     grid-area: btn_show;
@@ -423,6 +400,20 @@ li {
 
     .user_name:hover {
       cursor: default;
+    }
+  }
+}
+
+.header.transparent {
+  padding: 15px;
+  background: transparent;
+
+  .context_links {
+
+    .add-padding-top {
+      a {
+        padding-top: 0 !important;
+      }
     }
   }
 }

@@ -6,7 +6,7 @@ import {Logo} from "../app_logo/Logo";
 import {AuthContext} from "../../context/Context";
 
 
-const Header = ({contextRight}) => {
+const Header = ({contextRight, color}) => {
     const history = useHistory()
     const authCtx = useContext(AuthContext)
 
@@ -15,12 +15,12 @@ const Header = ({contextRight}) => {
     }
 
     return (
-        <header className="header">
-            <div className="nave">
+        <header className={`header ${authCtx.cookie.access_token ? '' : 'transparent'}`}>
+            <div className={`nave`}>
                 <div className="hero_logo">
                     <strong>
                         <Link to="/">
-                            <Logo/>
+                            <Logo color={color}/>
                         </Link>
                     </strong>
                 </div>

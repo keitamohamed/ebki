@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   scroll-behavior: smooth;
   box-shadow: none;
@@ -21,6 +21,18 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: #4d4d4d !important;
   font-size: 1.2em;
+}
+
+.login input::-webkit-input-placeholder,
+.login input:-webkit-autofill,
+.login input:-webkit-autofill:focus,
+.login input:-webkit-autofill:active, .signup .context_right input::-webkit-input-placeholder,
+.signup .context_right input:-webkit-autofill,
+.signup .context_right input:-webkit-autofill:focus,
+.signup .context_right input:-webkit-autofill:active {
+  color: #FFFF !important;
+  -webkit-text-fill-color: #cccccc !important;
+  -webkit-box-shadow: transparent !important;
 }
 
 .successful_message {
@@ -230,36 +242,7 @@ li .dropdown li:hover {
   border-bottom: 1px solid #E1E5EA;
   padding: 15px;
   grid-gap: 1em;
-  grid-template-areas: "btn_container btn_container btn_container search_container search_container" "btn_show btn_show btn_show btn_show btn_show";
-}
-.context_sub_nav .btn_container {
-  grid-area: btn_container;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
-}
-.context_sub_nav .btn_container li {
-  border: 1px solid #E1E5EA;
-  list-style: none;
-  padding: 5px 20px;
-  font-size: 1.2em;
-  cursor: pointer;
-  background: #57CC99;
-  border-radius: 10px;
-  text-align: center;
-  width: 100%;
-}
-.context_sub_nav .btn_container li svg {
-  font-size: 1.2em;
-  background: transparent;
-  position: absolute;
-}
-.context_sub_nav .btn_container li:hover {
-  font-size: 1.3em;
-}
-.context_sub_nav .btn_container * {
-  color: white;
+  grid-template-areas: "search_container search_container search_container" "btn_show btn_show btn_show";
 }
 .context_sub_nav .btn_show {
   grid-area: btn_show;
@@ -347,6 +330,14 @@ li .dropdown li:hover {
 }
 .header .context_links .user_name:hover {
   cursor: default;
+}
+
+.header.transparent {
+  padding: 15px;
+  background: transparent;
+}
+.header.transparent .context_links .add-padding-top a {
+  padding-top: 0 !important;
 }
 
 .header.pro {

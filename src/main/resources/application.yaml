@@ -29,8 +29,8 @@ logging:
 cloud:
   aws:
     credentials:
-      accessKey: ""
-      secreteKey: ""
+      accessKey: "AKIA4DJABAECM3SZY7MR"
+      secreteKey: "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"
       region: "us-east-1"
 
 jwt:

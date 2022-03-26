@@ -30,7 +30,7 @@ const DisplayCarClicked = ({car, checkout}) => {
                         </div>
                         {
                             checkout.checkoutID !== null ? (
-                                <div>
+                                <div className="checkout_detail">
                                     <h2 className="car_checkout">Checkout Detail</h2>
                                     <div className="card_header">
                                         <h3>Checkout ID: <span>{checkout.checkoutID}</span></h3>

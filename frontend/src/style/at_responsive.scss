@@ -5,22 +5,7 @@
 
 }
 
-
-// Small dives
-@include responsive_max(sml) {
-
-  .signup {
-
-    .container {
-
-      .form {
-        flex-direction: column;
-      }
-    }
-  }
-}
-
-@include responsive_max(xs) {
+@include responsive_max(md) {
 
   .nave {
 
@@ -33,26 +18,30 @@
       padding: 0;
 
       a {
-        font-size: 19px;
+        font-size: 1.3em;
         padding-top: 17px;
+      }
+
+      .dropdown {
+        //max-width: 100% !important;
+
+        li {
+          font-size: 1.1em !important;
+        }
       }
     }
   }
 
   .home {
-
     .carousel {
-
       .content_container {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-gap: .2em;
 
         .card {
-
           border: none;
 
           .image_container {
-
             img {
               display: block;
               margin: 0 auto;
@@ -65,8 +54,9 @@
     .main {
       .content_container {
         .content {
-          display: flex;
-          flex-direction: column-reverse;
+          //display: flex;
+          //flex-direction: column-reverse;
+          padding-bottom: 2em;
 
           * {
             border: none !important;
@@ -75,7 +65,7 @@
           .image_container {
 
             img {
-              width: 95%;
+              width: 100%;
               margin: 0 auto;
             }
           }
@@ -83,17 +73,17 @@
           .content_info {
 
             h2 {
-              width: 80%;
+              width: 90%;
               font-size: 1.5em;
             }
 
             .btn_container {
               margin: 3em auto auto;
-              width: 50%;
+              width: 70%;
 
               li {
                 width: 100%;
-                font-size: 1.3em;
+                font-size: 1.5em;
               }
             }
           }
@@ -107,14 +97,18 @@
 
     .sub_nav {
       .content {
-        width: 100%;
+        width: 70%;
+
+        input {
+          font-size: 1.7em;
+        }
       }
     }
 
     .main {
 
       .paginate_data_wrapper {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(2, 1fr);
 
         .card {
           display: flex;
@@ -124,6 +118,24 @@
             width: 300px;
             height: 300px;
           }
+
+          .car_info {
+            h5 {
+              font-size: 1.5em;
+            }
+
+            li {
+              font-size: 1.5em;
+            }
+          }
+        }
+      }
+
+      .pagination_wrapper {
+        width: 90%;
+
+        li {
+          font-size: 1.3em;
         }
       }
     }
@@ -135,12 +147,21 @@
       display: flex !important;
       flex-direction: column;
 
+      .search_container {
+        width: 80% !important;
+        font-size: 1.3em;
+        margin: 0 auto;
+      }
+
       .table_container {
         text-align: left;
 
         .table {
+          width: 100%;
 
-          width: 90%;
+          * {
+            font-size: 1.1em;
+          }
 
           tbody {
             padding: 0 5px !important;
@@ -154,26 +175,39 @@
 
       .form {
         width: 95% !important;
+        padding-top: 3em !important;
 
         .title_container {
           padding: 0 10px;
+          font-size: 1.2em;
 
           h5 {
             width: 100% !important;
           }
         }
 
+        .form-group {
+          * {
+            font-size: 1.3em;
+          }
+        }
+
         .file-upload-container {
           width: 100%;
-
 
           .drop-zone-content {
             width: 100%;
             height: 100%;
 
             p {
-              font-size: 18px;
+              font-size: 1.2em;
             }
+          }
+        }
+
+        .btn-container {
+          * {
+            font-size: 1.5em;
           }
         }
       }
@@ -189,29 +223,65 @@
       .content_left {
 
         .content_profile {
-          padding-left: 6em !important;
+          padding-left: 0 !important;
+          margin: 0 auto;
+          width: 200px !important;
+          height: 200px !important;
+
+          img {
+            width: 200px !important;
+            height: 200px !important;
+          }
         }
 
         .user_name_container {
+          padding: 15px 0 !important;
 
           h2 {
             width: 100% !important;
           }
         }
 
+        .content_img_container {
+          .btn_container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            li {
+              text-align: center;
+              font-size: 1.2em;
+              padding: 10px;
+            }
+          }
+        }
+
         .content {
+
+          .content_info {
+            h5 {
+              font-size: 25px;
+            }
+          }
+
+          .content_address {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            width: 100%;
+          }
+
           .content {
-            flex-direction: column;
-            padding-bottom: 1.5em;
+            * {
+              font-size: 24px !important;
+            }
 
             .btn_content {
               padding: 5px 0 10px 5px !important;
               border-bottom: 1px solid $border_color;
               grid-gap: 2em !important;
-            }
 
-            &:last-child {
-              padding-bottom: 0;
+              svg {
+                font-size: 1.5em !important;
+              }
             }
           }
         }
@@ -231,6 +301,10 @@
 
             .content {
               margin-top: 2em;
+
+              h4, h5 {
+                font-size: 1.3em !important;
+              }
             }
           }
 
@@ -239,9 +313,19 @@
         .content_bottom {
           display: flex;
           flex-direction: column;
+          margin-top: 2em;
+
+          .check-table {
+            h5 {
+              font-size: 1.6em;
+            }
+
+            .tbody {
+              font-size: 1.2em;
+            }
+          }
 
           .content {
-            padding-top: 2em;
 
             .image_slide {
               width: 100% !important;
@@ -265,6 +349,521 @@
               "header header header"
               "checklist checklist checklist"
               "dash_main dash_main dash_main" !important;
+
+      .search_container {
+        width: 70%;
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  .login {
+    background: rgba(14, 14, 15, 100) !important;
+
+    .form {
+      width: 85% !important;
+
+      .form-group {
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  .signup {
+    .container {
+
+      .title_title {
+        h3 {
+          font-size: 1.3em;
+        }
+      }
+
+      .form {
+        flex-direction: column;
+
+        .form-group {
+          input {
+            font-size: 28px !important;
+          }
+        }
+
+        .context_right {
+          margin-top: 2em;
+        }
+      }
+
+      .context_right {
+        padding-top: 2.5em !important;
+
+        .add_margin {
+          margin-top: 2em;
+        }
+
+        .btn-container {
+          width: 100%;
+          text-align: center;
+
+          input {
+            width: 80%;
+            margin: 0 auto;
+          }
+        }
+      }
     }
   }
 }
+
+@include responsive_max(xs) {
+
+  .nave {
+
+    .hero_logo {
+      flex: 1 1 0
+    }
+
+    .context_links {
+      grid-gap: 0;
+      padding: 0;
+
+      a {
+        font-size: .8em;
+        padding-top: 17px;
+      }
+
+      .dropdown {
+
+        li {
+          font-size: .8em !important;
+        }
+      }
+    }
+  }
+
+  .header.transparent {
+    padding: 15px;
+    background: transparent;
+
+    * {
+      background: transparent;
+    }
+
+    .context_links {
+      a {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .home {
+    .carousel {
+      .content_container {
+        grid-template-columns: repeat(1, 1fr);
+
+        .card {
+          .content {
+            * {
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+
+    .main {
+      .content_container {
+        .content {
+          display: flex;
+          flex-direction: column-reverse;
+          padding-bottom: 2em;
+
+          .content_info {
+
+            h2 {
+              font-size: 1.2em;
+            }
+
+            p {
+              font-size: 18px;
+            }
+
+            .btn_container {
+              margin: 3em auto auto;
+              width: 70%;
+
+              li {
+                width: 100%;
+                font-size: 1em;
+                padding: 10px 15px;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .car {
+
+    .context_new_car {
+
+      .search_container {
+        width: 90% !important;
+
+        input {
+          width: 90% !important;
+          font-size: 17px !important;
+        }
+      }
+
+      .table_container {
+        .table {
+          width: 100%;
+
+          * {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .form {
+        width: 100% !important;
+        padding-top: 2em !important;
+
+        .title_container {
+          font-size: .8em;
+        }
+
+        .form-group {
+          * {
+            font-size: 1em;
+          }
+        }
+
+        .file-upload-container {
+          .drop-zone-content {
+
+            p {
+              font-size: .8em;
+            }
+          }
+        }
+
+        .btn-container {
+          * {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+
+  .profile {
+
+    .profile_layout {
+      display: flex;
+      flex-direction: column;
+
+      .content_left {
+
+        .content_profile {
+          width: 150px !important;
+          height: 150px !important;
+
+          img {
+            width: 150px !important;
+            height: 150px !important;
+          }
+        }
+
+        .user_name_container {
+          padding: 0 !important;
+
+          h2 {
+            width: 100% !important;
+            font-size: 1.2em !important;
+          }
+        }
+
+        .content_img_container {
+          .btn_container {
+            display: flex;
+            flex-direction: column;
+
+            li {
+              text-align: center;
+              font-size: .8em;
+              padding: 5px !important;
+            }
+          }
+        }
+
+        .content {
+          .content_info {
+            h5 {
+              font-size: 20px;
+            }
+          }
+
+          .content_address {
+            grid-template-columns: repeat(1, 1fr);
+          }
+
+          .content {
+            * {
+              font-size: 18px !important;
+            }
+
+            .btn_content {
+              padding: 5px 0 10px 5px !important;
+              border-bottom: 1px solid $border_color;
+              grid-gap: 2em !important;
+
+              svg {
+                font-size: 1.5em !important;
+              }
+            }
+          }
+        }
+
+      }
+
+      .content_right {
+
+        .title_container {
+          h3 {
+            font-size: 1.1em;
+          }
+
+          padding-bottom: 2em;
+        }
+
+        .content_top {
+          .recent_content {
+
+            .content {
+
+              h4 {
+                font-size: 1.2em !important;
+              }
+
+              h5 {
+                font-size: 1em !important;
+              }
+            }
+          }
+
+        }
+
+        .content_bottom {
+
+          .check-table {
+            h5 {
+              font-size: 1em;
+            }
+
+            .tbody {
+              font-size: .8em;
+            }
+          }
+
+          .content {
+
+            .img_caption {
+              p {
+                font-size: 1.2em;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  .dashboard {
+
+    .dash_context_layout {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-areas:
+              "header header header"
+              "checklist checklist checklist"
+              "dash_main dash_main dash_main" !important;
+
+      .search_container {
+        padding: 0 15px;
+        width: 90%;
+        font-size: .9em;
+      }
+
+      .dash_main {
+
+        .context_sub_nav {
+          grid-template-columns: repeat(1, 1fr);
+          padding: 0 15px;
+          gap: 0;
+
+          .btn_show {
+            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            padding-bottom: 15px;
+
+            li {
+              width: 100%;
+              font-size: 1em;
+              border-radius: 5px;
+            }
+          }
+        }
+
+        .table_container {
+          .table {
+
+            thead {
+              h5 {
+                font-size: .8em;
+              }
+            }
+
+            tbody {
+              padding: 0 !important;
+
+              * {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+
+      .checklist {
+
+        .car_card {
+
+          * {
+            font-size: 16px !important;
+          }
+
+          .checkout_detail {
+            margin-top: 0 !important;
+          }
+
+          .btn_container {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .carInventory {
+
+    .sub_nav {
+      .content {
+        width: 90%;
+
+        input {
+          font-size: 1em;
+        }
+      }
+    }
+
+    .main {
+
+      .paginate_data_wrapper {
+        grid-template-columns: repeat(1, 1fr);
+
+        .card {
+
+          .image_container {
+            max-width: 100%;
+            max-height: 100%;
+          }
+
+          .car_info {
+            * {
+              font-size: 1em !important;
+            }
+          }
+        }
+      }
+
+      .pagination_wrapper {
+        width: 90%;
+
+        li {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+
+  .login {
+    width: 100% !important;
+
+    .content_container {
+      width: 100% !important;
+    }
+
+    .form {
+      width: 100% !important;
+      border: none !important;
+
+      input {
+        width: 100%;
+        background: transparent !important;
+      }
+
+      .form-group {
+        font-size: 1em;
+      }
+
+      .btn-container {
+        input {
+          font-size: .8em;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+
+  .signup {
+    .container {
+
+      .title_title {
+        h3 {
+          font-size: .9em;
+        }
+      }
+
+      .form {
+        .form-group {
+          input {
+            font-size: 22px !important;
+          }
+        }
+      }
+
+      .context_right {
+        padding-top: 2.5em !important;
+
+        .add_margin {
+          margin-top: 1.5em;
+        }
+
+        .btn-container {
+          text-align: center;
+
+          input {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 22px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+

@@ -21,7 +21,7 @@ const CarInventory = () => {
     }, [car, data])
 
     return (
-        <div className="carInventory">
+        <div className={`carInventory`}>
             {
                 !isObjectUndefined(driver) ? <ProtHeader driver={driver}/> : <Header/>
             }
@@ -42,11 +42,6 @@ const CarInventory = () => {
                         </div>
                     </div>
                 </div>
-                {/*<div className="side_nav">*/}
-                {/*    <div className="content_filter">*/}
-                {/*        <h5 className={"filter_title"}>Filter Inventory By</h5>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
                 <div className={`main`}>
                     {
                         car !== undefined ? (

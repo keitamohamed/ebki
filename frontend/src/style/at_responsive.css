@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
-@media screen and (max-width: 800px) {
-  .signup .container .form {
-    flex-direction: column;
-  }
-}
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 900px) {
   .nave .hero_logo {
     flex: 1 1 0;
   }
@@ -13,12 +8,15 @@
     padding: 0;
   }
   .nave .context_links a {
-    font-size: 19px;
+    font-size: 1.3em;
     padding-top: 17px;
+  }
+  .nave .context_links .dropdown li {
+    font-size: 1.1em !important;
   }
 
   .home .carousel .content_container {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.2em;
   }
   .home .carousel .content_container .card {
@@ -29,34 +27,36 @@
     margin: 0 auto;
   }
   .home .main .content_container .content {
-    display: flex;
-    flex-direction: column-reverse;
+    padding-bottom: 2em;
   }
   .home .main .content_container .content * {
     border: none !important;
   }
   .home .main .content_container .content .image_container img {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
   }
   .home .main .content_container .content .content_info h2 {
-    width: 80%;
+    width: 90%;
     font-size: 1.5em;
   }
   .home .main .content_container .content .content_info .btn_container {
     margin: 3em auto auto;
-    width: 50%;
+    width: 70%;
   }
   .home .main .content_container .content .content_info .btn_container li {
     width: 100%;
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 
   .carInventory .sub_nav .content {
-    width: 100%;
+    width: 70%;
+  }
+  .carInventory .sub_nav .content input {
+    font-size: 1.7em;
   }
   .carInventory .main .paginate_data_wrapper {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   .carInventory .main .paginate_data_wrapper .card {
     display: flex;
@@ -66,16 +66,36 @@
     width: 300px;
     height: 300px;
   }
+  .carInventory .main .paginate_data_wrapper .card .car_info h5 {
+    font-size: 1.5em;
+  }
+  .carInventory .main .paginate_data_wrapper .card .car_info li {
+    font-size: 1.5em;
+  }
+  .carInventory .main .pagination_wrapper {
+    width: 90%;
+  }
+  .carInventory .main .pagination_wrapper li {
+    font-size: 1.3em;
+  }
 
   .car .context_new_car {
     display: flex !important;
     flex-direction: column;
   }
+  .car .context_new_car .search_container {
+    width: 80% !important;
+    font-size: 1.3em;
+    margin: 0 auto;
+  }
   .car .context_new_car .table_container {
     text-align: left;
   }
   .car .context_new_car .table_container .table {
-    width: 90%;
+    width: 100%;
+  }
+  .car .context_new_car .table_container .table * {
+    font-size: 1.1em;
   }
   .car .context_new_car .table_container .table tbody {
     padding: 0 5px !important;
@@ -85,12 +105,17 @@
   }
   .car .context_new_car .form {
     width: 95% !important;
+    padding-top: 3em !important;
   }
   .car .context_new_car .form .title_container {
     padding: 0 10px;
+    font-size: 1.2em;
   }
   .car .context_new_car .form .title_container h5 {
     width: 100% !important;
+  }
+  .car .context_new_car .form .form-group * {
+    font-size: 1.3em;
   }
   .car .context_new_car .form .file-upload-container {
     width: 100%;
@@ -100,7 +125,10 @@
     height: 100%;
   }
   .car .context_new_car .form .file-upload-container .drop-zone-content p {
-    font-size: 18px;
+    font-size: 1.2em;
+  }
+  .car .context_new_car .form .btn-container * {
+    font-size: 1.5em;
   }
 
   .profile .profile_layout {
@@ -108,22 +136,48 @@
     flex-direction: column;
   }
   .profile .profile_layout .content_left .content_profile {
-    padding-left: 6em !important;
+    padding-left: 0 !important;
+    margin: 0 auto;
+    width: 200px !important;
+    height: 200px !important;
+  }
+  .profile .profile_layout .content_left .content_profile img {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  .profile .profile_layout .content_left .user_name_container {
+    padding: 15px 0 !important;
   }
   .profile .profile_layout .content_left .user_name_container h2 {
     width: 100% !important;
   }
-  .profile .profile_layout .content_left .content .content {
-    flex-direction: column;
-    padding-bottom: 1.5em;
+  .profile .profile_layout .content_left .content_img_container .btn_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .profile .profile_layout .content_left .content_img_container .btn_container li {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 10px;
+  }
+  .profile .profile_layout .content_left .content .content_info h5 {
+    font-size: 25px;
+  }
+  .profile .profile_layout .content_left .content .content_address {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+  .profile .profile_layout .content_left .content .content * {
+    font-size: 24px !important;
   }
   .profile .profile_layout .content_left .content .content .btn_content {
     padding: 5px 0 10px 5px !important;
     border-bottom: 1px solid #E1E5EA;
     grid-gap: 2em !important;
   }
-  .profile .profile_layout .content_left .content .content:last-child {
-    padding-bottom: 0;
+  .profile .profile_layout .content_left .content .content .btn_content svg {
+    font-size: 1.5em !important;
   }
   .profile .profile_layout .content_right .content_top {
     display: flex;
@@ -137,12 +191,19 @@
   .profile .profile_layout .content_right .content_top .recent_content .content {
     margin-top: 2em;
   }
+  .profile .profile_layout .content_right .content_top .recent_content .content h4, .profile .profile_layout .content_right .content_top .recent_content .content h5 {
+    font-size: 1.3em !important;
+  }
   .profile .profile_layout .content_right .content_bottom {
     display: flex;
     flex-direction: column;
+    margin-top: 2em;
   }
-  .profile .profile_layout .content_right .content_bottom .content {
-    padding-top: 2em;
+  .profile .profile_layout .content_right .content_bottom .check-table h5 {
+    font-size: 1.6em;
+  }
+  .profile .profile_layout .content_right .content_bottom .check-table .tbody {
+    font-size: 1.2em;
   }
   .profile .profile_layout .content_right .content_bottom .content .image_slide {
     width: 100% !important;
@@ -154,6 +215,307 @@
   .dashboard .dash_context_layout {
     grid-template-columns: repeat(1, 1fr);
     grid-template-areas: "header header header" "checklist checklist checklist" "dash_main dash_main dash_main" !important;
+  }
+  .dashboard .dash_context_layout .search_container {
+    width: 70%;
+    font-size: 1.2em;
+  }
+
+  .login {
+    background: #0e0e0f !important;
+  }
+  .login .form {
+    width: 85% !important;
+  }
+  .login .form .form-group {
+    font-size: 1.2em;
+  }
+
+  .signup .container .title_title h3 {
+    font-size: 1.3em;
+  }
+  .signup .container .form {
+    flex-direction: column;
+  }
+  .signup .container .form .form-group input {
+    font-size: 28px !important;
+  }
+  .signup .container .form .context_right {
+    margin-top: 2em;
+  }
+  .signup .container .context_right {
+    padding-top: 2.5em !important;
+  }
+  .signup .container .context_right .add_margin {
+    margin-top: 2em;
+  }
+  .signup .container .context_right .btn-container {
+    width: 100%;
+    text-align: center;
+  }
+  .signup .container .context_right .btn-container input {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 575px) {
+  .nave .hero_logo {
+    flex: 1 1 0;
+  }
+  .nave .context_links {
+    grid-gap: 0;
+    padding: 0;
+  }
+  .nave .context_links a {
+    font-size: 0.8em;
+    padding-top: 17px;
+  }
+  .nave .context_links .dropdown li {
+    font-size: 0.8em !important;
+  }
+
+  .header.transparent {
+    padding: 15px;
+    background: transparent;
+  }
+  .header.transparent * {
+    background: transparent;
+  }
+  .header.transparent .context_links a {
+    padding-top: 0;
+  }
+
+  .home .carousel .content_container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .home .carousel .content_container .card .content * {
+    font-size: 1em;
+  }
+  .home .main .content_container .content {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 2em;
+  }
+  .home .main .content_container .content .content_info h2 {
+    font-size: 1.2em;
+  }
+  .home .main .content_container .content .content_info p {
+    font-size: 18px;
+  }
+  .home .main .content_container .content .content_info .btn_container {
+    margin: 3em auto auto;
+    width: 70%;
+  }
+  .home .main .content_container .content .content_info .btn_container li {
+    width: 100%;
+    font-size: 1em;
+    padding: 10px 15px;
+  }
+
+  .car .context_new_car .search_container {
+    width: 90% !important;
+  }
+  .car .context_new_car .search_container input {
+    width: 90% !important;
+    font-size: 17px !important;
+  }
+  .car .context_new_car .table_container .table {
+    width: 100%;
+  }
+  .car .context_new_car .table_container .table * {
+    font-size: 16px;
+  }
+  .car .context_new_car .form {
+    width: 100% !important;
+    padding-top: 2em !important;
+  }
+  .car .context_new_car .form .title_container {
+    font-size: 0.8em;
+  }
+  .car .context_new_car .form .form-group * {
+    font-size: 1em;
+  }
+  .car .context_new_car .form .file-upload-container .drop-zone-content p {
+    font-size: 0.8em;
+  }
+  .car .context_new_car .form .btn-container * {
+    font-size: 1em;
+  }
+
+  .profile .profile_layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile .profile_layout .content_left .content_profile {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  .profile .profile_layout .content_left .content_profile img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  .profile .profile_layout .content_left .user_name_container {
+    padding: 0 !important;
+  }
+  .profile .profile_layout .content_left .user_name_container h2 {
+    width: 100% !important;
+    font-size: 1.2em !important;
+  }
+  .profile .profile_layout .content_left .content_img_container .btn_container {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile .profile_layout .content_left .content_img_container .btn_container li {
+    text-align: center;
+    font-size: 0.8em;
+    padding: 5px !important;
+  }
+  .profile .profile_layout .content_left .content .content_info h5 {
+    font-size: 20px;
+  }
+  .profile .profile_layout .content_left .content .content_address {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .profile .profile_layout .content_left .content .content * {
+    font-size: 18px !important;
+  }
+  .profile .profile_layout .content_left .content .content .btn_content {
+    padding: 5px 0 10px 5px !important;
+    border-bottom: 1px solid #E1E5EA;
+    grid-gap: 2em !important;
+  }
+  .profile .profile_layout .content_left .content .content .btn_content svg {
+    font-size: 1.5em !important;
+  }
+  .profile .profile_layout .content_right .title_container {
+    padding-bottom: 2em;
+  }
+  .profile .profile_layout .content_right .title_container h3 {
+    font-size: 1.1em;
+  }
+  .profile .profile_layout .content_right .content_top .recent_content .content h4 {
+    font-size: 1.2em !important;
+  }
+  .profile .profile_layout .content_right .content_top .recent_content .content h5 {
+    font-size: 1em !important;
+  }
+  .profile .profile_layout .content_right .content_bottom .check-table h5 {
+    font-size: 1em;
+  }
+  .profile .profile_layout .content_right .content_bottom .check-table .tbody {
+    font-size: 0.8em;
+  }
+  .profile .profile_layout .content_right .content_bottom .content .img_caption p {
+    font-size: 1.2em;
+  }
+
+  .dashboard .dash_context_layout {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "header header header" "checklist checklist checklist" "dash_main dash_main dash_main" !important;
+  }
+  .dashboard .dash_context_layout .search_container {
+    padding: 0 15px;
+    width: 90%;
+    font-size: 0.9em;
+  }
+  .dashboard .dash_context_layout .dash_main .context_sub_nav {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 15px;
+    gap: 0;
+  }
+  .dashboard .dash_context_layout .dash_main .context_sub_nav .btn_show {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 15px;
+  }
+  .dashboard .dash_context_layout .dash_main .context_sub_nav .btn_show li {
+    width: 100%;
+    font-size: 1em;
+    border-radius: 5px;
+  }
+  .dashboard .dash_context_layout .dash_main .table_container .table thead h5 {
+    font-size: 0.8em;
+  }
+  .dashboard .dash_context_layout .dash_main .table_container .table tbody {
+    padding: 0 !important;
+  }
+  .dashboard .dash_context_layout .dash_main .table_container .table tbody * {
+    font-size: 16px;
+  }
+  .dashboard .dash_context_layout .checklist .car_card * {
+    font-size: 16px !important;
+  }
+  .dashboard .dash_context_layout .checklist .car_card .checkout_detail {
+    margin-top: 0 !important;
+  }
+  .dashboard .dash_context_layout .checklist .car_card .btn_container {
+    margin-top: 0;
+  }
+
+  .carInventory .sub_nav .content {
+    width: 90%;
+  }
+  .carInventory .sub_nav .content input {
+    font-size: 1em;
+  }
+  .carInventory .main .paginate_data_wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .carInventory .main .paginate_data_wrapper .card .image_container {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .carInventory .main .paginate_data_wrapper .card .car_info * {
+    font-size: 1em !important;
+  }
+  .carInventory .main .pagination_wrapper {
+    width: 90%;
+  }
+  .carInventory .main .pagination_wrapper li {
+    font-size: 1em;
+  }
+
+  .login {
+    width: 100% !important;
+  }
+  .login .content_container {
+    width: 100% !important;
+  }
+  .login .form {
+    width: 100% !important;
+    border: none !important;
+  }
+  .login .form input {
+    width: 100%;
+    background: transparent !important;
+  }
+  .login .form .form-group {
+    font-size: 1em;
+  }
+  .login .form .btn-container input {
+    font-size: 0.8em;
+    border-radius: 10px;
+  }
+
+  .signup .container .title_title h3 {
+    font-size: 0.9em;
+  }
+  .signup .container .form .form-group input {
+    font-size: 22px !important;
+  }
+  .signup .container .context_right {
+    padding-top: 2.5em !important;
+  }
+  .signup .container .context_right .add_margin {
+    margin-top: 1.5em;
+  }
+  .signup .container .context_right .btn-container {
+    text-align: center;
+  }
+  .signup .container .context_right .btn-container input {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 22px !important;
   }
 }
 
